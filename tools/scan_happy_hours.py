@@ -56,6 +56,14 @@ def windows(txt, n=4, width=450):
 
 
 def scan(row):
+    try:
+        return _scan(row)
+    except Exception as e:  # never let one odd site stop the whole run
+        return {'row': row['row'], 'name': row['name'], 'website': row['website'], 'ok': False,
+                'pages': [], 'snippets': [], 'pdfs': [], 'error': f'error: {type(e).__name__}'}
+
+
+def _scan(row):
     url = row['website'].strip()
     if not url.startswith('http'):
         url = 'http://' + url
@@ -72,9 +80,12 @@ def scan(row):
     rec['snippets'] += [{'page': final, 'text': s} for s in windows(txt)]
     links = []
     for a in soup.find_all('a', href=True):
-        href = urljoin(final, a['href'])
+        try:
+            href = urljoin(final, a['href'])
+            p = urlparse(href)
+        except ValueError:
+            continue
         label = (a.get_text(' ', strip=True) or '') + ' ' + href
-        p = urlparse(href)
         if href.lower().split('?')[0].endswith('.pdf') and (LINK_HINT.search(label) or HAPPY.search(label)):
             if href not in rec['pdfs']:
                 rec['pdfs'].append(href)
