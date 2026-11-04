@@ -140,16 +140,38 @@ async function loadRows() {
   return rows;
 }
 
+// Happy hours found on bars' own websites (data/website-happy-hours.csv).
+// Matched to sheet bars by address; ignored for any bar whose sheet row already has times.
+function loadWebsiteRows() {
+  const f = path.join(ROOT, 'data', 'website-happy-hours.csv');
+  if (!fs.existsSync(f)) return [];
+  return parseCSV(fs.readFileSync(f, 'utf8')).map((r) => ({ ...r, _fromWebsite: true }));
+}
+const addrKey = (a) => slugify(String(a || '').toLowerCase()
+  .replace(/\s(ste|suite|unit|fl|floor|space|#).*$/i, '')
+  .replace(/\b(street|st|avenue|ave|boulevard|blvd|road|rd)\b/g, ''));
+
 function buildModel(rows) {
   const venues = new Map();
   const problems = [];
   const skipped = { hidden: 0, closed: 0, club: 0, deli: 0, companyName: 0 };
   const slugs = new Set();
+  const byAddr = new Map();       // address -> venue key (sheet rows)
+  const sheetTimed = new Set();   // venue keys that got times from the sheet
+  const blockedAddr = new Set();  // sheet says closed / no HH / hidden
+  let fromWebsite = 0;
   rows.forEach((r, i) => {
     if (!r.name) return;
-    if (r.active && !yes(r.active)) { skipped.hidden++; return; }
+    if (r._fromWebsite) {
+      if (blockedAddr.has(addrKey(r.address))) return;
+      const k = byAddr.get(addrKey(r.address));
+      if (k && sheetTimed.has(k)) return;       // the sheet wins
+      if (k) { const v = venues.get(k); r = { ...r, name: v.name, address: v.address, neighborhood: v.hood }; }
+      fromWebsite++;
+    }
+    if (r.active && !yes(r.active)) { skipped.hidden++; blockedAddr.add(addrKey(r.address)); return; }
     const status = (r.status || '').toLowerCase();
-    if (status === 'closed' || status === 'no hh') { skipped.closed++; return; }
+    if (status === 'closed' || status === 'no hh') { skipped.closed++; blockedAddr.add(addrKey(r.address)); return; }
     const type = (r.type || '').toLowerCase();
     if (type === 'private club') { skipped.club++; return; }              // members only
     if (type.startsWith('deli')) { skipped.deli++; return; }               // take-out beer delis
@@ -178,12 +200,14 @@ function buildModel(rows) {
       });
     }
     const v = venues.get(key);
+    if (!r._fromWebsite && !byAddr.has(addrKey(r.address))) byAddr.set(addrKey(r.address), key);
     for (const k of ['address', 'phone', 'website', 'instagram', 'vibe']) if (!v[k] && r[k]) v[k] = r[k];
     v.featured ||= yes(r.featured);
     v.classic ||= yes(r.classic);
     v.sample ||= yes(r.sample);
     if (r.verified && r.verified > v.verified) v.verified = r.verified;
     if (!days.length || start == null || end == null) return; // listed without happy hour times yet
+    if (!r._fromWebsite) sheetTimed.add(key);
     if (end - start > 240) problems.push(`Row ${i + 2} (${r.name}): longer than PA's 4-hour daily limit`);
     if (end > 23 * 60 + 59) problems.push(`Row ${i + 2} (${r.name}): PA happy hours must end by midnight`);
     v.blocks.push({
@@ -200,6 +224,7 @@ function buildModel(rows) {
   }
   const withHH = list.filter((v) => v.blocks.length).length;
   console.log(`${list.length} bars to publish: ${withHH} with happy hour times, ${list.length - withHH} without yet`);
+  if (fromWebsite) console.log(`Added ${fromWebsite} happy hour rows from data/website-happy-hours.csv`);
   console.log(`Left off the site: ${skipped.closed} closed or no happy hour, ${skipped.club} private clubs, ${skipped.deli} delis, ${skipped.companyName} still showing a company name, ${skipped.hidden} set to active = no`);
   problems.forEach((p) => console.warn('  ! ' + p));
   return list;
@@ -308,7 +333,7 @@ ${content}
 
 /* ---------- pages ---------- */
 async function main() {
-  let venues = buildModel(await loadRows());
+  let venues = buildModel([...(await loadRows()), ...loadWebsiteRows()]);
   if (!venues.length) {
     // Sheet has no bars with times yet: keep publishing the sample listings so code changes still go live.
     console.log('No bars with happy hour times in the sheet yet. Building from the sample listings in data/venues.csv.');

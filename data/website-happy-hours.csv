@@ -1,0 +1,75 @@
+name,neighborhood,address,days,start,end,deals,tags,verified,source_url
+1518 Bar & Grill,Center City,1518 Sansom St,Mon-Fri,17:00,19:00,$1 off draft & bottled beer|$5 Merlot & Chardonnay|$5 well drinks,"beer,wine,cocktails",2026-11-05,http://1518barandgrill.com/
+Recipe Philly,Center City,1401 Arch St,Daily,15:00,18:00,,,2026-11-05,https://www.recipe-philly.com/menus/
+The Cheesecake Factory,Center City,1426-30 Walnut St,Mon-Fri,16:00,18:00,Select food & drink specials,food,2026-11-05,https://locations.thecheesecakefactory.com/pa/philadelphia-181.html
+Cedar Point,Fishtown,2370-72 E Norris St,Sun-Fri,17:00,19:00,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-05,https://cedarpointbarandkitchen.com/
+Cedar Point,Fishtown,2370-72 E Norris St,Mon-Thu,22:00,23:00,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-05,https://cedarpointbarandkitchen.com/
+Cedar Point,Fishtown,2370-72 E Norris St,Fri,23:00,23:59,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-05,https://cedarpointbarandkitchen.com/
+Drafthouse,Fishtown,1235 E Palmer St,Tue-Fri,16:00,18:00,$1 off drafts,beer,2026-11-05,https://interstatedrafthouse.com/weekly-specials/
+Hard Rock Cafe,Midtown Village / Wash Sq West,1113-31 Market St,Mon-Fri,15:00,19:00,$5 domestic drafts|$6 import drafts|$6 well drinks|$7 select wines & cocktails|$8 nachos & loaded fries|$10 wings & sliders,"beer,wine,cocktails,food",2026-11-05,https://cafe.hardrock.com/philadelphia/
+Kiddo PHL,Midtown Village / Wash Sq West,1136 Pine St,"Mon,Wed,Thu,Fri",16:00,18:00,$10-12 pastas|$10 wine & cocktails|$5 draft beer & cider|$7 non-alcoholic drinks,"beer,wine,cocktails,food",2026-11-05,https://www.kiddorestaurant.com/
+Loch Bar Philly,Midtown Village / Wash Sq West,301 S Broad St,Mon-Fri,15:00,18:00,,,2026-11-05,https://lochbar.com/philly/
+Top Tomato II,Midtown Village / Wash Sq West,116-120 S 11th St,Mon-Fri,16:30,18:30,$5 select drafts|$5 well drinks|$6 house wine|$8 select cocktails|$5 select appetizers|$7 sliders|$10 small cheese pizza,"beer,wine,cocktails,food",2026-11-05,https://toptomatophilly.com/
+Vedge,Midtown Village / Wash Sq West,1221-23 Locust St,Tue-Fri,17:00,19:00,,food,2026-11-05,https://www.vedgerestaurant.com/
+Bar 1010,Northern Liberties / Callowhill,701 N 2nd St,Tue-Fri,16:00,18:00,,,2026-11-05,https://www.bar1010.com/
+Bourbon & Branch,Northern Liberties / Callowhill,705 N 2nd St,Mon-Fri,15:00,18:00,$2 roasted oysters|$8 Cajun fried crab balls,"oysters,food",2026-11-05,https://bourbonandbranchphilly.com/
+La Chinesca,Northern Liberties / Callowhill,1036 Spring Garden St,Sun-Fri,16:00,18:00,,,2026-11-05,https://www.lachinescaphl.com/
+Prohibition Taproom,Northern Liberties / Callowhill,501 N 13th St,Mon-Thu,16:00,18:00,$10 cocktails|$1 off drafts,"beer,cocktails",2026-11-05,https://prohibitiontaproom.com/
+Prohibition Taproom,Northern Liberties / Callowhill,501 N 13th St,Fri,15:00,18:00,$10 cocktails|$1 off drafts,"beer,cocktails",2026-11-05,https://prohibitiontaproom.com/
+Santucci's Original Square Pizza,Northern Liberties / Callowhill,655-659 N Broad St,Mon-Fri,16:00,19:00,$3 off personal pizzas|$3 off starters,food,2026-11-05,https://www.santuccispizza.com/specials/
+Santucci's Original Square Pizza,Northern Liberties / Callowhill,655-659 N Broad St,Sat-Sun,11:00,14:00,$3 off personal pizzas|$3 off starters,food,2026-11-05,https://www.santuccispizza.com/specials/
+Triple Bottom Brewing Company,Northern Liberties / Callowhill,915 Spring Garden St,Wed-Fri,16:00,18:00,,beer,2026-11-05,https://triplebottombrewing.com/
+Yards Brewing Company,Northern Liberties / Callowhill,500 Spring Garden St,Mon-Fri,15:00,18:00,$5 select beers|$9 select cocktails & wine|$6 snacks|$12 wing pounders,"beer,wine,cocktails,food",2026-11-05,https://yardsbrewing.com/pages/taproom
+Amada,Old City / Society Hill,217-219 Chestnut St,Sun-Fri,16:30,18:30,"Tapas, sangria, draft wine & cocktails","wine,cocktails,food",2026-11-05,https://www.amadarestaurant.com/specials/
+Brasils,Old City / Society Hill,112 Chestnut St,Wed-Fri,16:00,18:00,Happy hour food & drink menu,food,2026-11-05,https://brasilsnightclub-philly.com/
+Dave & Busters,Old City / Society Hill,325 N Christopher Columbus Blvd,Mon-Fri,17:00,19:00,"$5 drinks: cocktails, 22oz domestic drafts & house wine","beer,wine,cocktails",2026-11-05,https://www.daveandbusters.com/us/en/about/locations/philadelphia
+Dave & Busters,Old City / Society Hill,325 N Christopher Columbus Blvd,Sun-Thu,22:00,23:59,"$5 drinks: cocktails, 22oz domestic drafts & house wine","beer,wine,cocktails",2026-11-05,https://www.daveandbusters.com/us/en/about/locations/philadelphia
+Panorama Ristorante,Old City / Society Hill,14-18 N Front St,Tue-Fri,16:30,18:00,,wine,2026-11-05,https://www.panoramawinebar.com/
+Panorama Ristorante,Old City / Society Hill,14-18 N Front St,Sat,15:00,16:30,,wine,2026-11-05,https://www.panoramawinebar.com/
+Capri,Queen Village / Bella Vista / Passyunk,757 S Front St,Sun-Fri,15:00,18:00,"$10 calamari, mussels & shrimp scampi",food,2026-11-05,https://capriphilly.com/
+Emmy Squared,Queen Village / Bella Vista / Passyunk,624-632 S 5th St,Mon-Fri,15:00,18:00,$5 select beer|$7 house wine|$9 well cocktails,"beer,wine,cocktails",2026-11-05,https://www.emmysquaredpizza.com/queen-village-menus/
+Mighty Bread Company,Queen Village / Bella Vista / Passyunk,1211 Gerritt St,Mon-Fri,16:00,18:00,Aperitivo bites & drinks,food,2026-11-05,https://www.mightybreadco.com/menu/aperitivo/
+Queen & Rook Game Cafe,Queen Village / Bella Vista / Passyunk,121-123 South St,Mon-Fri,17:00,19:00,$5 Yards Pale Ale|$10 margarita or daiquiri,"beer,cocktails",2026-11-05,https://www.queenandrookcafe.com/
+The Good King,Queen Village / Bella Vista / Passyunk,614 S 7th St,Mon-Fri,17:00,18:30,,,2026-11-05,https://thegoodkingtavern.com/
+Almyra,Rittenhouse,1612-34 Chancellor St,Daily,16:00,18:00,,,2026-11-05,https://www.almyrarestaurant.com
+Bolo,Rittenhouse,2025 Sansom St,Tue-Fri,17:00,19:00,,,2026-11-05,https://bolophl.com/
+Continental Midtown,Rittenhouse,1801 Chestnut St,Mon-Fri,17:00,19:00,$6 esquites fries|$6 Brussels sprouts|$6 pork tacos|$8 cheesesteak egg roll|$8 Frozen Astronaut,"food,cocktails",2026-11-05,https://continentalmidtown.com/
+Dancerobot,Rittenhouse,1710-1712 Sansom St,Tue-Wed,16:00,18:00,,,2026-11-05,https://dancerobotphl.com/
+Lucy's,Rittenhouse,1720 Chestnut St,Mon-Fri,16:00,19:00,25¢ wings,food,2026-11-05,https://www.lucysphiladelphia.com/
+Rosys Taco Bar,Rittenhouse,2216 -2222 Walnut St Unit B,Mon-Thu,15:00,17:00,,,2026-11-05,https://www.rosystacobar.com/
+Seafoods Unlimited,Rittenhouse,270 S 20th St,Tue-Sat,16:30,18:30,$1 oysters|$8 tempura veggies|$9 tuna pops|$10 buffalo fried shrimp,"oysters,food",2026-11-05,https://seafoodunlimited.com/
+Tequila's,Rittenhouse,1602-1604 Locust St,Mon-Fri,17:00,19:00,,,2026-11-05,https://www.tequilasphilly.com/
+Uchi Philadelphia,Rittenhouse,1620 Sansom St Ste C1,Daily,16:00,18:00,$120 happy hour omakase for two,food,2026-11-05,https://uchi.uchirestaurants.com/location/sushi-philadelphia/
+Victory Brewing,Rittenhouse,1776 Benjamin Franklin Pkwy,"Mon,Tue,Thu,Fri",16:00,18:00,"$2 off PHL-brewed drafts, liquor & wine","beer,wine,cocktails",2026-11-05,https://philadelphia.victorybeer.com/
+Victory Brewing,Rittenhouse,1776 Benjamin Franklin Pkwy,Wed,15:00,19:00,"$2 off PHL-brewed drafts, liquor & wine","beer,wine,cocktails",2026-11-05,https://philadelphia.victorybeer.com/
+New Deck Tavern,University City,3408-12 Sansom St,Tue-Fri,16:00,18:00,$5 select beers|$7 house wines|$8 margaritas|$8 nachos supreme|$8 chicken tenders,"beer,wine,cocktails,food",2026-11-05,https://www.newdecktavern.com/
+Smokey Joe's,University City,208 S 40th St,Mon-Fri,16:00,19:00,$1 off all drinks,"beer,wine,cocktails",2026-11-05,https://www.smokeyjoesbar.com/about-us
+El Poquito,Chestnut Hill,8201-03 Germantown Ave,Mon-Fri,16:00,18:00,$3.95 chips & salsa|$5.95 queso,food,2026-11-05,https://www.elpoquito.com/
+El Poquito,Chestnut Hill,8201-03 Germantown Ave,Sat-Sun,15:00,17:00,$3.95 chips & salsa|$5.95 queso,food,2026-11-05,https://www.elpoquito.com/
+Wissahickon Brewing Company,East Falls,3705 W School House Ln,Mon-Fri,16:00,18:00,"$1 off drafts|$3 off wine|$3 off highballs|$5 'za popcorn|$10 smash burger, fries & a beer","beer,wine,cocktails,food",2026-11-05,https://www.wissahickonbrew.com/kensington-brewery/
+2637 Brew,Fairmount / Spring Garden,2637 Girard Ave,Mon-Fri,16:00,18:00,$2 off drafts|$7 house wine|$7 bar bites,"beer,wine,food",2026-11-05,https://2637brew.com/
+2637 Brew,Fairmount / Spring Garden,2637 Girard Ave,Sat-Sun,15:00,17:00,$4 Kenwood Lager|$5 Fireball shots|$6 rosé or brut|$7 mimosas,"beer,wine,cocktails",2026-11-05,https://2637brew.com/
+Kelliann,Fairmount / Spring Garden,1549 Spring Garden St,Mon-Fri,16:00,18:00,$1 off draft beer|$2 off all wine,"beer,wine",2026-11-05,https://kellianns.com/
+Osteria,Fairmount / Spring Garden,630-640 N Broad St,Mon-Thu,17:00,19:00,$7 draft beer|$7 glass of wine|$9 spritzes,"beer,wine,cocktails",2026-11-05,https://www.osteriaphilly.com/
+Osteria,Fairmount / Spring Garden,630-640 N Broad St,Fri-Sat,16:00,19:00,$7 draft beer|$7 glass of wine|$9 spritzes,"beer,wine,cocktails",2026-11-05,https://www.osteriaphilly.com/
+Osteria,Fairmount / Spring Garden,630-640 N Broad St,Sun,16:00,18:00,$7 draft beer|$7 glass of wine|$9 spritzes,"beer,wine,cocktails",2026-11-05,https://www.osteriaphilly.com/
+Dock Street Brewery South,Graduate Hospital / Point Breeze,2118 Washington Ave,Tue-Fri,16:00,18:00,$1 off draft beer|$5 El Puffer lager|$8 house margarita|$10 cocktail of the week,"beer,cocktails,food",2026-11-05,https://www.dockstreetbeer.com/dock-street-south-point-breeze
+Founding Fathers Sports Bar & Grill,Graduate Hospital / Point Breeze,1612-1616 South St,Mon-Fri,17:00,19:00,,,2026-11-05,https://www.foundingfathersbar.com/
+Jet Wine Bar,Graduate Hospital / Point Breeze,1525 South St,Tue-Fri,17:00,19:00,,wine,2026-11-05,https://www.jetwinebar.com/
+Blondie On Main,Manayunk,4417 -4419 Main St,Mon-Sat,16:00,18:00,$3.50 draft beer|$5 wine|$7 spritzes|$7 espresso martini|$7 smashburger|$8 crunchwrap,"beer,wine,cocktails,food",2026-11-05,https://www.blondiephilly.com/menus/
+Blondie On Main,Manayunk,4417 -4419 Main St,Mon-Sat,21:00,22:00,$3.50 draft beer|$5 wine|$7 spritzes,"beer,wine,cocktails",2026-11-05,https://www.blondiephilly.com/menus/
+Mia Ragazza,Manayunk,4411-4413 Main St,Mon-Fri,16:00,18:00,$6 draft beers|$7 house wine|$8 cocktails|$2 oysters,"beer,wine,cocktails,oysters",2026-11-05,https://www.miaragazzaphilly.com/
+Toska Restaurant And Brewery,Mount Airy,7136 Germantown Ave,Mon-Fri,15:00,18:00,"House drafts, cocktails, wine & shareables","beer,wine,cocktails,food",2026-11-05,https://www.toskabrewery.com/
+Gatehouse,Navy Yard,4501 S Broad St,Mon-Thu,16:30,18:30,$5 select drafts|$8 house wine|$8 select cocktails,"beer,wine,cocktails",2026-11-05,https://www.gatehousephilly.com/
+Gatehouse,Navy Yard,4501 S Broad St,Fri,15:00,18:30,$5 select drafts|$8 house wine|$8 select cocktails,"beer,wine,cocktails",2026-11-05,https://www.gatehousephilly.com/
+Punch Buggy Brewing Company,Olde Kensington / Temple,1445 N American St,Mon-Fri,16:00,18:00,,beer,2026-11-05,https://punchbuggybrewing.com/
+Wissahickon Brewing Company Olde Kensington,Olde Kensington / Temple,1526 N American St,Mon-Fri,16:00,18:00,"$1 off drafts|$3 off wine|$3 off highballs|$5 'za popcorn|$10 smash burger, fries & a beer","beer,wine,cocktails,food",2026-11-05,https://www.wissahickonbrew.com/kensington-brewery/
+Laroma,Port Richmond / Kensington,2620 E Allegheny Ave,Mon-Fri,16:00,19:00,"Happy hour food menu: empanadas, burger, pierogies",food,2026-11-05,https://laromaphilly.com/
+Nemi Restaurant,Port Richmond / Kensington,2636 E Ann St,Mon-Fri,16:00,18:00,,,2026-11-05,https://nemirestaurant.com/
+Barcelona Wine Bar,South Philly East / East Passyunk,1709-17 E Passyunk Ave,Mon-Fri,16:00,18:00,,wine,2026-11-05,https://barcelonawinebar.com/location/philadelphia/
+Live! Casino & Hotel Philadelphia,South Philly East / East Passyunk,900 Packer Ave,Mon-Thu,15:00,18:00,$4 Busch Light & Bud Light drafts|$5 cocktails|$6 house wine|$6 loaded nachos,"beer,wine,cocktails,food",2026-11-05,https://www.livech.com/philadelphia/dine-and-drink/events-and-promotions
+Second District Brewing Company,South Philly West,1939 S Bancroft St,Mon-Fri,16:00,18:00,,"beer,food",2026-11-05,https://seconddistrictbrewing.com/brewpub-menu/
+Miller Theater,Center City,250 S Broad St,Wed-Fri,16:30,18:30,"Specials on small plates, draft beer, wine & cocktails","beer,wine,cocktails,food",2026-11-05,https://www.ensembleartsphilly.org/food-drink
+Currans Fox Chase,Fox Chase,7968 Verree Rd,Fri,16:00,18:00,$3 domestic drafts|$3.25 domestic bottles,beer,2026-11-05,https://curransfoxchase.com/
+Reale' Restaurant & Lounge,Tacony / Mayfair,7233-35 Frankford Ave,Mon-Fri,17:00,19:00,$5 select cocktails,cocktails,2026-11-05,https://www.realessportsbar.com/specials
+Jimmys Timeout Sports Pub,Torresdale,5001-5005 Linden Ave,Mon-Fri,15:00,17:00,Appetizer & drink specials,food,2026-11-05,https://www.jimmystimeout.com/
