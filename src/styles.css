@@ -34,6 +34,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; } /* filters hide cards with the hidden attribute */
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; font: 400 16px/1.55 var(--f-body); color: var(--ink);

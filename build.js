@@ -19,6 +19,10 @@ const PREVIEW = process.argv.includes('--preview');
 const OUT = path.join(ROOT, PREVIEW ? 'dist-preview' : 'dist');
 const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 const BUILD_DATE = new Date();
+// changes whenever styles.css or app.js change, so browsers fetch the new version instead of a cached one
+const ASSET_V = require('crypto').createHash('md5')
+  .update(fs.readFileSync(path.join(ROOT, 'src', 'styles.css')))
+  .update(fs.readFileSync(path.join(ROOT, 'src', 'app.js'))).digest('hex').slice(0, 8);
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const DAY_FULL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -280,8 +284,8 @@ function filterBar({ when = 'any', showWhen = true, showHood = true, hoods = [],
 
 function shell(p, { title, description, body, schema, page = {}, venues, hoods, noindex = false }) {
   const featured = venues.filter((v) => v.featured);
-  const css = href(p, '').replace(/index\.html$/, '') + 'styles.css';
-  const js = href(p, '').replace(/index\.html$/, '') + 'app.js';
+  const css = href(p, '').replace(/index\.html$/, '') + 'styles.css?v=' + ASSET_V;
+  const js = href(p, '').replace(/index\.html$/, '') + 'app.js?v=' + ASSET_V;
   const dayNav = DAY_FULL.map((d, i) => `<li><a href="${href(p, d.toLowerCase() + '/')}" data-day="${i}"${page.day === i ? ' aria-current="page"' : ''}>${d.toLowerCase()}</a></li>`).join('');
   const head = `<title>${esc(title)}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -290,7 +294,7 @@ ${PREVIEW ? '' : `<meta name="viewport" content="width=device-width, initial-sca
 <link rel="canonical" href="${canonical(p)}">`}
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="website"><meta property="og:url" content="${canonical(p)}">
-<link rel="icon" href="${css.replace('styles.css', 'favicon.svg')}" type="image/svg+xml">
+<link rel="icon" href="${css.replace(/styles\.css.*$/, 'favicon.svg')}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Barlow+Condensed:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="${css}">
