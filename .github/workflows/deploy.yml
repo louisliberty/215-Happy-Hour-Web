@@ -27,6 +27,7 @@ jobs:
         run: node build.js
 
       - name: Upload to HostGator over FTP
+        if: hashFiles('dist/index.html') != ''
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}

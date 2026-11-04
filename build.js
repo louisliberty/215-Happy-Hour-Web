@@ -293,7 +293,7 @@ ${content}
 /* ---------- pages ---------- */
 async function main() {
   const venues = buildModel(await loadRows());
-  if (!venues.length) { console.error('No listings found. Not building.'); process.exit(1); }
+  if (!venues.length) { console.log('No bars with happy hour times yet. Nothing published; the live site is unchanged.'); fs.rmSync(OUT, { recursive: true, force: true }); return; }
   fs.rmSync(OUT, { recursive: true, force: true });
   const write = (p, html) => {
     const f = path.join(OUT, p);
