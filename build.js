@@ -352,7 +352,6 @@ function notFoundBody(hhVenues) {
     <path class="nf-shine" d="M30 20l-6 100"/>
   </svg>`;
   return `<section class="nf">
-  <p class="eyebrow">Error 404 · Page not found</p>
   <div class="nf-sign" aria-hidden="true"><span>4</span>${glass}<span>4</span></div>
   <h1>This tap ran dry.</h1>
   <p class="lede">The page you ordered isn't on the menu anymore. Maybe the link got cut off, or this jawn closed up shop. The good news: happy hour is still pouring all over Philly.</p>
