@@ -1,0 +1,19 @@
+name,neighborhood,address,phone,website,instagram,lat,lng,days,start,end,deals,tags,vibe,verified,featured,classic,sample,active
+The Brass Ferret,Rittenhouse,"18th & Sansom St (sample address)",,,,39.9506,-75.1708,Mon-Fri,16:00,18:00,$5 drafts|$7 house cocktails|$6 wine|Half-price fries,"beer,cocktails,wine,food",cocktail bar,2026-10-28,yes,,yes,yes
+The Brass Ferret,Rittenhouse,"18th & Sansom St (sample address)",,,,39.9506,-75.1708,Sun-Thu,22:00,23:59,$4 lagers|$6 shot-and-a-beer,"beer",cocktail bar,2026-10-28,yes,,yes,yes
+Night Owl Oyster Counter,Midtown Village,"13th & Sansom St (sample address)",,,,39.9497,-75.1622,Daily,16:00,18:00,$1.50 oysters|$6 sparkling|$5 crushes,"oysters,wine,cocktails,food",oyster bar,2026-10-30,yes,,yes,yes
+Lantern & Lager,Fishtown,"Frankford Ave & Girard (sample address)",,,,39.9706,-75.1346,Mon-Fri,17:00,19:00,$5 local drafts|$4 cans|$8 burger,"beer,food",neighborhood bar,2026-10-21,,,yes,yes
+Lantern & Lager,Fishtown,"Frankford Ave & Girard (sample address)",,,,39.9706,-75.1346,Sat-Sun,13:00,15:00,$5 local drafts|$6 bloody marys,"beer,cocktails",neighborhood bar,2026-10-21,,,yes,yes
+Passyunk Pickle Club,East Passyunk,"E Passyunk Ave & Tasker (sample address)",,,,39.9297,-75.1625,Tue-Sat,16:30,18:30,$6 spritzes|$5 pickleback|$4 hot dogs,"cocktails,food",dive,2026-10-15,,,yes,yes
+Old City Ledger,Old City,"2nd & Market St (sample address)",,,,39.9502,-75.1437,Mon-Fri,16:00,19:00,$5 drafts|$7 old fashioneds|$9 wings,"beer,cocktails,food",sports bar,2026-10-25,,,yes,yes
+Old City Ledger,Old City,"2nd & Market St (sample address)",,,,39.9502,-75.1437,Mon-Thu,21:00,23:00,$3 lagers|Half-price flatbreads,"beer,food",sports bar,2026-10-25,,,yes,yes
+Liberties Lawn Club,Northern Liberties,"2nd & Poplar St (sample address)",,,,39.9649,-75.1418,Wed-Sun,15:00,18:00,$5 frozen drinks|$4 drafts|Patio,"cocktails,beer",patio,2026-10-12,,,yes,yes
+Spruce Hill Vinyl Bar,University City,"45th & Baltimore Ave (sample address)",,,,39.9486,-75.2117,Daily,17:00,19:00,$6 wine|$5 well drinks|$5 records-night snacks,"wine,cocktails,food",music,2026-10-19,,,yes,yes
+Wissahickon Wine Room,Manayunk,"Main St & Green Ln (sample address)",,,,40.0258,-75.2232,Tue-Fri,16:00,18:00,$7 glasses|$25 bottles|$8 cheese board,"wine,food",wine bar,2026-10-09,,,yes,yes
+Two Street Tavern,South Philly,"2nd & Porter St (sample address)",,,,39.9181,-75.1508,Mon-Sat,17:00,19:00,$3 domestic drafts|$1 off everything,"beer",dive,2026-10-27,,,yes,yes
+Two Street Tavern,South Philly,"2nd & Porter St (sample address)",,,,39.9181,-75.1508,Fri-Sat,22:00,23:59,$3 domestic drafts|$4 shots,"beer",dive,2026-10-27,,,yes,yes
+Arch Street Taproom,Center City,"15th & Arch St (sample address)",,,,39.9554,-75.1655,Mon-Fri,16:30,18:30,$5 Yards drafts|$6 house wine|$7 wings,"beer,wine,food",after-work,2026-11-02,,,yes,yes
+Fairmount Park Pour,Fairmount,"25th & Fairmount Ave (sample address)",,,,39.9670,-75.1785,Mon-Fri,16:00,18:00,$5 drafts|$6 margaritas|$5 tacos,"beer,cocktails,food",neighborhood bar,2026-10-18,,,yes,yes
+Chinatown Noodle & Sake,Chinatown,"10th & Race St (sample address)",,,,39.9555,-75.1563,Daily,15:00,18:00,$5 sake|$4 Sapporo|$6 dumplings,"beer,food",restaurant,2026-10-29,,,yes,yes
+Graduate Hospital Gin Joint,Graduate Hospital,"20th & South St (sample address)",,,,39.9442,-75.1755,Tue-Sun,17:00,19:00,$8 martinis|$6 G&Ts,"cocktails",cocktail bar,2026-10-24,,,yes,yes
+Washington Square Wine Bar,Washington Square West,"12th & Spruce St (sample address)",,,,39.9466,-75.1610,Mon-Fri,16:00,18:00,$6 wine|$7 spritz|Half-price crostini,"wine,cocktails,food",wine bar,2026-10-22,,,yes,yes

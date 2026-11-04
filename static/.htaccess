@@ -1,0 +1,33 @@
+# 215 Happy Hour — Apache settings for HostGator
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Always use https://www.215happyhour.com
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.215happyhour.com/$1 [R=301,L]
+
+# Keep the original 2009 URLs working (and their search ranking)
+RewriteRule ^index\.html?$ / [R=301,L]
+RewriteRule ^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\.html?$ /$1/ [R=301,L,NC]
+RewriteRule ^about\.html?$ /about/ [R=301,L,NC]
+RewriteRule ^contact\.html?$ /for-bars/ [R=301,L,NC]
+RewriteRule ^site_?map\.html?$ /neighborhoods/ [R=301,L,NC]
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access plus 5 minutes"
+ExpiresByType text/css "access plus 1 day"
+ExpiresByType application/javascript "access plus 1 day"
+ExpiresByType image/svg+xml "access plus 7 days"
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/xml text/plain
+</IfModule>
