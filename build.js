@@ -291,9 +291,9 @@ function shell(p, { title, description, body, schema, page = {}, venues, hoods, 
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="${esc(description)}">${noindex ? '\n<meta name="robots" content="noindex, follow">' : ''}
 ${PREVIEW ? '' : `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="canonical" href="${canonical(p)}">`}
+${p === '404.html' ? '' : `<link rel="canonical" href="${canonical(p)}">`}`}
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}">
-<meta property="og:type" content="website"><meta property="og:url" content="${canonical(p)}">
+<meta property="og:type" content="website">${p === '404.html' ? '' : `<meta property="og:url" content="${canonical(p)}">`}
 <link rel="icon" href="${css.replace(/styles\.css.*$/, 'favicon.svg')}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Barlow+Condensed:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
@@ -603,7 +603,7 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
 
   // 404 (served at any path, so use root-absolute assets on the live site)
   if (!PREVIEW) {
-    let nf = shell('404.html', { ...ctx, title: `Page Not Found | ${config.siteName}`, description: 'Page Not Found', page: { type: '404' },
+    let nf = shell('404.html', { ...ctx, title: `Page Not Found | ${config.siteName}`, description: 'Page Not Found', page: { type: '404' }, noindex: true,
       body: notFoundBody(hhVenues) });
     nf = nf.replace(/(href|src)="(?!https?:|\/|#|mailto)([^"]*)"/g, (m, a, u) => `${a}="/${u.replace(/^(\.\.\/)+/, '').replace(/^\.\//, '')}"`);
     write('404.html', nf);
