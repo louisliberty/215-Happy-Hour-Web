@@ -6,6 +6,12 @@ on:
   schedule:
     - cron: "17 * * * *"   # every hour, picks up Google Sheet changes
   workflow_dispatch:        # "Run workflow" button in the Actions tab
+    inputs:
+      task:
+        description: What to run
+        type: choice
+        default: deploy
+        options: [deploy, find-websites]
 
 concurrency:
   group: deploy
@@ -13,6 +19,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_dispatch' || inputs.task == 'deploy'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,3 +43,22 @@ jobs:
           protocol: ftps
           local-dir: ./dist/
           server-dir: ./
+
+  find-websites:
+    # One-off: look up websites, phones and socials for tools/bars-input.csv from Overture Maps
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'find-websites'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install overturemaps pandas pyarrow
+      - name: Download every place in Philadelphia from Overture Maps
+        run: overturemaps download --bbox=-75.2803,39.8670,-74.9558,40.1379 -f geoparquet --type=place -o places.parquet
+      - name: Match against the bar list
+        run: python tools/find_websites.py places.parquet tools/bars-input.csv websites-found.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: websites-found
+          path: websites-found.csv
