@@ -143,9 +143,11 @@ async function loadRows() {
 function buildModel(rows) {
   const venues = new Map();
   const problems = [];
+  let notYet = 0;
   rows.forEach((r, i) => {
     if (r.active && !yes(r.active)) return;
     if (!r.name) return;
+    if (!r.days && !r.start && !r.end) { notYet++; return; } // not researched yet
     const days = parseDays(r.days);
     const start = toMin(r.start), end = toMin(r.end);
     if (!days.length || start == null || end == null) {
@@ -182,6 +184,7 @@ function buildModel(rows) {
     if (v.weeklyMinutes > 24 * 60) problems.push(`${v.name}: more than PA's 24 hours per week`);
     v.blocks.sort((a, b) => a.days[0] - b.days[0] || a.start - b.start);
   }
+  if (notYet) console.log(`Skipped ${notYet} rows with no happy hour times yet`);
   problems.forEach((p) => console.warn('  ! ' + p));
   return list;
 }
