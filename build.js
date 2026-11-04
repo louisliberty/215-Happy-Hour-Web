@@ -603,7 +603,7 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
 
   // 404 (served at any path, so use root-absolute assets on the live site)
   if (!PREVIEW) {
-    let nf = shell('404.html', { ...ctx, title: `Page not found | ${config.siteName}`, description: 'Page not found', page: { type: '404' },
+    let nf = shell('404.html', { ...ctx, title: `Page Not Found | ${config.siteName}`, description: 'Page Not Found', page: { type: '404' },
       body: notFoundBody(hhVenues) });
     nf = nf.replace(/(href|src)="(?!https?:|\/|#|mailto)([^"]*)"/g, (m, a, u) => `${a}="/${u.replace(/^(\.\.\/)+/, '').replace(/^\.\//, '')}"`);
     write('404.html', nf);
