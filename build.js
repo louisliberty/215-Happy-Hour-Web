@@ -292,8 +292,12 @@ ${content}
 
 /* ---------- pages ---------- */
 async function main() {
-  const venues = buildModel(await loadRows());
-  if (!venues.length) { console.log('No bars with happy hour times yet. Nothing published; the live site is unchanged.'); fs.rmSync(OUT, { recursive: true, force: true }); return; }
+  let venues = buildModel(await loadRows());
+  if (!venues.length) {
+    // Sheet has no bars with times yet: keep publishing the sample listings so code changes still go live.
+    console.log('No bars with happy hour times in the sheet yet. Building from the sample listings in data/venues.csv.');
+    venues = buildModel(parseCSV(fs.readFileSync(path.join(ROOT, 'data', 'venues.csv'), 'utf8')));
+  }
   fs.rmSync(OUT, { recursive: true, force: true });
   const write = (p, html) => {
     const f = path.join(OUT, p);

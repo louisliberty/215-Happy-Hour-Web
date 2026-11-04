@@ -1,6 +1,6 @@
 # 215 Happy Hour
 
-Philadelphia's happy hour source, since 2009. This repo builds www.215happyhour.com as a fast static site from a Google Sheet, then uploads it to HostGator.
+Philadelphia's happy hour source, since 2009. This repo builds 215happyhour.com as a fast static site from a Google Sheet, then uploads it to HostGator.
 
 ```
 Google Sheet  ──►  GitHub Actions (node build.js)  ──►  HostGator /215happyhour.com
@@ -15,7 +15,7 @@ Google Sheet  ──►  GitHub Actions (node build.js)  ──►  HostGator /2
 | `site.config.json` | Site name, URL, contact email, newsletter form link. |
 | `data/venues.csv` | Sample listings. Import this into Google Sheets to start your sheet. |
 | `src/styles.css`, `src/app.js` | Design and the live "happening now" / filter code. |
-| `static/.htaccess` | HTTPS, www, 404 page, and redirects from the 2009 URLs (`monday.html` → `/monday/`). |
+| `static/.htaccess` | HTTPS, no-www, 404 page, and redirects from the 2009 URLs (`monday.html` → `/monday/`). |
 | `.github/workflows/deploy.yml` | Builds and uploads to HostGator. |
 
 Pages it creates: home (live now), Monday–Sunday, late night, weekend, every neighborhood, every bar, about (with the 2011 archive), for bars, 404, `sitemap.xml`, `robots.txt`.
@@ -63,10 +63,10 @@ Repo → **Settings → Secrets and variables → Actions → New repository sec
 If you create an FTP account that already opens inside `public_html`, (for example one created just for the 215happyhour.com folder), change `server-dir` in `deploy.yml` to `./`. If FTPS fails to connect, change `protocol: ftps` to `ftp`.
 
 ### 4. First deploy
-215happyhour.com is an addon domain, so its files live in the `215happyhour.com` folder in your home directory, not `public_html`. Leave `.well-known` and `cgi-bin` there. Back up anything else in that folder, then go to **Actions → Build and deploy to HostGator → Run workflow**. In HostGator, make sure the free SSL certificate is on for the domain, since `.htaccess` sends everyone to `https://www`.
+215happyhour.com is an addon domain, so its files live in the `215happyhour.com` folder in your home directory, not `public_html`. Leave `.well-known` and `cgi-bin` there. Back up anything else in that folder, then go to **Actions → Build and deploy to HostGator → Run workflow**. In HostGator, make sure the free SSL certificate is on for the domain, since `.htaccess` sends everyone to `https://215happyhour.com` (www redirects there).
 
 ### 5. Tell Google
-Add the site in [Google Search Console](https://search.google.com/search-console), submit `https://www.215happyhour.com/sitemap.xml`, and set up a Google Business Profile.
+Add the site in [Google Search Console](https://search.google.com/search-console), submit `https://215happyhour.com/sitemap.xml`, and set up a Google Business Profile.
 
 ## Day to day
 - **Add or change a bar:** edit the sheet. The site rebuilds every hour, or hit **Run workflow** to publish now.

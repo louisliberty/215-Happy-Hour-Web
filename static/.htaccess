@@ -7,10 +7,10 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Always use https://www.215happyhour.com
+# Always use https://215happyhour.com (no www)
 RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ https://www.215happyhour.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://215happyhour.com/$1 [R=301,L]
 
 # Keep the original 2009 URLs working (and their search ranking)
 RewriteRule ^index\.html?$ / [R=301,L]
