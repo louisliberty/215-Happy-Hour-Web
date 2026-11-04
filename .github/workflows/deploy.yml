@@ -58,6 +58,8 @@ jobs:
         run: overturemaps download --bbox=-75.2803,39.8670,-74.9558,40.1379 -f geoparquet --type=place -o places.parquet
       - name: Match against the bar list
         run: python tools/find_websites.py places.parquet tools/bars-input.csv websites-found.csv
+      - name: Print results
+        run: echo "=====BEGIN CSV=====" && cat websites-found.csv && echo "=====END CSV====="
       - uses: actions/upload-artifact@v4
         with:
           name: websites-found
