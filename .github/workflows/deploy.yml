@@ -11,7 +11,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites]
+        options: [deploy, find-websites, scan-happy-hours]
 
 concurrency:
   group: deploy
@@ -64,3 +64,19 @@ jobs:
         with:
           name: websites-found
           path: websites-found.csv
+
+  scan-happy-hours:
+    # One-off: read each confirmed bar website for happy hour mentions
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'scan-happy-hours'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - name: Scan bar websites
+        run: python tools/scan_happy_hours.py tools/confirmed-websites.csv happy-hour-scan.jsonl
+      - name: Print results
+        run: echo "=====BEGIN JSONL=====" && cat happy-hour-scan.jsonl && echo "=====END JSONL====="
