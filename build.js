@@ -341,6 +341,59 @@ ${content}
 </body></html>`;
 }
 
+/* ---------- 404 ---------- */
+function notFoundBody(hhVenues) {
+  const picks = hhVenues.map((v) => `/bar/${v.slug}/`);
+  const glass = `<svg class="nf-glass" viewBox="0 0 120 170" role="img" aria-label="An empty pint glass">
+    <path class="nf-glass-body" d="M14 8h92l-10 150a6 6 0 0 1-6 5H30a6 6 0 0 1-6-5z"/>
+    <path class="nf-dregs" d="M23.6 140h72.8l-1.3 18a6 6 0 0 1-6 5H30.9a6 6 0 0 1-6-5z"/>
+    <path class="nf-foam" d="M24 140c6-4 12 3 18 0s12-4 18 0 12 3 18 0 12-3 18 0"/>
+    <g class="nf-bubbles"><circle cx="44" cy="150" r="2.2"/><circle cx="62" cy="154" r="1.6"/><circle cx="78" cy="148" r="2"/><circle cx="54" cy="156" r="1.3"/></g>
+    <path class="nf-shine" d="M30 20l-6 100"/>
+  </svg>`;
+  return `<section class="nf">
+  <p class="eyebrow">Error 404 · Page not found</p>
+  <div class="nf-sign" aria-hidden="true"><span>4</span>${glass}<span>4</span></div>
+  <h1>This tap ran dry.</h1>
+  <p class="lede">The page you ordered isn't on the menu anymore. Maybe the link got cut off, or this jawn closed up shop. The good news: happy hour is still pouring all over Philly.</p>
+  <div class="nf-grid">
+    <div class="nf-tab" role="group" aria-labelledby="tab-h">
+      <p class="nf-tab-h" id="tab-h">Bar tab #404</p>
+      <dl>
+        <div><dt>1 × page you wanted</dt><dd>sold out</dd></div>
+        <div><dt>1 × wrong turn</dt><dd>on the house</dd></div>
+        <div><dt>Tip</dt><dd>try below</dd></div>
+      </dl>
+      <p class="nf-tab-total"><span>Total</span><span>$0.00</span></p>
+      <p class="nf-tab-foot">Thanks for drinking with 215 Happy Hour</p>
+    </div>
+    <div class="nf-next">
+      <h2 class="sec-h">Order something else</h2>
+      <form class="nf-search" action="/" method="get" role="search">
+        <label class="sr" for="nf-q">Search bars and deals</label>
+        <input id="nf-q" name="q" type="search" placeholder="Bar, deal, or drink" autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+      <ul class="nf-links">
+        <li><a href="/">What's pouring right now</a></li>
+        <li><a href="/monday/" id="nf-today">Today's happy hours</a></li>
+        <li><a href="/late-night/">Late-night deals</a></li>
+        <li><a href="/neighborhoods/">Browse by neighborhood</a></li>
+      </ul>
+      ${picks.length ? `<button class="btn nf-random" type="button" id="nf-random">Pour me a random happy hour</button>` : ''}
+    </div>
+  </div>
+</section>
+<script>(function(){
+  var picks=${JSON.stringify(picks)};
+  var b=document.getElementById('nf-random');
+  if(b) b.addEventListener('click',function(){ location.href=picks[Math.floor(Math.random()*picks.length)]; });
+  var days=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+  var wd=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'long'}).format(new Date()).toLowerCase();
+  var t=document.getElementById('nf-today'); if(t && days.indexOf(wd)>-1){ t.href='/'+wd+'/'; t.textContent=wd.charAt(0).toUpperCase()+wd.slice(1)+"'s happy hours"; }
+})();</script>`;
+}
+
 /* ---------- pages ---------- */
 async function main() {
   let venues = buildModel([...(await loadRows()), ...loadWebsiteRows()]);
@@ -552,7 +605,7 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
   // 404 (served at any path, so use root-absolute assets on the live site)
   if (!PREVIEW) {
     let nf = shell('404.html', { ...ctx, title: `Page not found | ${config.siteName}`, description: 'Page not found', page: { type: '404' },
-      body: `<section class="hero hero-sm"><p class="eyebrow">404</p><h1>That page has been cut off.</h1><p class="lede">Last call came early for this link. Head back to <a href="/">today's happy hours</a> or pick a day.</p></section>` });
+      body: notFoundBody(hhVenues) });
     nf = nf.replace(/(href|src)="(?!https?:|\/|#|mailto)([^"]*)"/g, (m, a, u) => `${a}="/${u.replace(/^(\.\.\/)+/, '').replace(/^\.\//, '')}"`);
     write('404.html', nf);
   }

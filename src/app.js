@@ -48,6 +48,10 @@
     if (fHood && saved && fHood.querySelector('option[value="' + saved + '"]')) fHood.value = saved;
   } catch (e) { /* storage unavailable */ }
   if (fWhen) fWhen.value = defaultWhen;
+  try {
+    var qs = new URLSearchParams(location.search).get('q');
+    if (fQ && qs) { fQ.value = qs; if (fWhen) fWhen.value = 'any'; }
+  } catch (e) { /* old browser */ }
 
   function tick() {
     var now = nowPhilly();
