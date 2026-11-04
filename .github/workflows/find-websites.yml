@@ -1,0 +1,28 @@
+name: Find bar websites (Overture Maps)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tools
+        run: pip install overturemaps pandas pyarrow
+
+      - name: Download every place in Philadelphia from Overture Maps
+        run: overturemaps download --bbox=-75.2803,39.8670,-74.9558,40.1379 -f geoparquet --type=place -o places.parquet
+
+      - name: Match against the bar list
+        run: python tools/find_websites.py places.parquet tools/bars-input.csv websites-found.csv
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: websites-found
+          path: websites-found.csv

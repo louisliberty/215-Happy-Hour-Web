@@ -1,0 +1,1559 @@
+row,name,address,zip,legal_name
+2,1433 Philly,1433 Arch St,19102,1433 Philly INC
+3,1500 Brasserie,1500 Locust St Ste 4,19102,1500 Brasserie LLC
+4,1518 Bar & Grille,1518 Sansom St,19102,1518 Bar & Grille INC
+5,1524 Sansom,1524 Sansom St,19102,1524 Sansom INC.
+6,1526 Race,1526 Race St,19102,1526 Race INC
+7,16th Street Marathon Grill Associates,119-121 S 16th St,19102,16th Street Marathon Grill Associates
+8,Aegean Estiatorio,1405 Locust St,19102,"Aegean Estiatorio, INC."
+9,Alice,235 S 15th St First Floor,19102,Alice Of PA LLC
+10,Aloft Philadelphia Downtown,101 N Broad St,19102,Hersha Hospitality Management LP
+11,Billini,220 S 16th St,19102,Spiro Brothers LLC
+12,Capriccio Cafe At Cret Park,110 N 16th St,19102,Capriccio Parkway LLC
+13,Cellar Dog,254-258 S 15th St Space #2,19102,Cellar Dog Hs LLC
+14,Chancellor 218,218 S 16th St,19102,Chancellor 218 LLC
+15,Cigars On Walnut,1522 Walnut St 2nd Fl,19102,Cigars On Walnut LLC
+16,City Restaurant,2 Penn Center Concourse,19102,City Restaurant INC
+17,Courtyard By Marriott Philadelphia Arch St,1421 Arch St,19102,Hersha Hospitality Management LP
+18,Dan Dan 126,126 S 16th St,19102,Dan Dan 126 LLC
+19,Del Friscos Of Philadelphia,Unit 1 Packard Grande Bldg 111 S 15th St,19102,Del Friscos Of Philadelphia INC
+20,Dilworth Park Cafe,1 S 15th St,19102,Aramark Sports And Entertainment Services LLC
+21,Fado',1500 Locust St,19102,"Fado Philadelphia, INC."
+22,Firehouse Hospitality,1528-30 Sansom St,19102,Firehouse Hospitality LLC
+23,Flight Club,1417 Walnut St,19102,Flight Club Walnut LLC
+24,Frank Clements Tavern,224 S 15th St,19102,"Frank Clements Tavern, INC."
+25,Giovanis Falafel Bar & Grill,1533 Chestnut St,19102,Giovanis Falafel Bar & Grill INC
+26,Giuseppe & Sons Restaurant Group,1520-1522 Chestnut St,19102,Giuseppe & Sons Restaurant Group LLC
+27,Harp & Crown Restaurant Group,1524-26 Chestnut St,19102,Harp & Crown Restaurant Group LLC
+28,Holly Go Lightly,1534 Sansom St,19102,Holly Go Lightly LLC
+29,Kimmel Center,300 S Broad St,19102,Ovations Food Services LP
+30,Kissho House,1522 Locust St,19102,Kissho House INC
+31,Latimer Delicatessen,255-257 S 15th St,19102,"255 Latimer Deli, INC."
+32,Locust Rendezvous,1415 Locust St,19102,"Fred O, Ltd."
+33,Looking Up,264 South 16th St,19102,"Looking Up, INC."
+34,Meld Worldwide,1501 Spruce St,19102,Meld Worldwide LLC
+35,Misconduct Tavern,1511 Locust St,19102,1511 Locust Tavern LLC
+36,Ocean Prime,124-34 S 15th St 1500 Sansom St,19102,Cameron Mitchell Restaurants LLC
+37,Palm Tree Market,322 N Broad St Ste B,19102,Palm Tree At Broad INC
+38,Palm Vintage Cafes Sushi & Teas,1414 S Penn Sq,19102,Palm Vintage Cafes Sushi & Teas LLC
+39,Recipe Philly,1401 Arch St,19102,Recipe Philly LLC
+40,Sams Oyster House,1514-16 Sansom St 1515-17 Moravian St,19102,Sams Oyster House LLC
+41,Samurai Japanese Restaurant,"1420 Locust St, Academy House Stes R1-B & R1-3",19102,Samurai Japanese Restaurant LLC
+42,Sand Php,10 Ave Of The Arts,19102,Sand Php LLC
+43,Sansom Street Partners,1514-16-18 Sansom St 2nd Fl,19102,Sansom Street Partners LLC
+44,Sbi Restaurant Partners,1500 Walnut St,19102,"Sbi Restaurant Partners, L.P."
+45,Spin Philadelphia,1430 Walnut St,19102,Spin Philadelphia LLC
+46,Steak 48 Philadelphia,260 S Broad St,19102,Steak 48 Philadelphia LLC
+47,The Bellevue Hotel,200 S Broad St,19102,Highgate Hotels LP
+48,The Cheesecake Factory,1426-30 Walnut St,19102,The Cheesecake Factory Restaurants INC
+49,The Happy Rooster,118 S 16th St & 1604 Sansom St,19102,Angry Rooster LLC
+50,Touch-Barger,1421 Sansom St,19102,"Touch-Barger, INC."
+51,Two Penn Center,1500 Jfk Blvd Ste 100 1515 Market Street - Suite L100,19102,Uptown Beer Garden INC
+52,Union Trust Events,"1414 S Penn Square, Unit 16D",19102,Union Trust Events INC
+53,W Philadelphia / Element Philadelphia,1441 Chestnut St,19102,Chestlen Development LP
+54,1444 Restaurant Group,1444 Frankford Ave,19125,1444 Restaurant Group LLC
+55,1873 Partners,1873 Frankford Ave,19125,1873 Partners Corp
+56,202 Girard,202 E Girard Ave,19125,"202 Girard, INC."
+57,2401 E Norris Street,2401 E Norris St,19125,2401 E Norris Street INC
+58,2406 Frankford Restaurant,2406 Frankford Ave,19125,2406 Frankford Restaurant LLC
+59,2524 Wang,2524 Kensington Ave,19125,2524 Wang INC
+60,2661 Capital Beer,2661-2663 E Cumberland St,19125,2661 Capital Beer INC
+61,529 Girard Group,529 E Girard Ave,19125,529 Girard Group INC
+62,Applebee's Neighborhood Grill & Bar,2501 Aramingo Ave,19125,Rose Casual Dining LP
+63,Arramama,951-955 Frankford Ave,19125,Arramama INC
+64,Ballers,1325 N Beach St,19125,Ballers Philadelphia LLC
+65,Baly,1108 Frankford Ave,19125,Baly LLC
+66,Barcade Philadelphia,1114 Frankford Ave,19125,Barcade Philadelphia LLC
+67,Bierfish Restaurant Partners,1210-22 Frankford Ave,19125,Bierfish Restaurant Partners LP
+68,Bsss Partners,1204-1208 Frankford Ave,19125,Bsss Partners LP
+69,Cannonball Club,1105 Frankford Ave,19125,Cannonball Club Spirits LLC
+70,Cedar Point,2370-72 E Norris St,19125,Cedar Point LLC
+71,Charles Jacquin Et Cie,2633 Trenton Ave,19125,"Charles Jacquin Et Cie, INC."
+72,Cue Records,400-402 E Girard Ave,19125,Cue Records INC
+73,Dice On Dauphin,2118-2120 E Dauphin St,19125,Dice On Dauphin LLC
+74,Drafthouse,1235 E Palmer St,19125,Drafthouse INC
+75,East Sergeant,2532 Coral St,19125,East Sergeant LLC
+76,First Space,2519 Frankford Ave,19125,First Space LLC
+77,Fishtown Arts & Crafts,1523-27 Frankford Ave,19125,Fishtown Arts & Crafts LLC
+78,Fishtown Tavern,1301 Frankford Ave,19125,Fishtown Tavern LLC
+79,Forin,2525 Frankford Ave,19125,Forin LLC
+80,Ginger Susan,2546 E Lehigh Ave,19125,Ginger Susan INC
+81,Give Me Five,2421 Martha St,19125,Give Me Five LLC
+82,Hotel Anna & Bel,1401 E Susquehanna Ave,19125,Anna & Bel LLC
+83,Iced Intergalactic,2301 Frankford Ave,19125,Iced Intergalactic LLC
+84,J. R. 's Place,2663 E Norris St,19125,J. R. 's Place Ltd
+85,Kalaya,4-6 W Palmer St,19125,Tong Thai LLC
+86,Kelly's Happy Tap,1301 E Susquehanna Ave,19125,"1301 East Susquehanna, INC."
+87,Kqfh Atlantic,100 E Girard Ave,19125,Kqfh Atlantic INC
+88,Leofigs,2201 Frankford Ave,19125,Leofigs LLC
+89,Manpants,1201-05 Frankford Ave 109 East Girard Ave,19125,"Manpants, LLC"
+90,Medium Rare Philadelphia,1540 Frankford Ave,19125,Medium Rare Philadelphia LLC
+91,Medusa Pizza Port Richmond,2327-35 Gaul St,19125,Medusa Pizza Port Richmond INC
+92,Meetinghouse,2331 E Cumberland St,19125,Morning Swim Beer Company
+93,Meyers Brewing Company,436 E Girard Ave,19125,Fill It Up Again LLC
+94,Mural City Cellars,1831 Frankford Ave,19125,Shackamaxon Wines LLC
+95,Myenso,2049 E Hagert St,19125,Myenso LLC
+96,Next Of Kin,1414 Frankford Ave,19125,Kin On Kimball LLC
+97,Philadelphia Brewers & Bottlers,2423-39 Amber St,19125,Philadelphia Brewers & Bottlers LLC
+98,Pig & Khao,2113-15 E York St,19125,Pk Philly LLC
+99,Piggies,2101 York St,19125,"Piggies, INC."
+100,Red Brick Craft Distillery,2628 Martha St Unit Sl-H,19125,Red Brick Craft Distillery
+101,Rey-Rey,2442 Frankford Ave,19125,Rey-Rey INC
+102,Rivers Casino Philadlephia,1001 N Delaware Ave,19125,Sugarhouse Hsp Gaming LP
+103,Something Beautiful,2634 E York St,19125,"Something Beautiful, INC."
+104,Source Brewing,1101 Frankford Ave,19125,Source Brewing LLC
+105,Starboard Side,2500 E Norris St,19125,"Starboard Side, INC."
+106,Suraya's Garden,1526-30 Frankford Ave,19125,Suraya's Garden LLC
+107,Therichmondshops.Com Iga,2497 Aramingo Ave,19125,Food Line Management Co
+108,Three J Fishtown,1140 Shackamaxon St,19125,Three J Fishtown Corp
+109,Wine Frankford Ave,1204 Frankford Ave,19125,Wine Frankford Ave LLC
+110,Wink Realty,2301-07 E Albert St,19125,Wink Realty LLC
+111,Wolfgang Puck Catering And Events,1000 Frankford Ave,19125,Wolfgang Puck Catering And Events LLC
+112,Yachi Blanc '22,2672 Almond St,19125,Yachi Blanc '22 LLC
+113,York Street Tavern Associates,2501 E York St,19125,"York Street Tavern Associates, INC."
+114,Yuhiro Fishtown Sushi,2146 E Susquehanna Ave,19125,Yuhiro Fishtown Sushi INC
+115,Zig Zag BBQ,2111 E York St,19125,Zig Zag BBQ LLC
+116,1126 Walnut Restaurant,1126 Walnut St,19107,1126 Walnut Restaurant INC.
+117,12th Street Restaurant Associates,114 S 12th St,19107,12th Street Restaurant Associates INC
+118,1311 Sansom Enterprises,1311-13 Sansom St,19107,1311 Sansom Enterprises LLC
+119,1312 DJ,1312-14 Walnut St,19107,1312 DJ INC
+120,1315-21 Sansom Street,1315-21 Sansom St,19107,1315-21 Sansom Street LLC
+121,1318 Brauhaus,1318-20-22-24 Chestnut St,19107,1318 Brauhaus INC
+122,1342 Cypresslql,1342 Cypress St,19107,1342 Cypresslql LLC
+123,13th & Sansom Restaurant Group,112 S 13th St,19107,13th & Sansom Restaurant Group LLC
+124,76 West,114-124 S 13th St,19107,76 West LLC
+125,926 Arch Associates,926 Arch St,19107,926 Arch Associates LLC
+126,Adr 131 S 13,131 S 13th St,19107,Adr 131 S 13 LLC
+127,Aki Nom Nom,1210 Walnut St,19107,Aki Nom Nom LLC
+128,Amc Fashion District 8,901 Market St,19107,American Multi-Cinema INC
+129,Back Street Food & Wine Co,254-256 S 12th St,19107,Back Street Food & Wine Co LLC
+130,Ballroom Management Company,Benjamin Franklin House 834 Chestnut St Ste 210,19107,"Ballroom Management Company, INC."
+131,Banana Knuckles,1309 Sansom St,19107,Banana Knuckles INC
+132,Barcade,1326 Chestnut St,19107,"Barcade PA Chestnut, LLC"
+133,Bc Philly,1020 Cherry St,19107,Bc Philly INC
+134,Bl 219 Partners,219-225 S Broad St,19107,Bl 219 Partners LP
+135,Broad & Locust Events,227-31 S Broad St,19107,Broad & Locust Events LLC
+136,Btb Philadelphia 1,1218-22 Chestnut St,19107,Btb Philadelphia 1 LLC
+137,C-Town Restaurant And Bar,101 N 11th St,19107,C-Town Restaurant And Bar LLC
+138,Cafe Twelve 29,1229-31 Spruce St,19107,"Anni Enterprises, INC."
+139,Camac 255,255 S Camac St & 1217 Spruce St Rear,19107,Camac 255 Corp
+140,Capital Grille Holdings,1346 Chestnut St,19107,Capital Grille Holdings INC
+141,Ch & S Enterprises,719 Walnut St,19107,Ch & S Enterprises INC
+142,Chili Bamboo,1228 Chestnut St,19107,Chili Bamboo LLC
+143,Chili's Grill & Bar,1239 Filbert St,19107,Brinker Penn Trust
+144,City Winery,907-37 Market St Space C085,19107,City Winery Philadelphia LLC
+145,Cocoras,112 S 8th St,19107,Cocoras INC
+146,Culloo Entertainment,1209 Vine St,19107,Culloo Entertainment LLC
+147,Daily Pint,216 S 11th St,19107,Daily Pint INC
+148,Davidson Hotel Company,21 S 12th St,19107,Davidson Hotel Company LLC
+149,Dirty Frank's Bar,347-349 S 13th St,19107,Soilent Francine's LLC
+150,E Mei,915 Arch St,19107,E Mei Corporation
+151,El Purepecha,315 N 12th St,19107,El Purepecha INC
+152,F1 Arcade,1330 Chestnut St,19107,Raceway Philadelphia LLC
+153,Fairfield Inn & Suites By Marriott,261 S 13th St,19107,Shree Sai Siddhi Spruce LLC And Shree Sai Siddhi Spruce Restuarant LLC A Joint Venture
+154,Fogo De Chao,Widener Building 1339 Chestnut St,19107,Fogo De Chao Churrascaria (Phila) LLC A Delaware Limited Liability Company
+155,Foodery,324 S 10th St,19107,"Foodery, Ltd."
+156,Forrest Theater,1114 Walnut St,19107,"Theater Refreshment Co. Of New York, INC."
+157,Four Points By Sheraton,1201 Race St,19107,Touch Down LLC
+158,Frost Fire Philly,927 Arch St,19107,Frost Fire Philly INC
+159,Fuxion,1021 Arch St,19107,Fuxion INC
+160,Gladurhar,339 N 11th St,19107,Gladurhar LLC
+161,Green Eggs Cafe,1301 Locust St 212 S 13th St,19107,B.A.R. Midtown INC.
+162,Hard Rock Cafe,1113-31 Market St,19107,"Hard Rock Cafe International (Stp), INC."
+163,Hersha Hospitality Management,1301 Race St,19107,Hersha Hospitality Management LP
+164,Hi-Lo Taco 1,1109 Walnut St,19107,Hi-Lo Taco 1 LLC
+165,Hilton Garden Inn Philadelphia,1100 Arch St,19107,Gf Hospitality PHL Hgi LLC
+166,Homecooked On Walnut,1222-24 Walnut St,19107,Homecooked On Walnut LLC
+167,Hop Sing Restaurant Group,1029 Race St,19107,Hop Sing Restaurant Group INC
+168,Hsom,834 Chestnut St Ste 106,19107,Hsom LLC
+169,Ikki,310 Market St,19107,Ikki LLC
+170,Jadary,1175 Ludlow St,19107,Jadary LLC
+171,Jade Harbor Seafood Restaurant,942 Race St,19107,"Ylsl, INC."
+172,Justaplumber,1318-22 Chancellor St,19107,Justaplumber INC
+173,Kiddo PHL,1136 Pine St,19107,Kiddo PHL LLC
+174,Kitchen + Kocktails By Kevin Kelley Philadelphia,225 S Broad St,19107,Kitchen + Kocktails By Kevin Kelley Philadelphia LLC
+175,Lams Investment Group,1225 Vine St,19107,Lams Investment Group LP
+176,Le Pain Quotidien,801 Walnut St,19107,Apq 8th And Walnut PA LLC
+177,Lins Foods,909 Arch St First Fl,19107,Lins Foods LLC
+178,Little Gay Pub,102 S 13th St,19107,Three Pigs LLC
+179,Lobro Associates,233-247 S Broad St,19107,Lobro Associates
+180,Loch Bar Philly,301 S Broad St,19107,Loch Bar Philly LLC
+181,Locust 13,1234 Locust St,19107,Locust 13 INC
+182,Locust Tavern,235 S 10th St,19107,"Locust Tavern, Ltd."
+183,Loews Hotel,1200 Market St,19107,Twelfth Street Hotel Associates LLC
+184,Lolita Restaurant,104-106 S 13th St,19107,Lolita Restaurant INC
+185,Lucky Strike Philadelphia,1330-36 Chestnut St 2nd & 3rd Fl,19107,Amf Bowling Centers INC
+186,Maggiano's Little Italy,1201-39 Filbert St,19107,Maggiano's Holding Corporation
+187,Mai Lai Wah,1001 Race St & 204-206-208 N 10th St,19107,"Mai Lai Wah, INC."
+188,McCormick & Schmick's Seafood Rest,One S Broad St,19107,McCormick & Schmick Restaurant Corp
+189,McGillin's Old Ale House Est. 1860,1310-14 Drury St,19107,McGillin's Old Ale House Est. 1860 INC.
+190,Mi Vida East Market,34 S 11th St Unit 100-102,19107,Mi Vida East Market LLC
+191,Milkboy Center City,1100 Chestnut St,19107,Milkboy Center City LLC
+192,Miss Saigon Restaurant,1316 Walnut St,19107,Miss Saigon Restaurant INC
+193,Molly Malloys,Reading Terminal Market 12th & Filbert Sts,19107,Iovine Brothers Bar & Grill INC
+194,Moms Organic Market,34 S 11th St,19107,Moms Organic Market INC
+195,Mona,1308-10 Chestnut St,19107,1308 Restaurant Partners INC
+196,Moriarty's Restaurant,1116 Walnut St,19107,Oberst Incorporated
+197,Mr Pig Philly,1001-11 Vine St & 314 N 10th St,19107,Mr Pig Philly LLC
+198,Nan Zhou Hand Drawn Noodle House,1022 Race St,19107,Nan Zhou Hand Drawn Noodle House INC
+199,New American Tavern,1123 Walnut St,19107,New American Tavern Corporation
+200,New Heaven Chinese Restaurant,1119 Walnut St,19107,New Heaven Chinese Restaurant INC
+201,Next Of Kin,1137 Spruce St,19107,Next Of Kin Hospitality LLC
+202,Nom Wah,218 N 13th St,19107,Nom Wah Tea Parlor INC
+203,Ocean City Seafood Restaurant,234 N 9th St,19107,P And D Two LLC
+204,Olympia Gyro,1136 Arch St Unit 436 & 488,19107,Olympia Gyro INC
+205,Penang Philly,117-119 N 10th St,19107,Penang Philly LLC
+206,Philadelphia Marriott,1201 Market St & 1113-31 Market St,19107,Marriott Hotel Services LLC
+207,Pho Cali Vietnamese Restaurant,1000 Arch St,19107,"Pho Cali Vietnamese Restaurant, INC."
+208,Piranha Sushi,204-206 S Quince St,19107,"Piranha Sushi, LLC"
+209,Quad Philly Restaurant,336-338 N 10th St,19107,Quad Philly Management LLC
+210,Race Street Restaurant,1214 Sansom St,19107,"Race Street Restaurant, INC."
+211,Residence Inn Philadelphia Center City,1 East Penn Sq,19107,Granite Penn Square LLC
+212,Restaurant 13,110 South 13th St,19107,Restaurant 13 INC
+213,Round 1 Bowling & Amusement,1001 Market St #3010,19107,Round One Entertainment INC
+214,Sang Kee Peking Duck House,238-240 N 9th St,19107,"Sang Kee Peking Duck House, INC."
+215,Sansom Street Pub,116-118 S 12th St,19107,"Sansom Street Pub, INC."
+216,Sanye,1023 Race St,19107,"Sanye, LLC"
+217,Sbh PHL,1213 Sansom St,19107,Sbh PHL LLC
+218,Seorabol,1326 Spruce St Unit C3,19107,Seorabol INC
+219,Shake Shack,105 S 12th St,19107,Shake Shack Pennsylvania LLC
+220,Song & Da,1024 Race St,19107,Song & Da LLC
+221,Swampoodle,225 S 12th St,19107,Swampoodle INC
+222,Tai Lake Seafood Restaurant,134 N 10th St,19107,Tai Lake Seafood Restaurant INC
+223,Tavern On Camac,243-245 S Camac St,19107,"My Blue Eyed Dog, LLC"
+224,The Arts Catering,1324 Locust St,19107,The Arts Catering LLC
+225,The Down Home Diner,45 N 12th St Reading Terminal Mrkt,19107,The Down Home Diner INC
+226,"The Notary Hotel, Autograph Collection",21 N Juniper St,19107,Ashford Trs Philadelphia Annex LLC
+227,The Philadelphia Kitchen & Bar,129 S 13th St,19107,"The Philadelphia Kitchen & Bar, INC."
+228,Thirteenth Street Restaurant Partners,121-127 S 13th St,19107,"Thirteenth Street Restaurant Partners, LP"
+229,Tmr Restaurant,1310 Walnut St,19107,"Tmr Restaurant, LLC"
+230,Toll Man Joes,1141-1143 Pine St,19107,Tmj Pine LLC
+231,Top Tomato II,116-120 S 11th St,19107,Top Tomato II INC
+232,Uncles,1220 Locust St,19107,Uncles LLC
+233,Vedge,1221-23 Locust St,19107,Horizons Food Of The Future INC
+234,Vetri,1312 Spruce St,19107,Vetri Restaurant Corp
+235,Vietnam Restaurant,221-223 N 11th St,19107,"Vietnam Restaurant, INC."
+236,Vinx,1025 Arch St 1st Floor,19107,Vinx INC
+237,Walnut Resto,1121 Walnut St,19107,Walnut Resto LLC
+238,Walnut Supper Club,1227-1229 Walnut St,19107,Walnut Supper Club INC
+239,Wood Brothers Bar,200-202 S 13th St,19107,Wood Brothers Bar INC
+240,Y & R S,1326 Spruce St Store #c1,19107,Y & R S INC
+241,Yakitori Boy,211 N 11th St,19107,"Yakitori Boy, INC."
+242,Yamitsuki,1028 Arch St,19107,The 24 7 Philly INC
+243,Zhi,210 N 9th St 1st Floor,19107,Zhi LLC
+244,10spring33,1033-35-37 Spring Garden St,19123,10spring33 LLC
+245,149 S & M,149 Brown St,19123,"149 S & M, INC."
+246,4th Rail,923 N Watts St,19123,4th Rail LLC
+247,520 Management,520 N Columbus Blvd,19123,520 Management LLC
+248,626 Front,626-628 N Front St,19123,626 Front LLC
+249,801 Last Resort,801-805 N 3rd St,19123,"801 Last Resort, INC."
+250,816 Enterprises,816 N 12th St,19123,816 Enterprises INC
+251,90del125,901-25 N Delaware Ave,19123,90del125 LLC
+252,931-933,931-933 N 2nd St,19123,931-933 INC
+253,Angkor Food Co,1234-1236 W Girard Ave,19123,Angkor Food Co INC
+254,Bar Fred,1040 N 2nd St,19123,Bar Fred LLC
+255,Bar1010,701 N 2nd St,19123,Bar1010 LLC
+256,Bardot Cafe,447-453 Poplar St,19123,Bardot Cafe LLC
+257,Bourbon & Branch,705 N 2nd St,19123,Bourbon & Branch LLC
+258,Cafe Lift,1124 Spring Garden St,19123,Cafe Lift INC
+259,Cdd 725,725 N 10th St,19123,Cdd 725 INC
+260,Cerveau,990 Spring Garden St,19123,Past Mijo LLC
+261,Cescaphe Ballroom,917-923 N 2nd St,19123,Cescaphe Ballroom LLC
+262,Cicala At The Divine Lorraine,699 N Broad St Suite 1,19123,Cicala Restaurant Group LLC
+263,1970-12-01 00:00:00,700 N 2nd St,19123,Dec70 LLC
+264,Delilah's Den Of Philadelphia,100 Spring Garden St,19123,"Delilah's Den Of Philadelphia, INC."
+265,Divine Lorraine,699 N Broad St,19123,Underground Concepts LLC
+266,Dolgencorp,1001 N 2nd St Ste 7,19123,Dolgencorp LLC
+267,Doomed Ventures,421 N 7th St Ste 102,19123,Doomed Ventures LLC
+268,Eat It Up,525 N 11th St,19123,Eat It Up LLC
+269,Emmett43,161 W Girard Ave,19123,Emmett43 LLC
+270,Five Iron Golf,27 E Allen St,19123,Five Iron Golf Philadelphia LLC
+271,Flavor Saver,425-449 Spring Garden St,19123,Flavor Saver INC
+272,Foodery Northern Liberty,837-41 N 2nd St,19123,Foodery Northern Liberty Ltd.
+273,Franklin Music Hall,421 N 7th St Rear,19123,Facility Concession Services LLC
+274,Frosted Mug,180 W Girard Ave,19123,ACME Markets INC
+275,Future Days Beer Company,433 Fairmount Ave,19123,Future Days Beer Company LLC
+276,Garage Sale Vintage,1148 Frankford Ave,19123,Gsv PA 1 LLC
+277,Hua Gui,180 W Girard Ave Unit 106A,19123,Hua Gui LLC
+278,Infinite Niches,25 E Allen St,19123,Philadelphia Distilling LLC
+279,Joe And Kay,702-704 N 2nd St,19123,Joe And Kay Produce LLC
+280,Kappo Yanaga Izakaya,635-637 N 3rd St & 244 Fairmount Ave,19123,"Yde Concepts, LLC"
+281,La Chinesca,1036 Spring Garden St,19123,448 Restaurant Partners LLC
+282,Love City Brewing Company,1016 Buttonwood St,19123,Love City Brewing Company
+283,Lucky Duck,501 N Christopher Columbus Blvd Unit S Retail Sr-3,19123,4B Ventures LLC
+284,Manhattan Restaurant,13-15 W Girard Ave,19123,"Manhattan Restaurant, INC."
+285,Mja Holdings,635 W Girard Ave,19123,Mja Holdings LLC
+286,Nolibs Group,1030 N 2nd St Ste 101 & 102,19123,Nolibs Group LLC
+287,Northern Liberties Management,1099 Germantown Ave,19123,Northern Liberties Management LLC
+288,Ortnolibs,847 N 3rd St,19123,Ortnolibs LLC
+289,Other Half Brewery,1000-1002 Canal St,19123,Ohb PA LLC
+290,P.J.P. Consulting,Pier 25 N 417 N Columbus Blvd,19123,"P.J.P. Consulting, LLC"
+291,Poison Heart,931 Spring Garden St,19123,"Poison Heart, LLC"
+292,Prohibition Taproom,501 N 13th St,19123,Prohibition Taproom INC
+293,Punchline Philadelphia,33-51 E Laurel St,19123,Hob Punch Line Penn Corp
+294,R & K Standard,901 N Second St & 173 Poplar St,19123,R & K Standard INC
+295,Rose Hospitality Group Germantown,1102 Germantown Ave,19123,Rose Hospitality Group Germantown LLC
+296,S & B Restaurant Group 1,102 W Girard Ave,19123,S & B Restaurant Group 1 LLC
+297,Santucci's Original Square Pizza,655-659 N Broad St,19123,Phantom Food Group Corporation
+298,Sb Beer,1001 N 2nd St Unit 2700,19123,Sb Beer LLC
+299,Spare Time,909-915 N 2nd St,19123,"Spare Time, INC."
+300,Streetside,165 W Girard Ave,19123,Streetside LLC
+301,Tendenza,969 N 2nd St,19123,Tendenza LLC
+302,The Arts Bar,1200 Callowhill St,19123,The Arts Bar LLC
+303,The Vermouthery,421 N 7th St Ste 105,19123,"The Vermouthery, LLC"
+304,The Vermouthery,421 N 7th St,19123,"The Vermouthery, LLC"
+305,Triple Bottom Brewing Company,915 Spring Garden St,19123,Triple Bottom Brewing Company LLC
+306,Union Transfer,1026 Spring Garden St,19123,Facility Concession Services LLC
+307,Wp,129 W Laurel St,19123,Wp LLC
+308,Yards Brewing Company,500 Spring Garden St,19123,Yards Brewing Company LLC
+309,13river15,221 N Columbus Blvd,19106,13river15 LLC
+310,205-209 Ll,205-09 Race St #102,19106,205-209 Ll LLC
+311,35 South Street Ventures,35 S 2nd St,19106,35 South Street Ventures LLC
+312,Amada,217-219 Chestnut St,19106,3bm1 Amada LLC
+313,Apollo Pizza,615 Chestnut St Ground Fl,19106,"Independence Pizza, LLC"
+314,Bistro 52,52 S 2nd St,19106,Bistro 52 INC
+315,Brasils,112 Chestnut St,19106,Brasils Eandm Enterprise LLC
+316,Bread & Race,228 Race St,19106,"Bread & Race, INC."
+317,Brownies Pub,46 S 2nd St,19106,Pib LLC
+318,Bucadoro,Washington West Bldg N E Cor 8th & Locust Sts Basement,19106,Bucadoro LLC
+319,Buddakan,325 Chestnut St,19106,Costar Partners LP
+320,Buffalo Billiards Philadelphia,116-118 Chestnut St,19106,"Buffalo Billiards Philadelphia, L.P."
+321,Chestnut Barriga,703 Chestnut St,19106,Chestnut Barriga LLC
+322,Chestnut Street Venture,723 Chestnut St,19106,Chestnut Street Venture LP
+323,Chops,30-34 S Front St,19106,"Chops, INC."
+324,Cuba Libre,10-14-16 S Second St,19106,Thursday Enterprises LLC
+325,Cwkearse,233 Chestnut St,19106,Cwkearse LLC
+326,Dave & Busters,325 N Christopher Columbus Blvd,19106,Dave & Busters Of Pennsylvania INC
+327,Down At Dino's Bar & Grill,226 Market St,19106,Down At Dino's Bar & Grill INC
+328,Down Town Club,150 South Independence Mall West P O Box 40206,19106,900 Public Ledger LLC
+329,Fishmouth,54-56 S Second St,19106,"Fishmouth, INC."
+330,Food Tek,22-24-26 S 2nd St,19106,"Food Tek, INC."
+331,Fork,306 Market St,19106,Yin & Gang LLC
+332,Global Taste,208 Race St,19106,"Global Taste, INC."
+333,Gms Hospitality,402 Wood St,19106,Gms Hospitality LLC
+334,Hilton Philadelphia At Penns Landing,201 S Christopher Columbus Blvd,19106,"Penn's Landing Partners Project, LLC"
+335,Hn Gourmet,114 Market St,19106,Hn Gourmet INC
+336,Hopkinson House,604 S Washington Sq,19106,Honeybee Gourmet Deli LLC
+337,Hotel Monaco Philadelphia,433-441 Chestnut St,19106,Lafayette Hotel LLC And Kimpton Hotel & Restaurant Group LLC
+338,Independence Restaurant Group,100 S Independence Mall W Ste 1,19106,Independence Restaurant Group LLC
+339,Independence Seaport Museum,211 S Christopher Columbus Blvd,19106,Independence Seaport Museum
+340,J&J Chestnut,123 Chestnut St 1st Fl,19106,J&J Chestnut LLC
+341,Koto Sushi,719 Sansom St,19106,Koto Sushi INC
+342,Lamberti's Of Philadelphia,212 Walnut St 2nd Fl,19106,"Lamberti's Of Philadelphia, INC."
+343,Marriott Old City,One Dock St,19106,Society Hill Hotel Xli Owner LLC
+344,Mulberry Market,236 Arch St,19106,"Mulberry Market, INC."
+345,Nom Nom Japanese Kitchen,725 Walnut St & 725-727-729 Walnut St Bsmt,19106,Nom Nom Japanese Kitchen LLC
+346,Np Ll 20,15 S 3rd St,19106,Np Ll 20 LLC
+347,Old City Pretzel Company,33 S 2nd St,19106,"Old City Pretzel Company, LLC"
+348,Panorama Ristorante,14-18 N Front St,19106,Krishna Amrut Philly LLC
+349,Peruvians Sb,20 S 2nd St,19106,Peruvians Sb INC
+350,Pj Clarkes At The Curtis,601 Walnut St 170 S Independance West Mall,19106,Pj Clarkes At The Curtis LLC
+351,Pulp Philly,126 Chestnut St,19106,Pulp Philly LLC
+352,Really Rotten Ralphs,201 Chestnut St,19106,Really Rotten Ralphs LLC
+353,Renaissance Philadelphia Downtown Hotel,401 Chestnut St,19106,Independence Sq Hotel Partners LP
+354,Revolution House,200 Market St,19106,Rv Hospitality Group LLC
+355,Scc Restaurant,401 S Christopher Columbus Blvd,19106,Scc Restaurant LLC
+356,Seven Mountaintop,720-724 Arch St,19106,"Seven Mountaintop, INC."
+357,Stoish,240 Market St,19106,Stoish INC
+358,The Frosted Mug,309 S 5th St,19106,ACME Markets INC
+359,The Giant Company,1004 N 2nd St,19106,The Giant Company LLC
+360,The Philly Pump House Association,140 N Columbus Blvd & 2 Race St,19106,The Philly Pump House Association
+361,The Plough And The Stars,123-129 Chestnut St,19106,"Irish Table, INC."
+362,Washington Square Restaurant Partners,210 W Washington Sq,19106,Washington Square Restaurant Partners LP
+363,Wyndham Philadelphia Hist Dist,400 Arch St,19106,Djont/Jpm Hospitality Leasing (Spe) LLC
+364,Xaviers,48 S 2nd St,19106,Xaviers LLC
+365,Zahav,237 St James Place,19106,Zahav LLC
+366,1039,1039 S 8th St,19147,1039 INC.
+367,12 Steps Down,Bsmt 831-833 Christian St & 831 Christian St,19147,"12 Steps Down, LLC"
+368,120 Lombard,120 Lombard St,19147,"120 Lombard, INC."
+369,1231 Barrage,1231-33 E Passyunk Ave,19147,1231 Barrage INC
+370,1338,1338-40s 10th St,19147,1338 INC
+371,1525 M & J,1525 S 9th St,19147,"1525 M & J, INC."
+372,1536,1536 E Passyunk Ave,19147,1536 INC
+373,15dolphin39,1539 S Broad St,19147,15dolphin39 LLC
+374,4th Street Group,536 S 4th St,19147,4th Street Group LLC
+375,622 Mustard Green,622 S 2nd St,19147,622 Mustard Green LLC
+376,780,780-782 S 2nd St,19147,780 LLC
+377,941 South 8th St,941 S 8th St,19147,941 South 8th St Corp
+378,947 Adk Enterprises,947 E Passyunk Ave,19147,"947 Adk Enterprises, INC."
+379,ACME Markets,1001 South St,19147,ACME Markets INC
+380,Adelita Taqueria And Restaurant Number 2,1108-10 S 9th St,19147,Adelita Taqueria And Restaurant Number 2 INC
+381,Adobe Cafe II,736-738 S 8th St,19147,Adobe Cafe II LLC
+382,Alice,901 Christian St,19147,Conn Restaurant Concepts LLC
+383,Ambra Restaurant Group,701 & 705 S 4th St 334 Bainbridge St,19147,Ambra Restaurant Group LLC
+384,Andreana 509,507-509 South St,19147,Andreana 509 INC
+385,Argento Argentinian Steak House,400-02 S 2nd St,19147,Argento Argentinian Steak House LLC
+386,Beer Love,714 S 4th St,19147,Krc Beer LLC
+387,Bridget Foy's,200 South St,19147,"East Philly Cafe, INC"
+388,C & W Investments,1248 S 10th St,19147,C & W Investments LLC
+389,C P Young,1110-1120 Washington Ave Unit A1,19147,C P Young INC
+390,Calhoun Restaurant,1520 E Passyunk Ave,19147,Calhoun Restaurant Corporation
+391,Capozzoli Bar,1200 E Passyunk Ave,19147,Capozzoli Bar Corporation
+392,Cappie's,1503 S 13th St,19147,Cappie's INC
+393,Capri6,757 S Front St,19147,Capri6 LLC
+394,Carbon Copy,613 S 7th St Basement,19147,Catamount Liquids LLC
+395,Cartesian Brewing,1324-26 E Passyunk Ave,19147,Cartesian Brewing LLC
+396,Casablanca Mediterranean Grill,947 Federal St,19147,Casablanca Mediterranean Grill LLC
+397,Connie's Ric Rac,1130-32 S 9th St,19147,Connie's Ric Rac INC
+398,Cossette Enterprises,900 Washington Ave,19147,Cossette Enterprises INC
+399,Crybaby Food & Wine,627 S 3rd & 243 Bainbridge Sts,19147,Crybaby South Third Street LLC
+400,Curt Flood Booking,937 E Passyunk Ave,19147,"Curt Flood Booking, INC."
+401,Dante & Luigi's,760-762 S 10th St,19147,"Dante & Luigi's, INC."
+402,David Dinh Lynn Vo,932 Washington Ave,19147,David Dinh Lynn Vo
+403,Dibruno Bros,920 S 9th St,19147,Db Gourmet Markets LLC
+404,Dls Events,332-336 South St,19147,Dls Events LLC
+405,El Costeno,940 S 9th St,19147,"El Costeno, INC."
+406,El Pueblo,1137 S 9th St,19147,El Pueblito Food And Beverage INC
+407,Emmy Squared,624-632 S 5th St,19147,Ai Liq Limited Liability Company
+408,Fat Tuesday,431 South St Store Nos 5 & 6,19147,"Briggs Of Philadelphia, LLC"
+409,Fez Fine Moroccan Cuisine,620 S 2nd St,19147,"Fez Fine Moroccan Cuisine, INC."
+410,Fitz On 4th,743 S 4th St,19147,Veg LLC
+411,Fond Bistro,1537 South 11th St,19147,Fond Bistro INC
+412,For Pete's Sake,900 S Front St,19147,"For Pete's Sake, LLC"
+413,Gecc2,414 S 2nd St,19147,Gecc2 LLC
+414,Giant Food Store #6549,1001-29 S Broad St Ste 11,19147,The Giant Company LLC
+415,Grand Palace Restaurant Limited Liability Company,600 Washington Ave #3b,19147,Grand Palace Restaurant Limited Liability Company
+416,Green Eggs Cafe 1306,1306 Dickinson St,19147,Green Eggs Cafe 1306 INC
+417,Guavaberry Group,776 S 4th St,19147,Guavaberry Group INC
+418,Herman's,1313 S 3rd St,19147,Third And Moyamensing LLC
+419,High Note Cafe,1547-49 S 13th St,19147,"Highnote, INC"
+420,It Was Beautiful,848 S 2nd St,19147,It Was Beautiful LLC
+421,J. B.'s Variety,782-784 S 3rd St,19147,"J. B.'s Variety, INC."
+422,Jim's Steaks,400 And 402 South St,19147,400 South Corp
+423,Lale Lounge,216-218 South St,19147,Lale Lounge LLC
+424,Le Viet,1019-21 S 11th St,19147,"Le Viet, LLC"
+425,M & P Food,800 Bainbridge St,19147,M & P Food INC
+426,M & S Restaurant Enterprises,767 S 9th St,19147,M & S Restaurant Enterprises LLC
+427,Marsha's,430 South St,19147,430 South Street LLC
+428,Mighty Bread Company,1211 Gerritt St,19147,"Mighty Bread Company, LLC"
+429,Montrose,932-936 S 9th St,19147,Montrose INC.
+430,Morgan Associates,611 S 3rd St,19147,Morgan Associates LLC
+431,Nikki Lopez,304 South St,19147,Nikki Lopez LLC
+432,Nom Nom Poke,604 South St,19147,Nom Nom Poke LLC
+433,Originfoods,406-408 S 2nd St,19147,Originfoods LLC
+434,Paddy Whacks Irish Sports Pub,150-152 South St And 601-605 S 2nd St,19147,Southpw LLC
+435,Paulie Gees Philly,412-26 S 13th St,19147,"Paulie Gees Philly, LLC"
+436,Penns Landing Catering Services,1301 S Christopher Columbus Blvd,19147,"Penns Landing Catering Services, INC."
+437,Picositos Restaurant,1122-24 S 9th St,19147,Picositos Mexican Grill LLC
+438,Plaza Garibaldi,935 Washington Ave,19147,Plaza Garibaldi INC
+439,Pnk Head House,421 S 2nd St,19147,Pnk Head House LLC
+440,Queen & Rook Game Cafe,121-123 South St,19147,Philly Games INC
+441,Ralph's Restaurant,760 S 9th St,19147,"Ralph's Restaurant, INC."
+442,Repe's On The Row,1400 S 2nd St,19147,Repe's On The Row LLC
+443,Rock Of Ages,530 South St,19147,"Rock Of Ages, INC."
+444,Rosy's East,624-626 S 6th St,19147,6six24 LLC
+445,Samuel Gritz Public House,627-29 S 2nd St,19147,The-Good The-Bad The-Ugly LLC
+446,Select Restaurant Partners,215 Lombard St,19147,Select Restaurant Partners LP
+447,Side Eye,623 S 6th St Unit A,19147,Side Eye LLC
+448,Solar Myth,1131 S Broad St,19147,Solar Myth LLC
+449,Superette,1538-40 E Passyunk Ave,19147,Superette Passyunk LLC
+450,Taylorsyd,242 Wharton St(Front),19147,Taylorsyd LLC
+451,Tesiny,719 Dickinson St,19147,Tesiny LLC
+452,The Frosted Mug,1400 Passyunk Ave,19147,ACME Markets INC
+453,The Giant Company,1403 S Christopher Columbus Blvd,19147,The Giant Company LLC
+454,The Good King,614 S 7th St,19147,The Good King LLC
+455,The Saloon,750-754 S 7th St,19147,Saloon Enterprises INC
+456,The Twisted Tail,509-511 S Second St,19147,The Twisted Tail INC
+457,Two Street Crab House,604 S 2nd St,19147,Wwcs LLC
+458,Val's Lesbian Bar,603-605 S 3rd St,19147,Val's Lesbian Bar LLC
+459,Vetri Fiorella,817 Christian St,19147,Vetri Fiorella LLC
+460,Victor Cafe,1303-05 Dickinson St,19147,"Victor Cafe, INC."
+461,Waltzing Matildas Pub,1501-03 E Passyunk Ave,19147,Waltzing Matildas Pub LLC
+462,Whizville,"1123 S Broad St, Basement",19147,Whizville LLC
+463,Whole Foods Market Group,929 South St,19147,Whole Foods Market Group LLC
+464,10-12 S. 20th,10-12 S 20th St,19103,"10-12 S. 20th, INC."
+465,1801 Jfk Restaurant Associates,1801 John F Kennedy Blvd,19103,1801 Jfk Restaurant Associates LLC
+466,1907 Sansom St Operating,1905-1907 Sansom St,19103,1907 Sansom St Operating INC
+467,19chestnut03,1903 Chestnut St,19103,19chestnut03 LLC
+468,2031 Walnut Enterprises,2031 Walnut St #1f,19103,2031 Walnut Enterprises LLC
+469,2121 Walnut Restaurant,2121 Walnut St,19103,2121 Walnut Restaurant Corporation
+470,31south18,31 S 18th St,19103,31south18 LLC
+471,Abe Fisher,1605-27 Sansom St,19103,Abe Fisher LLC
+472,Act3,253 S 20th St,19103,Act3 LLC
+473,Aka Rs Liquor,135 S 18th St,19103,Aka Rs Liquor LLC
+474,Alaska Cafe,123 S 18th St,19103,Alaska Cafe LLC
+475,Aleksandar,124-126 S 19th St,19103,Aleksandar LLC
+476,Almyra,1612-34 Chancellor St,19103,Artemis Restaurant INC
+477,Ambrosia Ristorante,231-233 S 24th St,19103,Ambrosia Ristorante LLC
+478,Bae Enterprises,100 S 21st St,19103,Bae Enterprises INC
+479,Bar Cicci,1620 Sansom St,19103,Yin & Gang III LLC
+480,Barclay Prime,237 S 18th St,19103,Barclay Restaurant Group LP
+481,Big City Restaurant Group,2013 Chestnut St,19103,Big City Restaurant Group LP
+482,Black Sheep,247 S 17th St,19103,"17th & Latimer, INC."
+483,Bolo,2025 Sansom St,19103,"2025 Sansom Group, LLC"
+484,Butcher Bar,2034 Chestnut St,19103,Butcher Bar INC
+485,Carolyn's Modern Vietnamese,2015 Walnut St,19103,Kindred Table LLC
+486,Cavanaugh's Rittenhouse,1921 Sansom St,19103,Knp Holdings LLC
+487,Center Stage Comedy,2031-33 Sansom St,19103,"Center Stage Comedy, L.P."
+488,Cg Bellevue,Main Floor & Mezzanine Level The Bellevue Broad & Walnut Sts,19103,Cg Bellevue LLC
+489,Chen On The Parkway,1700 Benjamin Franklin Pkwy 1st Fl,19103,Chen On The Parkway LLC
+490,Cherry St Tavern,129 N 22nd St,19103,Cherry St Tavern INC
+491,City Tap House,2 Logan Sq 1st Fl 100 N 18th St,19103,City Tap Logan LLC
+492,Cl1 Philadelphia,2 Franklin Plaza,19103,Cl1 Philadelphia LLC
+493,Continental Midtown,1801 Chestnut St,19103,1801 Restaurant Partners LP
+494,D'angelo Restaurant,256-258 S 20th St,19103,D'angelo Restaurant Corp.
+495,Dancerobot,1710-1712 Sansom St,19103,Dancerobot LLC
+496,Dear Daphne,1930 Sansom St,19103,Laurel Restaurant Group LLC
+497,Di Bruno Bros,1730-1732 Chestnut St,19103,Db Gourmet Markets LLC
+498,Drc Spruce Street,2201 Spruce St,19103,"Drc Spruce Street, LLC"
+499,Eighteenth Street Restaurant Partners,122-124 S 18th St,19103,"Eighteenth Street Restaurant Partners, L.P."
+500,Fitler Space,2229 Spruce St,19103,Fitler Space LLC
+501,Five Iron Golf,Three Logan Square 1717 Arch St Ste 140,19103,Five Iron Golf Logan LLC
+502,Five Iron Golf Philadelphia,2116 Chestnut St,19103,Five Iron Golf Philadelphia LLC
+503,Food Court II,236 S 21st St Unit A,19103,Food Court II INC
+504,Four Seasons Hotel Philadelphia At Comcast Center,1 N 19th St,19103,18th & Arch Hotel LLC
+505,Gec Rittenhouse,30 S 17th St Ste 110,19103,Gec Rittenhouse LLC
+506,Gran Caffe L'aquila,1716 Chestnut St,19103,Gran Caffe L'aquila LP
+507,Haggis & Hops,2006 Chestnut St,19103,Haggis & Hops LLC
+508,Her Place Supper Club,1740 Sansom St,19103,Her Place LLC
+509,Hotel Palomar Philadelphia,117 S 17th St,19103,Kimpton Hotel & Restaurant Group LLC
+510,Huayu Co,1930-34 Chestnut St,19103,Huayu Co INC
+511,Hyatt Centric Rittenhouse Square Philadelphia.,1612-1634 Chancellor St,19103,Hyatt Corporation
+512,Kfar,112 S 19th St & 1900-06 Chestnut St,19103,Kfar LLC
+513,Kura Sushi USA,1721 Chestnut St,19103,Kura Sushi USA INC
+514,La Fontana Della Citta,1701 Spruce St,19103,Fontana 1701 INC
+515,License Holdings 18A,"1800 Arch St, Comcast Technology Center, Concourse Level, Ste 100018",19103,"License Holdings 18a, LLC"
+516,Little Water,259-261 S 20th St,19103,Little Water LLC
+517,Locust Street Restaurant Group,219 S 18th St Commercial Unit 103,19103,Locust Street Restaurant Group LLC
+518,Lucy's,1720 Chestnut St,19103,17chest20 LLC
+519,Marathon On The Square,1839-41 Spruce St,19103,"Marathon Grill Rittenhouse Square, L.P."
+520,Marquis Latin Philly,133 S 18th St,19103,Marquis Latin Philly LLC
+521,Midnight & The Wicked,124-34 S 15th St Basement,19103,124-34 S 15th St Management LLC
+522,My Loup,2005 Walnut St,19103,My Loup LLC
+523,Na Brasa Brazilian Steakhouse,1st Flr & Mezzanine Kennedy House 1901 John F Kennedy Blvd,19103,Nabrasa PHL LLC
+524,Nwani Advanced Care,1901 Chestnut St 2nd Fl,19103,Nwani Advanced Care LLC
+525,Old Nelson Food Company,1833 Jfk Blvd,19103,Old Nelson Food PA Six LLC
+526,PA 1939,1939 Arch St,19103,PA 1939 Corp
+527,PA Self Pour,110-16 S 16th St,19103,PA Self Pour LLC
+528,Parc,227-29 S 18th St Suite 101,19103,Parc Restaurant Partners LP
+529,Pete's Famous Pizza,116 N 21st St,19103,"Pete's Famous Pizza, INC"
+530,Philly Pub,1600 Arch St,19103,Philly Pub LLC
+531,Pietro's Walnut Pizzeria,1714 Walnut St,19103,Pietro's Walnut Pizzeria INC
+532,Pine Street Grill,2227 Pine St,19103,Pine Street Grill LLC
+533,Plenty Rittenhouse,1602 Spruce St,19103,Plenty Rittenhouse LLC
+534,Puttshack Philadelphia Liberty,1625 Chestnut St Unit 142,19103,Puttshack Philadelphia Liberty LLC
+535,Pyramid Club Management,1735 Market St 52nd Fl,19103,"Pyramid Club Management, LLC"
+536,Ristorante Vita,261 S 17th St,19103,"Ristorante Vita, LLC"
+537,Rittenhouse Operations,1711 Rittenhouse Sq,19103,Rittenhouse Operations LLC
+538,Rosys Taco Bar,2216 -2222 Walnut St Unit B,19103,20walnut20 LLC
+539,Rouge 98,205 S 18th St,19103,"Rouge 98, INC."
+540,Ruth's Chris Steak House,1800 Market St,19103,Rcsh Operations LLC
+541,Sam 2 Enterprise,2200 Arch St Unit 103,19103,Sam 2 Enterprise INC
+542,Sam's Chestnut Grill,1907 Chestnut St,19103,"Sam's Chestnut Grill, INC."
+543,Sawan's Bistro,114-116 S 18th St,19103,"Sawan's Bistro, INC."
+544,Seafoods Unlimited,270 S 20th St,19103,"R. P. Fishheads, INC."
+545,Seven Penn Center,"1635 Market St, Lower Level",19103,16ma35 LLC
+546,Shake Shack,2000-02 Sansom St,19103,Shake Shack Sansom Street Philadelphia LLC
+547,Sjp II,1835 Arch St Ground Level,19103,Sjp II INC
+548,Smallville Restaurant Associates,1805 Walnut St,19103,Smallville Restaurant Associates LLC
+549,Sofitel Philadelphia At Rittenhouse Square,120 S 17th St,19103,"Oc Sansom Project Opco, LLC"
+550,South 19th Street,31 S 19th St,19103,South 19th Street LP
+551,Station Brake Lounge,One Penn Center 1617 John F Kennedy Blvd 17th Floor,19103,Station Brake LLC
+552,Sy Choi,1933-35 Spruce St,19103,Sy Choi INC
+553,Tequila's,1602-1604 Locust St,19103,"Tequila's, INC."
+554,The Bunker,130 S 18th St,19103,The Bunker LLC
+555,The Giant Company,60 N 23rd St,19103,The Giant Company LLC
+556,The Logan,One Logan Sq,19103,Sage Client 258 LLC
+557,The Prime Rib,1701 Locust St,19103,"The Prime Rib Of Philadelphia, INC."
+558,The Rittenhouse,202-214 W Rittenhouse Sq & 225 S 20th St,19103,Hersha Hospitality Management LP
+559,The Weekend Restaurant Group,261 S 21st St,19103,The Weekend Restaurant Group LLC
+560,The Westin Philadelphia,99 S 17th St,19103,Hersha Hospitality Management LP
+561,Tomboi,1705 Chancellor St,19103,Tomboi LLC
+562,Tower Restaurant,2400 Market St 7th Floor,19103,Aramark Services INC
+563,Uchi Philadelphia,1620 Sansom St Ste C1,19103,Uchi Philadelphia LLC
+564,Uisce Beatha,116-118-120 S 23rd St,19103,"Uisce Beatha, INC."
+565,Uni Japanese Cuisine,1900 Pine St,19103,Uni Japanese Cuisine LLC
+566,Victory Brewing,1776 Benjamin Franklin Pkwy,19103,Victory Brewing Company LLC
+567,Victrola89 II,2009-11 Sansom St,19103,Victrola89 II LLC
+568,Village Whiskey,116 & 118 S 20th St,19103,3bm1 Lq LLC
+569,Vue On 50,1717 Arch St Fl 50,19103,Vue On 50 LLC
+570,Warwick Hotel Rittenhouse Square,220 S 17th St,19103,Ap Rad Venture LP
+571,Yumin,2030 Chestnut St,19103,Yumin Corp
+572,Zama Limited,128 S 19th St,19103,Zama Limited
+573,3025 Food Hall Ll,3025 Market St Stes 100 & Ll 100,19104,3025 Food Hall Ll LLC
+574,38 Lancaster,3851 Lancaster Ave,19104,38 Lancaster INC
+575,4004 Spruce Street,4000-04 Spruce St,19104,4004 Spruce Street Corp.
+576,4048 Lav,4048 Lancaster Ave,19104,4048 Lav INC
+577,4100 H & T Enterprises,4100 Lancaster Ave,19104,"4100 H & T Enterprises, INC."
+578,98 Friends,898 Belmont Ave,19104,98 Friends INC
+579,Abyssinia Restaurant,229 S 45th St,19104,"Abyssinia Restaurant, INC."
+580,Allegro Pizza,3942 Spruce St,19104,Gl2 INC
+581,Bar Game I,3800 Lancaster Ave,19104,Bar Game I LLC
+582,Bc Philly U,3816-36 Chestnut St,19104,Bc Philly U INC
+583,Bdn Sy Hospitality,2929 Arch St,19104,Bdn Sy Hospitality LLC
+584,Bridge Upenn 6,4012 Walnut St,19104,Cinemark USA INC
+585,Carters Pizza & Beer,3816 Chestnut St 1st Fl,19104,Carters Pizza & Beer LLC
+586,Crown Lancaster,4022-24 Lancaster Ave,19104,Crown Lancaster LLC
+587,Fifty Fifty,3675 Market St Ste 101,19104,Fifty Fifty LLC
+588,Ip Enterprise,202 1/2-204 1/2 S 43rd St & 4302 Walnut St,19104,Ip Enterprise INC
+589,It Could Be Wurst,4301 Baltimore Ave,19104,It Could Be Wurst INC
+590,Jgh Group,3939 Chestnut St 2nd Floor,19104,Jgh Group LLC
+591,Landmark Americana Tap And Grill,3333 Market St,19104,"Landmark University City, LLC"
+592,Lascala's Fire,3200 Chestnut St West Bldg Retail B,19104,Blaze University City LLC
+593,Louie Louie,The Inn At Penn 3611 Walnut St,19104,Louie Louie Restaurant LLC
+594,M & M Liquor,1 S 43rd St,19104,M & M Liquor INC
+595,Mi Casa Philly,3151 Market St Ste 125,19104,Mi Casa Philly LLC
+596,New Deck Tavern,3408-12 Sansom St,19104,New Deck Tavern Corporation
+597,New Delhi Indian Restaurant,4004 Chestnut St,19104,"New Delhi Indian Restaurant, INC."
+598,Ochatto,3717 Chestnut St,19104,Ochatto INC
+599,Old Nelson Food Company,3400 Lancaster Ave Unit 2,19104,Old Nelson Food PA Seven LLC
+600,Old Nelson Food PA Four,3020 Market St,19104,Old Nelson Food PA Four LLC
+601,Old Nelson Food PA Three,129A S 30th St (Aka 2930 L Chestnut St #b2),19104,Old Nelson Food PA Three LLC
+602,Pace & Blossom,3601 Market St Unit #2,19104,Pt Uc INC
+603,Pelicana Chicken N Beer,4002-4004 Spruce St Basement,19104,Pelicana Chicken N Beer LLC
+604,Ramze 4002,4002 W Girard Ave,19104,Ramze 4002 INC
+605,Salona,3501-3511 Lancaster Ave,19104,Salona INC
+606,Saltpepperketchup,4329-33-35 Spruce St,19104,Saltpepperketchup INC
+607,Sang Kee Noodle House,3501 Chestnut St,19104,"Sang Kee Noodle House, LLC"
+608,Shake Shack University City Philadelphia,3200 Chestnut St E Bldg Retail C,19104,Shake Shack University City Philadelphia LLC
+609,Sheraton University City Hotel,NE Corner 36th & Chestnut Sts,19104,Upenn Hospitality INC
+610,Smokey Joe's,208 S 40th St,19104,"Smokey Joe's, INC."
+611,Study Philadelphia,20-40 South 33rd St,19104,"Study Philadelphia Operating, LLC"
+612,The Board And Brew,3200 Chestnut St West Bldg Retail A,19104,Theboardandbrewpa LLC
+613,The Frosted Mug,8200 Roosevelt Blvd,19104,ACME Markets INC
+614,The Frosted Mug,4001 Walnut St,19104,ACME Markets INC
+615,The Giant Company,3401 Chestnut St,19104,The Giant Company LLC
+616,The Restaurant School,4207-09 Walnut St,19104,"Walnut Hill College, INC"
+617,The Trustees Of The University Of Pennsylvania,3600 Sansom St,19104,The Trustees Of The University Of Pennsylvania
+618,Two Locals Brewing,3675 Market St Ste 100,19104,Two Locals Brewing LLC
+619,Vibe's Lounge,4043 Lancaster Ave,19104,Felders Associates INC.
+620,Walnut Street Cafe,2929 Walnut St,19104,"Walnut Street Hospitality, LLC"
+621,Wharton Executive Education Center,255 S 38th St,19104,The Trustees Of The University Of Pennsylvania
+622,White Dog Cafe,3420-24 Sansom St,19104,"White Dog Enterprises, Incorporated"
+623,Ym Art Foods,3940 Baltimore Ave,19104,Ym Art Foods LLC
+624,Zakzul,4421 Chestnut St,19104,Zakzul INC
+625,1102 Lam,1102-06 S 47th St,19143,1102 Lam INC
+626,1402 Seing,1402-04 S 52nd St,19143,"1402 Seing, INC."
+627,412 Katnip Bar,412 S 54th St,19143,412 Katnip Bar INC
+628,4511 M. & T.,4511-13 Baltimore Ave,19143,"4511 M. & T., INC."
+629,5131 G & D,5131 Woodland Ave,19143,5131 G & D INC
+630,5424 Lee,5424-26 Woodland Ave,19143,5424 Lee INC
+631,614 Blue Moon,614 S 55th St,19143,"614 Blue Moon, INC."
+632,720 Wabe,720 S 52nd St,19143,"720 Wabe, INC."
+633,Big Bill 99,1622-24 S 58th St,19143,Big Bill 99 INC
+634,Bsc,5147 Baltimore Ave,19143,Bsc INC
+635,Carbon Copy,701 S 50th St,19143,Catamount Liquids LLC
+636,Dahlak Restaurant,4706-08 Baltimore Ave,19143,"4706-08 Baltimore Avenue, INC."
+637,Ev 318,318 S 60th St,19143,Ev 318 INC
+638,Gojjo,4540 Baltimore Ave,19143,"Gojjo, INC."
+639,Hbp21,648 S 60th St,19143,Hbp21 INC
+640,Iejmuth,5701 Woodland Ave,19143,Iejmuth INC
+641,Kaffa Crossing II,4704 Baltimore Ave,19143,Kaffa Crossing II INC
+642,Kl 5527,5527 Baltimore Ave,19143,Kl 5527 INC
+643,Kl Chester,5956 Chester Ave,19143,Kl Chester INC
+644,Laim Enterprises,516 S 52nd St,19143,"Laim Enterprises, INC."
+645,Lam's Baltimore,5716-46 Baltimore Ave,19143,Lam's Baltimore INC
+646,Mermead,845 S 55th St Unit 310,19143,Mermead LLC
+647,Phax Entertainment Group,5021-23-25 Baltimore Ave,19143,Phax Entertainment Group LLC
+648,Rainer 516,416 S 56th St,19143,Rainer 516 INC
+649,S La 5701,5701 Elmwood Ave,19143,S La 5701 INC
+650,S P V,5801 Catharine St,19143,S P V INC
+651,Sh Beverage,5346-5348 Woodland Ave,19143,Sh Beverage INC
+652,Vietnam Cafe,816 S 47th St #820,19143,Vietnam Cafe INC
+653,West Bank Hospitality,4629-31 Baltimore Ave,19143,West Bank Hospitality INC
+654,Ar Tart,8229 Germantown Ave Bldg D Space 8 & 9,19118,Ar Tart LLC
+655,Ar Tart,8229 Germantown Ave Bldg D Sp 8 And 9,19118,Ar Tart LLC
+656,Chestnut Grill,8229 Germantown Ave,19118,"Three I's, INC."
+657,Cider Belly Hard Cider,8005 Germantown Ave,19118,Cider Belly Hard Cider LLC
+658,Cin Cin,7838 Germantown Ave,19118,L'asie Cincin LLC
+659,El Poquito,8201-03 Germantown Ave,19118,Chestnut Hill Cantina Company LLC
+660,Foodery Chestnut Hill,7829 Germantown Ave,19118,Foodery Chestnut Hill Ltd
+661,H & J McNallys Tavern,8632-34 Germantown Ave,19118,H & J McNallys Tavern INC
+662,Hoon,7830 Germantown Ave,19118,Hoon Corp
+663,Junto Foods,8001 Germantown Ave,19118,"Junto Foods, INC."
+664,Lovat Square,184-186 E Evergreen Ave,19118,Lovat Square LLC
+665,Mermaid Hotel,7673 Winston Rd,19118,Joanne Mekis
+666,The Frosted Mug,7700 Crittenden St,19118,ACME Markets INC
+667,3501 Roberts,3501 Indian Queen Ln,19129,3501 Roberts INC
+668,Billy Murphy's Irish Saloon,3333-35 Conrad St,19129,"Billy Murphy's Irish Saloon, INC."
+669,Cultivations,3500 Scotts Ln Unit D03,19129,Cultivations LLC
+670,Disruptive Influence,3300 Henry Ave Unit 2,19129,Disruptive Influence LLC
+671,Frogspring Ef,3521 Bowman St,19129,Frogspring Ef LLC
+672,Good Friday,3500 Scotts A12 Lane,19129,Good Friday Bev INC
+673,Le Bus Bistro,3736 Midvale Ave And 4201-03 Ridge Ave,19129,"Marty, INC"
+674,Marck's,4116-28 Ridge Ave,19129,"Marck's, LLC"
+675,Midvale Liquor,3749-51 Midvale Ave,19129,"Midvale Liquor, LLC"
+676,Prime Station Brewing,3500 Scotts Lane Unit D11,19129,Prime Station Brewing LLC
+677,Shan Chuan Restaurant,4211 Ridge Ave,19129,Shan Chuan Restaurant INC
+678,Shoprite Of Fox Street,2800 Fox St,19129,Browns Fox Street LLC
+679,Taqueria Cresta,3743 Midvale Ave,19129,Taqueria Cresta LLC
+680,Wissahickon Brewing Company,3705 W School House Ln,19129,"Wissahickon Brewing Co., LLC"
+681,1701 Bar,1701 Green St,19130,1701 Bar LLC
+682,1852,527-529 N 20th St,19130,1852 Corp.
+683,2025 Local,2025 Fairmount Ave,19130,2025 Local INC
+684,2637brew,2637 Girard Ave,19130,2637brew INC
+685,2729,2729 W Girard Ave,19130,"2729, INC."
+686,726 N. 24th St. Associates,726 N 24th St,19130,Rye Bridge License LLC
+687,920-22 28th Street Bar & Grill,920-22 N 28th St,19130,"920-22 28th Street Bar & Grill, INC."
+688,Absoloot Enterprises,1940 Green St,19130,"Absoloot Enterprises, INC."
+689,Blue Era,2743 Poplar St,19130,"Blue Era, INC."
+690,Brewery Techne,1720-30 Fairmount Ave,19130,Justop LLC
+691,Broad 600,600 N Broad St,19130,Broad 600 LLC
+692,Cafe Brown Street,2200 Spring Garden St,19130,Cafe Brown Street INC
+693,Cescaphe At The Water Works,600 Waterworks Dr,19130,Cescaphe At The Water Works LLC
+694,City View Pizza,1547 Spring Garden St,19130,"City View Pizza, INC."
+695,Das 2028,2028-30 Fairmount Ave,19130,Das 2028 INC
+696,Dolgencorp,1901 Callowhill St,19130,Dolgencorp LLC
+697,Dos Compadres,2321 Fairmount Ave,19130,Dos Compadres LLC
+698,Fairmount Avenue Club,2120 Fairmount Ave,19130,Fairmount Neighbor Corporation
+699,Giant #6573,510 N Broad St,19130,The Giant Company LLC
+700,Grgfc1,1901 Callowhill St Unit C,19130,Grgfc1 LLC
+701,Gyu-Kaku Japanese BBQ Restaurant,1901-1939 Callowhill St Spc 1,19130,Corning Management LLC
+702,Hilltown 2,795 N 24th St,19130,Hilltown 2 LLC
+703,Jack's Firehouse,2128-30-32 Fairmount Ave,19130,"McDavid Associates, INC."
+704,Javelin Philly,1811 Fairmount Ave,19130,Javelin Philly INC
+705,Jdf Partners,745-747 N 25th St,19130,Jdf Partners LLC
+706,Jp 1502,1502 Brown St,19130,Jp 1502 INC
+707,Justop,1720 Fairmount Ave,19130,Justop LLC
+708,Kelliann,1549 Spring Garden St,19130,"Kelliann, INC."
+709,Kite And Key Gastropub,1836-42 Callowhill St,19130,Kite And Key Gastropub INC
+710,La Bichota Entertainment,812 N Broad St,19130,La Bichota Entertainment LLC
+711,Libertee Grounds,1600-50 W Girard Ave,19130,Lcb Ventures LLC
+712,Little Pete's,2401 Pennsylvania Ave,19130,Costas Corp.
+713,Manong,1833 Fairmount Ave,19130,Taba Ching Ching LLC
+714,New Fairmount Pizza & Restaurant,2000 Fairmount Ave,19130,New Fairmount Pizza & Restaurant INC
+715,Old Nelson Food PA Eleven,2200 Ben Franklin Pky Ste Sozo1,19130,Old Nelson Food PA Eleven LLC
+716,Old Nelson Food PA Nine,1500 Spring Garden St,19130,Old Nelson Food PA Nine LLC
+717,Osteria,630-640 N Broad St,19130,Amici Hospitality Osteria LLC
+718,Rybrew,2600 W Girard Ave,19130,Rybread Too INC
+719,The Bishop's Collar,2349 Fairmount Ave,19130,"Carver's Saloon, INC."
+720,Vetri Pizza,1939 Callowhill St,19130,Urbn Callowhill LLC
+721,West Tavern,1440-1442 Callowhill St,19130,Westy's INC.
+722,Whole Foods Market Group,2101 Pennsylvania Ave,19130,Whole Foods Market Group LLC
+723,Yellow Front Market,1700-02 Ridge Ave,19130,Rsd Corporation
+724,Zorba's Tavern,2228-2230 Fairmount Ave,19130,Zorba's Taverna INC
+725,1201 L N & D,1201 S 28th St,19146,1201 L N & D INC
+726,1206 Joyce,1206-08 Point Breeze Ave,19146,1206 Joyce INC
+727,1500 G & G,1500 S Bailey St,19146,1500 G & G INC
+728,19 Degree Cafe Limited,1847 Christian St,19146,19 Degree Cafe Limited
+729,2615 South Street,2615 South St,19146,2615 South Street Corp
+730,44 Bar,1507-1509 South St,19146,"44 Bar, INC."
+731,B & D Hospitality Partners,700 S 20th St,19146,B & D Hospitality Partners LLC
+732,Barcarside,2201 Christian St,19146,Barcarside LLC
+733,Bpsd Enterprises,1600-02 South St,19146,Bpsd Enterprises LLC
+734,Dock Street Brewery South,2118 Washington Ave,19146,Dock Street Brewery South LLC
+735,Doniel,1264-66 S 22nd St,19146,"Doniel, INC."
+736,Dos Perros,918 S 22nd St,19146,Dos Perros LLC
+737,Drc Investments,1946 Lombard St,19146,Drc Investments LLC
+738,Fang Bar,1415 S 21st St,19146,Fang Bar INC
+739,Founding Fathers Sports Bar & Grill,1612-1616 South St,19146,Zkd Hospitality LLC
+740,Grays Ferry Foods,3021 Grays Ferry Ave,19146,Grays Ferry Foods LLC
+741,Heavy Metal Sausage,1316 S Warfield St,19146,Pmw LLC
+742,Jet Wine Bar,1525 South St,19146,Jet Wine Bar LLC
+743,Kitchen 1600,1200 S 21st St,19146,Kitchen 1600 LLC
+744,Krunch Inn,1401 S 28th St,19146,"Krunch Inn, INC."
+745,La Viva Miggs,1807 Washington Ave,19146,La Viva Miggs INC
+746,Mattei Family Pizza,1258-1260 Point Breeze Ave,19146,Mattei Family LLC
+747,New South Cafe,2200 South St,19146,"New South Cafe, INC."
+748,Sabrinas,2101 South St,19146,Sabrina's LLC
+749,Scotty's Bar,1420 Ellsworth St,19146,Scotty's Bar INC.
+750,Skylar & Company,2229 Grays Ferry Ave,19146,Skylar & Company LLC
+751,Ten Stone Inn,2059-63 South St,19146,"Ten Stone Inn, INC."
+752,The Giant Company,2303 Bainbridge St,19146,The Giant Company LLC
+753,The Union Slrk,1506-10 South St,19146,The Union Slrk INC
+754,Vahn,1252 S 21st St,19146,Vahn LLC
+755,Vons Chicken Philly,1714 Washington Ave Unit A,19146,Vons Chicken Philly LLC
+756,106 Jamestown Partners,106 Jamestown Ave,19127,106 Jamestown Partners INC.
+757,4055 Cresson,4055 Cresson St,19127,4055 Cresson INC
+758,4201 Main Street Associates Ll,4201 Main St,19127,4201 Main Street Associates Ll LLC
+759,4311 Main,4309-4311 Main St,19127,4311 Main License LLC
+760,Artesano Gallery,107-109 Green Ln & 4457 Main St,19127,Artesano Gallery LLC
+761,Blondie On Main,4417 -4419 Main St,19127,Blondie On Main LLC
+762,Cresson-Inn,114 Gay St,19127,"Cresson-Inn Bar & Grille, INC."
+763,Dawson Street Pub,100 Dawson St,19127,100 Dawson INC
+764,Fetch Park Manayunk,3720 Main St,19127,Fetch Park Manayunk LLC
+765,Franklin Brothers 111,111-13 Cotton St,19127,Franklin Brothers 111 INC
+766,Give Some Back,4421 Main St,19127,Give Some Back LLC
+767,Kgt Hospitality,4161 Main St,19127,Kgt Hospitality LLC
+768,Lucky 13 Unlimited,4801-03 Umbria St,19127,Lucky 13 Unlimited LLC
+769,Mia Ragazza,4411-4413 Main St,19127,The Goat 4 LLC
+770,Mojo Grill,4243 Main St,19127,Mojo Grill INC
+771,New Leaf Chinese And Japanese Cuisine II,4258 Main St,19127,New Leaf Chinese And Japanese Cuisine II LLC
+772,Nippys,4219 Main St,19127,Nippys LLC
+773,Palmer Distilling,220 Krams Ave,19127,W P Palmer Distilling Co
+774,Philadelphia Beer Works,4118 Main St,19127,"Philadelphia Beer Works, INC."
+775,Ryans Pub,4301 Main St,19127,Main St Pub LLC
+776,Station Liquor,4401 Cresson St,19127,"Station Liquor, LLC"
+777,Thanasis,4376-84 Main St,19127,Thanasis INC
+778,The Bar Jawn,4247 Main St,19127,"Bar Jawn, LLC"
+779,The Brass Tap,177 Markel St,19127,I & D Realty Liquor LLC
+780,The Couch Tomato Cafe & Tomato Bistro,100-102 Rector St,19127,Casmos Cafe INC
+781,The Grape,105-107 Grape St,19127,Grape R & R LLC
+782,Three Main,4245 Main St,19127,"Three Main, INC."
+783,Tres Feliz,4410B Main St,19127,Tres Feliz LLC
+784,Wf Phila Ll 1,4001 Cresson St,19127,Wf Phila Ll 1 LLC
+785,7100 Germantown Avenue Associates,7161-65 Germantown Ave,19119,"7100 Germantown Avenue Associates, LLC"
+786,Best Beer,6603 Chew Ave,19119,Best Beer INC
+787,Catering By Design,18-24 W Hortter St,19119,"Catering By Design, INC"
+788,McMenamin's Tavern,7170 Germantown Ave,19119,"7170, INC"
+789,Mount Airy Tap Room,300 W Mt Pleasant Ave,19119,Mount Airy Restaurants LLC
+790,Rsvp Hospitality,7152 Germantown Ave,19119,Rsvp Hospitality LLC
+791,The Frosted Mug,7010 Germantown Ave,19119,ACME Markets INC
+792,Toska Restaurant And Brewery,7136 Germantown Ave,19119,Toska Brew House LLC
+793,Courtyard Philadelphia South,1001 Intrepid Ave,19112,Ensemble Services LLC
+794,Gatehouse,4501 S Broad St,19112,Urbn Nvy Losp LLC
+795,1355 Front St Venture,1353-1355 N Front St,19122,1355 Front St Venture LLC
+796,1601 V & W,1601 N 5th St,19122,1601 V & W INC
+797,1705 Garden,1705 N American St,19122,1705 Garden LLC
+798,408 Norris,408 W Norris St,19122,"408 Norris, INC."
+799,81 Montgomery Partners,1625-27 N Howard St,19122,81 Montgomery Partners LLC
+800,Berkshire Coffee,1934-40 N Front St,19122,Berkshire Coffee LLC
+801,Cns Event Partners,1601 N Front St,19122,Cns Event Partners LLC
+802,Eloel,1315 N Front St,19122,Eloel LLC
+803,Elwolf,1301 Howard St,19122,Elwolf LLC
+804,Endless Road,1624 N Front St,19122,Endless Road LLC
+805,Evil Genius Beer Company,1727 -31 N Front St,19122,Brewing On Front LLC
+806,Feast Cafe,1626 N American St,19122,Feast Your Eyes INC
+807,Fermentery Form,161 Cecil B Moore Ave,19122,Stone & Tripp Enterprises LLC
+808,Fsc Farm To Table Restaurant,1247-53 N Front St,19122,Fsc Farm To Table Restaurant LLC
+809,Human Robot,1710 N 5th St,19122,Sentient Androids LLC
+810,Kung Fu Necktie,1248-50 N Front St,19122,Kung Fu Necktie LLC
+811,La Vida Loca Lounge,1354-56 N Front St 1357 N Hope St 106-108-112 W Master St,19122,"La Vida Loca Lounge, INC."
+812,Lamberti Restaurants Franchise,1926-1928 Liacours Walk Unit D,19122,"Lamberti Restaurants Franchise, LLC"
+813,Mecha Noodle Bar Fishtown,1700 N Front St,19122,Mecha Noodle Bar Fishtown LLC
+814,Merez,101 W Oxford St,19122,Merez INC
+815,Middle Child Clubhouse,1232 N Front St,19122,Good Friend LLC
+816,Ntm Group,1706 N 5th St,19122,Ntm Group LLC
+817,Old Nelson Food Company,1100 W Montgomery Ave Space D,19122,Old Nelson Food PA Ten LLC
+818,Padron Enterprise,120 W Diamond St,19122,Padron Enterprise LLC
+819,Philadelphia Whiskey Company,161-73 Cecil B Moore Ave Ste C-2,19122,Philadelphia Whiskey Company
+820,Pray Tell,1615 N Hancock St,19122,"Philly Winery, LLC"
+821,Punch Buggy Brewing Company,1445 N American St,19122,Punch Buggy Brewing Company
+822,Que Chula Es Puebla Restaurant,1356 N 2nd St,19122,Que Chula Es Puebla Restaurant INC
+823,Ramon A. Gonzalez Enterprises,1400 N 7th St,19122,"Ramon A. Gonzalez Enterprises, INC."
+824,Rkpalmer Associates,1739-49 N Front St,19122,Rkpalmer Associates LLC
+825,Sacred Vice Brewing Company,1817-53 N Howard St,19122,Brodstein LLC
+826,Sor Ynez,246 W Berks St Unit D,19122,Sor Ynez LLC
+827,Stateside Urbancraft Vodka,161 Cecil B Moore Ave Unit 103,19122,Stateside Brands LLC
+828,T & J Susquehanna,1201-03 W Susquehanna Ave,19122,"T & J Susquehanna, INC."
+829,Wissahickon Brewing Company Olde Kensington,1526 N American St,19122,"Wissahickon Brewing Co., LLC"
+830,121 Midnight,121 E Westmoreland St,19134,"121 Midnight, INC."
+831,1860 Ev,1860-62 E Allegheny Ave,19134,1860 Ev INC
+832,217 Vega,217 E Westmoreland St,19134,"217 Vega, INC"
+833,2732 Donna's Bar,2732 E Allegheny Ave,19134,2732 Donna's Bar INC.
+834,2769 Ly,2769-71 Kensington Ave,19134,2769 Ly INC
+835,300 Ontario,300 E Ontario St,19134,300 Ontario LLC
+836,3000 Rorer,3000 Rorer St,19134,"3000 Rorer, INC."
+837,3241 San,3241 Kensington Ave,19134,3241 San INC
+838,3589 Ventures,3589 Richmond St,19134,3589 Ventures INC
+839,5136 Torresdale,2116 East Tioga St,19134,5136 Torresdale LLC
+840,Alex Jc 8180,965 E Russell St,19134,Alex Jc 8180 INC
+841,Applebee's Neighborhood Grill & Bar,2539-53 Castor Ave,19134,Rose Casual Dining LP
+842,Ari's Cafe,2657 E Clearfield St,19134,Ari's Caffe LLC
+843,Arielle,2401 E Allegheny Ave,19134,Arielle INC
+844,Bonks Bcb,3467 Richmond St,19134,Bonks Bcb INC
+845,Byrne's Tavern,3301 Richmond St,19134,"Fjb Enterprises, INC."
+846,Chap 1949,1949 E Tioga St,19134,Chap 1949 Corporation
+847,Cheers Cafe,2601 E Westmoreland St,19134,"Cheers Cafe, INC"
+848,Chris's Bar And Grill,2656 E Ann St,19134,"Fasone, INC."
+849,Clearfield 2328,2328 E Clearfield St,19134,Clearfield 2328 INC
+850,Corner Bar,3066-68 Richmond St,19134,J & L Corner Bar INC
+851,D And W Aramingo,2974 Aramingo Ave,19134,D And W Aramingo INC
+852,Dsg Sports Lounge,2700 E Cambria St,19134,Dsg Sports Lounge LLC
+853,E & B 2601,2601 E Venango St,19134,E & B 2601 LLC
+854,East Coast Wings & Grill,2539 Castor Ave Spc 2,19134,Kickin Wings INC
+855,El Patio Lounge,3454 H St,19134,El Patio Lounge INC
+856,Gaul & Co Malthouse,2619 E Indiana Avenue,19134,Gaul & Co Malthouse LLC
+857,Hilton 801,801-803 E Hilton St,19134,Hilton 801 INC
+858,Humble Parlor Brewing Company,3245 Amber St Unit 2-1-NW,19134,Humble Parlor Brewing Company
+859,Kcwkmh,3454 A St,19134,Kcwkmh INC
+860,Knock-Out Sports Bar,447 E Allegheny Ave,19134,"Knock-Out Sports Bar, INC."
+861,L.X. Frankford,2958 Frankford Ave,19134,L.X. Frankford INC
+862,La Pantera Rosa,301 E Allegheny Ave,19134,La Pantera Rosa INC
+863,Laberintos De Pasion Rest,3166-68 G St,19134,Laberintos De Pasion Rest INC
+864,Laroma,2620 E Allegheny Ave,19134,Edgemont Group LLC
+865,Little Lou's,3575 Kensington Ave,19134,"Wooden Head Corporation, INC."
+866,Lost Time Brewery,"2825 Ormes St, Unit 4J",19134,Lost Time Brewing Company
+867,M-I Casbah,3461-65 East Thompson St,19134,"M-I Casbah, INC."
+868,Matelot,2155 Castor Ave,19134,Matelot LLC
+869,Nemi Restaurant,2636 E Ann St,19134,Nemi Restaurant LLC
+870,Nicholas 835,835-837 E Allegheny Ave,19134,Nicholas 835 LLC
+871,Requiem Bar & Bier,2852-2870 Memphis St Unit A,19134,Requiem Bier LLC
+872,Rfo Keown Co,2723 E Allegheny Ave,19134,Rfo Keown Co LLC
+873,Sgraffito,3245 Amber St Ste 5-3-A2,19134,Secret Joy LLC
+874,Space Cadet Brewing Company,2825 Ormes St #5g,19134,Space Cadet Brewing Company LLC
+875,Spruce Street Beverages,3450 Salmon St Fl 1,19134,Spruce Street Beverages LLC
+876,T D Beer,2262 E Allegheny Ave,19134,T D Beer INC
+877,The Shipyard,2537 E Ontario St,19134,2537 E Ontario INC
+878,1976,4201 Manayunk Ave,19128,1976 LLC
+879,6119,6119 Ridge Ave,19128,6119 Corp.
+880,Blacoak Tasting Room,6139 Ridge Ave,19128,Blacoak LLC
+881,Daiva's Grille,6750 Ridge Ave,19128,"Pilinkaite, INC"
+882,Dalessandro's Steaks And Hoagies,600 Wendover St,19128,Dalessandro's Steaks And Hoagies INC
+883,Foodery Phila,6148 Ridge Ave,19128,Foodery Phila INC
+884,Grahams Pub,8919 Ridge Ave,19128,Ridge 8919 INC
+885,Henry Ave Associates,5824-26 Henry Ave,19128,Henry Ave Associates LLC
+886,Jamestown Tavern,577 E Jamestown St,19128,Jamestown Tavern LLC
+887,Kmch,326 Roxborough Ave,19128,Kmch LLC
+888,Maria's Summit Restaurant,8100 Ridge Ave,19128,"Maria's Summit Restaurant, INC."
+889,Monroe Press,6786 Ridge Ave,19128,Monroe Press INC
+890,New Ridge Brewing,6168 Ridge Ave,19128,Roxborough Brewing Company LLC
+891,Ridge Petroleum,8965 Ridge Ave,19128,Ridge Petroleum LLC
+892,Roxborough Seafood House,601 Jamestown St,19128,Roxborough Seafood House INC
+893,Shoprite Of Roxborough,6901 Ridge Ave,19128,Brown's Super Stores INC
+894,The Frosted Mug,5927-59 Ridge Ave,19128,ACME Markets INC
+895,The Giant Company,701 Cathedral Rd,19128,The Giant Company LLC
+896,Throwbaxx Bar & Grille,6800 Ridge Ave,19128,"K D E B, LLC"
+897,Tj 5892,5892 Henry Ave,19128,Tj 5892 INC
+898,Valley Green Inn,Springfield Ave Wissahickon Creek,19128,"Big Way, INC."
+899,W & S Lin,Roxboro Market Sq Shopping Center Stores 15 & 16 8919 Ridge Ave,19128,"W & S Lin, INC."
+900,1142 Lions Den,1142 Mifflin St,19148,"1142 Lions Den, INC."
+901,1601 S 10th St,1601 S 10th St,19148,1601 S 10th St LLC
+902,1651,1651-53-55 E Passyunk Ave,19148,"1651, INC."
+903,1909 True,1909 E Passyunk Ave,19148,1909 True INC
+904,1927 Virtu,1927-33 E Passyunk Ave,19148,"1927 Virtu, INC."
+905,2 Street Tavern,1843 S 2nd St,19148,2 Street Tavern LLC
+906,2201 J & J,2201 South 8th St,19148,2201 J & J INC
+907,2351 Anthony,2351 S Front St,19148,2351 Anthony INC
+908,2701-Oregon,2701-03 S Marshall St,19148,"2701-Oregon, INC."
+909,2nd Street Brew House,1700 S 2nd St,19148,"2nd Street Brew House, LLC"
+910,700 SE,700 Snyder Ave,19148,"700 SE, INC."
+911,ACME Markets,29 Snyder Ave,19148,ACME Markets INC
+912,Barcelona Wine Bar,1709-17 E Passyunk Ave,19148,Barcelona Passyunk LLC
+913,Beau23,2301 S Front St,19148,Beau23 LLC
+914,Big Charlie's Saloon,1953 S 11th St,19148,Big Charlie's Saloon Incorporated
+915,Birra Management,1700 E Passyunk Ave,19148,Birra Management LLC
+916,Bomb Bomb Bar,1026 Wolf St,19148,Jb 77 LLC
+917,Conchetta,1700 S Christopher Columbus Blvd,19148,"Conchetta, INC."
+918,Djf Group,7 Ritner St,19148,Djf Group INC
+919,Dollar Dogs,1712 S 10th St,19148,Dollar Dogs LLC
+920,Hook & Reel,Columbus Commons Shopping Center 1936 S Columbus Blvd,19148,Cajun Seafood 1936 LLC
+921,J. Oc And Lau,Snyder Plaza Store No 20 43 Snyder Ave,19148,43 J & L INC
+922,Jaine & Nirali,1608 S Delaware Ave,19148,Jaine & Nirali Corp.
+923,K-Pot S,330 Oregon Ave,19148,K-Pot South Philly LLC
+924,Kelliann Sp,153 Snyder Ave,19148,Kelliann Sp LLC
+925,Lh Dining,1601 E Passyunk Ave,19148,Lh Dining LLC
+926,Live! Casino & Hotel Philadelphia,900 Packer Ave,19148,Stadium Casino Re LLC
+927,Longhorn Steakhouse,2120 S Columbus Blvd,19148,Rare Hospitality International INC
+928,Lucky 13 Pub,1820 S 13th St,19148,Lucky 13 Pub LLC
+929,M.A.G. Enterprises,2740 S Front St,19148,"M.A.G. Enterprises, INC."
+930,Merly,2654 S 7th St,19148,Merly INC
+931,Mick-Daniels,2044-46 South 2nd St,19148,"Mick-Daniels, INC."
+932,Mike's BBQ,1703 S 11th St,19148,Danny Ds One LLC
+933,Millers Ale House,2100 S Columbus Blvd,19148,Millers Ale House INC
+934,Mish Mish Philly,1046 Tasker St,19148,Mish Mish Philly INC
+935,Nickels Tavern,2653-55 S 2nd St,19148,Nickels Tavern INC.
+936,Parc Holdings,1934-36 E Passyunk Ave,19148,Parc Holdings LLC
+937,Plaza Garibaldi,1000 Wolf St,19148,Plaza Garibaldi INC
+938,Potamoula,302 Oregon Ave,19148,"Potamoula, INC."
+939,Ristorante Pesto,1915 S Broad St 1st Fl,19148,"Ristorante Pesto, INC"
+940,Sa's Rising Sun 81,1801 S 6th St,19148,Sa's Rising Sun 81 INC
+941,Shoprite,330 W Oregon Ave,19148,Colligas Family Markets LP
+942,South Bowl,19 E Oregon Ave,19148,South Bowl INC
+943,Southhouse,2535-37 S 13th St,19148,Southhouse Co
+944,Stateside Live!,1100 Pattison Ave,19148,Pl Phase One Operations LP
+945,Stogie Joe's Tavern,1801-1803 East Passyunk Ave,19148,1803 Tavern LLC
+946,The Bottle Shop,1616 E Passyunk Ave,19148,The Bottle Shop INC
+947,The Corner Foodery,748 Morris St & 751 Watkins St,19148,The Corner Foodery LLC
+948,Town Laying There,1901 S 9th St Fl 8,19148,Town Laying There LLC
+949,Uncle Oogies Stadium Grill,700 Pattison Ave Unit #3,19148,Uncle Oogies Stadium Grill LLC
+950,Waterfall Room,2015 S Water St,19148,"Swan Waterfall Caterers, INC."
+951,1401 Fasil,1401 Ringgold St,19145,1401 Fasil INC
+952,1600 Emily,1600 S 16th St,19145,"1600 Emily, INC."
+953,1822 Km,1822-24 S 18th St,19145,1822 Km INC
+954,1900 Cafe,1900 S 21st St,19145,1900 Cafe INC
+955,2100 S 17th St,2100 S 17th St,19145,"2100 S 17th St, INC."
+956,2854 Tasker,2854 Tasker St,19145,"2854 Tasker, INC."
+957,2moods,1939 Moore St,19145,2moods INC
+958,7-Eleven,2601 Penrose Ave,19145,7-Eleven Sales Corporation
+959,ACME Markets,1901 Johnston St,19145,ACME Markets INC
+960,Brewery Ars,1927-1929 W Passyunk Ave,19145,Brewery Ars LLC
+961,Broadside Kitchen,1520 South Street,19145,Broadside Kitchen LLC
+962,Cask And Mouse,2400 S 19th St,19145,Cask And Mouse LLC
+963,Celebre's Pizzeria,Packer Park Shppg Ctr 1536 Packer Ave,19145,"Celebre's Pizzeria, INC."
+964,Centerfolds,1602 W Passyunk Ave,19145,"Henney C., INC."
+965,Chickie's & Pete's Cafe,1526 Packer Ave,19145,"Packer Cafe, INC."
+966,Chili's Grill & Bar,2320 Oregon Ave,19145,Brinker Penn Trust
+967,Eiffel Seafood Restaurant,2301 Oregon Ave Unit #7,19145,Eiffel Seafood Restaurant INC
+968,Himmel House Spirits,1713R McKean St,19145,Th Distilling LLC
+969,Kim's House,2704 Snyder Ave,19145,Snyder Supermarket INC
+970,Lee Lai,2049 S 23rd St,19145,Lee Lai INC
+971,Lengly Passyunk,1940 W Passyunk Ave,19145,Lengly Passyunk LLC
+972,Lid's Cafe Society,2243 Tasker St,19145,"Lid's Cafe Society, INC."
+973,Lillian's,1900 S 19th St,19145,Diamond Lil LLC
+974,Lnd Pour Group,1627-31 Packer Ave,19145,Lnd Pour Group LLC
+975,Lucky Sue,1639 S 24th St,19145,"Lucky Sue, INC."
+976,McCusker's,2601-03 S 17th St,19145,McCusker's INC.
+977,Mennitti Management,1720 W Moyamensing Ave,19145,Menniti Management INC
+978,Noah's Ark,1548-50 McKean St,19145,"Finacaro-Maglio, INC."
+979,Old Original Nick's,2149 S 20th St,19145,"2149 N.R.B., INC."
+980,Parker Fitz,1615 Mifflin St,19145,Parker Fitz Ltd
+981,Penrose Restaurant Cafe,2016 Penrose Ave,19145,"Penrose Restaurant Cafe, INC."
+982,Popi's Restaurant,3120 S 20th St,19145,"Popi's Restaurant, INC."
+983,Rosewood Bar,1417 Shunk St,19145,1417 Shunk Corp.
+984,S & C Store,2101-03 S 20th St,19145,S & C Store INC
+985,S. K. Restaurant & Bar,2400 S 24th St,19145,"S. K. Restaurant & Bar, INC."
+986,Sbi Beverage,2033 Penrose Ave,19145,Sbi Beverage LLC
+987,Second District Brewing Company,1939 S Bancroft St,19145,West Broad Properties Fund LLC
+988,Stokes Sports Bar,2651 S 16th St,19145,"Stokes Sports Bar, INC."
+989,Wawa,2600 Penrose Ave,19145,Wawa INC
+990,Zuccato Brothers Two,1428 Ritner St,19145,"Zuccato Brothers Two, INC."
+991,2332 Orthodox,2332 Orthodox St,19137,2332 Orthodox INC
+992,4501 Salmon Enterprises,4501 Salmon St,19137,4501 Salmon Enterprises LLC
+993,American Legion Bridesburg Post No. 821,4404 Salmon St,19137,American Legion Bridesburg Post No. 821
+994,Bridesburg Lawton Post No 2 Veterans Of Foreign Wars Of The United States,4638-40 Richmond St,19137,Bridesburg Lawton Post No 2 Veterans Of Foreign Wars Of The United States
+995,Bridesburg Pub,4254-56 Richmond St,19137,O'shea's Bp LLC
+996,Jem3,2221 Bridge St,19137,"Jem3, INC."
+997,Krick Wuder,2670-76 Bridge St,19137,"Krick Wuder, INC"
+998,Old English Style Pizza And Steaks,2767 Orthodox St,19137,"Old English Style Pizza And Steaks, INC."
+999,Ozzie Corner Tavern,2678 Lefevre St,19137,King Louie LLC
+1000,Philadelphia Fire Officers Union,2500-02 Lefevre St,19137,Philadelphia Fire Officers Union
+1001,Pjp Marketplace #1,3899 Aramingo Ave,19137,Be Holdings Co 1 LLC
+1002,Point No Point Republican Assn,2843 Orthodox St,19137,Point No Point Republican Assn
+1003,Polish American Citizens Club Of Frankford,2404 Orthodox St,19137,Polish American Citizens Club Of Frankford
+1004,Shoprite Of Aramingo,3745 Aramingo Ave,19137,Aramingo Shoprite LLC
+1005,ACME Markets,920 Red Lion Rd,19115,ACME Markets INC
+1006,Applebee's Neighborhood Grill & Bar,9142 Roosevelt Blvd,19115,Delaware Valley Rose LP
+1007,Benny The Bums,9991-93 Bustleton Ave,19115,9991 Bustleton LLC
+1008,Bustleton Memorial Post No 810 American Legion,9151 Old Newtown Rd,19115,Bustleton Memorial Post No 810 American Legion
+1009,Chickie's & Pete's Cafe,Boulevard Plaza Store 350 Roosevelt Blvd & Haldeman St,19115,"Chickie's And Pete's, INC."
+1010,Krewstown Road Ventures,8929 Krewstown Rd,19115,Krewstown Road Ventures LLC
+1011,Macaroni's - The Primavera Brothers,9315 Old Bustleton Ave,19115,Macaroni's - The Primavera Brothers LLC
+1012,Mountney And Nigro,9319 Krewstown Rd,19115,Mountney And Nigro INC
+1013,Red Lobster #241,9140 Roosevelt Blvd,19115,Red Lobster Restaurants LLC
+1014,Regal Cinemas,1619 Grant Ave,19115,Regal Cinemas INC
+1015,The Olive Garden Italian Rest #372,9250 Roosevelt Blvd,19115,Gmr Restaurants Of Pennsylvania LLC
+1016,Tiffany Diner,9010 Roosevelt Blvd,19115,"Michael's Family Restaurant Vii, INC."
+1017,To-Kai Sushi & Hibachi Steakhouse,1699 Grant Ave,19115,Lucky Drinks LLC
+1018,Btl Deli,5500 Greenway Ave,19143,Btl Deli INC
+1019,Miller Theater,250 S Broad St,19102,Ovations Food Services LP
+1020,Pen & Pencil Club,1522 Latimer St,19102,"Pen & Pencil Club, INC."
+1021,Pennsylvania Academy Of The Fine Arts,118-128 N Broad St,19102,Pafa Jvll Holdings LLC
+1022,S & B Spruce Market,1523-25 Spruce St,19102,S & B Spruce Market INC
+1023,The Academy Of Music,240 S Broad St,19102,Ovations Food Services LP
+1024,Bachelors Barge Club,4516 Ridge Ave,19129,Bachelors Barge Club
+1025,Chew Deli,6302-04 Chew Ave,19138,3 Kyu LLC
+1026,Chew Foods,5301 Chew Ave,19138,Chew Foods LLC
+1027,Narragan,1385 Narragansett St,19138,Narragan INC
+1028,Ok Hoagie Factory,2119-21 72nd Ave,19138,Ok Hoagie Factory INC
+1029,S Lounge,1910 W Cheltenham Ave,19138,S Lounge INC
+1030,Smbw,5642-44 Boyer St,19138,Smbw INC
+1031,Tavern Kitchen Bar,5714 Anderson St,19138,Tavern Kitchen Bar LLC
+1032,Wyncote Deli,2139 65th Ave,19138,Wyncote Deli LLC
+1033,19138 Amerimart,7178 N 19th St,19126,19138 Amerimart INC
+1034,Golden Hen,468 W Cheltenham Ave,19126,Golden Hen INC
+1035,In Suk Chon,6779 N 5th St,19126,In Chon
+1036,7100 Dicks,7100 Dicks Ave,19153,7100 Dicks INC
+1037,Aloft Philadelphia Airport,4301 Island Ave,19153,Lvp Ap Airport Holding Corp
+1038,Ashford Trs Philly,9000 Bartram Ave,19153,Ashford Trs Philly LLC
+1039,Bar Symon,"Philadelphia Int'l Airport 8500 Essington Ave, Terminal D, Space D-11, 2nd Fl",19153,"Ssp America PHL, LLC"
+1040,Browns Ia,2946 Island Ave,19153,Browns Ia LLC
+1041,Bud & Marilyns,Philadelphia International Airport 8500 Essington Ave,19153,PHL Connector Joint Venture LLC
+1042,Chase Sapphire Lounge-Phl,Philadelphia International Airport 8500 Essington Ave T4 Concourse S1 Space De300 3rd Fl,19153,Sodexo Operations LLC
+1043,Cibo Bistro And Wine Bar,Philadelphia International Airport 8500 Essington Ave Terminal B Second Floor,19153,"Otg Management PHL B, LLC"
+1044,Cpc Airport PHL,Philadelphia International Airport 8000 Essington Ave,19153,Cpc Airport PHL LLC
+1045,Delta Sky Club,1 Philadelphia International Airport Ste 25,19153,Delta Air Lines INC
+1046,Dos Toros,Philadelphia International Airport 8500 Essington Ave Terminal Bc Space Bc7,19153,The Grove/M2 Jv LLC
+1047,Doubletree By Hilton Philadelphia,4509 Island Ave,19153,Mhi Hospitality Trs LLC
+1048,Filosadelfia,6130 W Passyunk Ave,19153,Filosadelfia LLC
+1049,Four Points By Sheraton Phila Airport,4101 A Island Ave,19153,Lvp Fps Airport Holding Corp
+1050,Gachi Sushi & Noodles,Philadelphia International Airport 8500 Essington Ave Terminal E Space 8B,19153,Star Global Hospitality LLC
+1051,Gus 61,3275 S 61 St,19153,"Gus 61, INC."
+1052,La Tapenade,Philadelphia International Airport 8800 Essington Ave Terminal A Space Aw-13,19153,Host International INC
+1053,Lafayette's Creole Kitchen & Bar,8000 Essington Ave Space Bc-27ab Terminal Bc Connector,19153,Lafayettes LLC
+1054,Middle Child,8800 Essington Ave Terminal D Space D9,19153,Jackmont Of Philadelphia LLC
+1055,Mouyheng,7365 Elmwood Ave,19153,Mouyheng Corp
+1056,Oyster House,8500 Essington Ave 2nd Fl B&C Connector Space #bc13,19153,Jackmont Of Philadelphia LLC
+1057,Philadelphia Airport Marriott Hotel,One Arrivals Rd,19153,Marriott Hotel Services LLC
+1058,Pretzels & Pints,Philadelphia International Airport 8500 Essington Ave Terminal A East Space Ae-Bar Top A,19153,The Grove/M2 Jv LLC
+1059,Residence Inn Philadelphia Airport,3701 Island Ave,19153,Shaner Hotel Holdings LP
+1060,Ruby Tuesday #4174,8680 Bartram Ave,19153,Ruby Tuesday Operations LLC
+1061,Sabrina's Cafe,8500 Essington Ave Terminal C -Space C5/C6,19153,Airport Dining INC.
+1062,Shotz,7413-17 Buist Ave,19153,Goldsmith & Goldsmith INC
+1063,Srm Essington,6798 Essington Ave,19153,Srm Essington LLC
+1064,The Centurion Lounge,Philadelphia International Airport 8000 Essington Ave Terminal A West Concourse Space Aw-22,19153,Flik International Corp.
+1065,United Club,Philadelphia International Airport 8500 Essington Ave Second Floor Terminal D,19153,United Airlines INC
+1066,1017 Cumberland,1017 W Cumberland St,19133,1017 Cumberland INC
+1067,2501 X Factor,2501 N 2nd St,19133,"2501 X Factor, INC."
+1068,2600 Lili,2600 N 12th St,19133,"2600 Lili, INC"
+1069,430 Fang,430-432 W Indiana Ave,19133,430 Fang INC
+1070,431 Tran,429-431 W Lehigh Ave,19133,431 Tran INC
+1071,7 Brothers Minimarket,800-02 W Allegheny Ave,19133,7 Brothers Minimarket INC
+1072,Dejesus 624,624 W Cumberland St,19133,Dejesus 624 INC
+1073,El Cantinfias Tacos Place,110-114 W Dauphin St,19133,"El Cantinfias Tacos Place, INC."
+1074,Espanola Spirits Ltd,2937-51 N Marshall St,19133,Espanola Spirits Ltd LLC
+1075,Front 2333,2333N Front St,19133,Front 2333 INC
+1076,Hao Feng Restaurant,2558 N 5th St,19133,Hao Feng Restaurant INC
+1077,Izlands,2725 N American St,19133,Izlands LLC
+1078,Jennifer Tavern,2859-61 N Mascher St,19133,Jennifer Tavern INC
+1079,Kite & Key Limited Liability Company,2772 N Hancock St Ste 112,19133,Kite & Key Limited Liability Company
+1080,L & S Sports Bar,801 W Lehigh St,19133,L & S Sports Bar LLC
+1081,La Cueva Bar,2965 N 3rd St,19133,La Cueva Bar INC
+1082,Mis Viejos Restaurant,151-153 W Lehigh Ave,19133,Mis Viejos Restaurant INC
+1083,Nak & Na,2959-61 N Front St,19133,Nak & Na INC
+1084,Nimol,2604 Germantown Ave,19133,Nimol INC
+1085,Orocovis Bar,400-402 W Cumberland St,19133,Orocovis Bar INC
+1086,Rotten Monkey Bar & Grill,430-434 W Dauphin St,19133,Rotten Monkey Bar & Grill INC
+1087,Seak,604 W York St,19133,Seak INC
+1088,Sidekicks Sports Bar,2207 N 2nd St,19133,Sidekicks Sports Bar INC
+1089,Metropolitan Opera House,858 N Broad St,19130,Ovations Food Services LP
+1090,Parkway Memorial Post No. 7650 V. F. W. Of The U. S.,757 N 24th St,19130,Parkway Memorial Post No. 7650 V. F. W. Of The U. S.
+1091,Philadelphia Art Museum,2600 Benjamin Franklin Pkwy,19130,Galaxy Restaurants Catering Group LP
+1092,Philadelphia Museum Of Art,2501-21 Fairmount Ave,19130,Galaxy Restaurants Catering Group LP
+1093,The Barnes Foundation,2025 Benjamin Franklin Pkwy,19130,Galaxy Restaurants Catering Group LP
+1094,Ukrainian League Of Phila,800 N 23rd St,19130,Ukrainian League Of Phila INC.
+1095,Comly Road Holdings,2711 Comly Rd,19154,Comly Road Holdings LLC
+1096,Dave & Buster's Grand Sports Cafe,1995 Franklin Mills Cir Anchor B,19154,Dave & Busters Of Pennsylvania INC
+1097,"Holt's Humidor, Bar & Lounge",2990 Southampton Rd,19154,Cigars On Southampton LLC
+1098,Iupat District Council 21,2980 Southampton-Byberry Rd,19154,Iupat District Council 21
+1099,Kpot NE Philly,789 Franklin Mills Cir,19154,Kpot NE Philly LLC
+1100,Local Union 690 Of The United Association Of Journeymen And Apprentices Of The Plumbing And Pipefitt,2791 Southampton Rd,19154,Local Union 690 Of The United Association Of Journeymen And Apprentices Of The Plumbing And Pipefitt
+1101,Nam Giang,427 Franklin Mills Cir,19154,Nam Giang INC
+1102,Pat's Pizzeria & Spaghetteria,12315-17 Academy Rd,19154,"Pat's Pizzeria & Spaghetteria, INC."
+1103,Santuccis Square Pizza IV,4050 Woodhaven Rd,19154,Santuccis Square Pizza IV INC
+1104,Kensington Memorial Amvets Post No 146 Home Assn.,2502-04 E Sergeant St,19125,Kensington Memorial Amvets Post No 146 Home Assn.
+1105,427 Lusitano,427 Rhawn St,19111,427 Lusitano LLC
+1106,7945 Prestige Worldwide,7947-7959 Oxford Ave,19111,7945 Prestige Worldwide LLC
+1107,Anna & Nick,6041 Rising Sun Ave,19111,Anna & Nick INC
+1108,Conroy Catering At Knowlton Mansion,8001-8101 Verree Rd,19111,"Conroy Catering At Knowlton Mansion, INC."
+1109,Country Club Restaurant,1717 Cottman Ave,19111,"Michael's Family Restaurant Vii, INC."
+1110,Currans Fox Chase,7968 Verree Rd,19111,Currans Fox Chase LLC
+1111,Get2 The Point,6700 Martins Mill Rd,19111,Get2 The Point LLC
+1112,J & D 5 Points,7301-09 Oxford Ave & 1001 Cottman Ave,19111,"J & D 5 Points, INC."
+1113,Kgks,6412 1/2- 6414 Rising Sun Ave,19111,"Kgks, INC."
+1114,Lo Martinez,7235-7237 Rising Sun Ave,19111,Lo Martinez INC
+1115,Lou Lewis,1328 Cottman Ave,19111,"Lou Lewis, INC."
+1116,Michael J Crescenz Rising Sun Post No. 2819,6850 Martins Mill Rd,19111,Michael J Crescenz Rising Sun Post No. 2819
+1117,Millstone Spirits Group Philadelphia,"7746 Dungan Rd, Suite A",19111,Millstone Spirits Group LLC
+1118,Shoprite Of Oxford & Levick,6301 Oxford Ave,19111,Collins Family Markets INC
+1119,Sunshine Unity,7980-82 Oxford Ave,19111,Sunshine Unity INC
+1120,Tavares,7301 Rockwell Ave,19111,Tavares INC
+1121,The Frosted Mug,6640 Oxford Ave,19111,ACME Markets INC
+1122,1065 Maria,1065-1071 E Erie Ave,19124,1065 Maria INC
+1123,1128 Luzerne,1124-28 E Luzerne St,19124,1128 Luzerne INC
+1124,1640 Bridge,1640-42 Bridge St,19124,1640 Bridge INC
+1125,4101 New Addition,4101 Paul St,19124,4101 New Addition INC
+1126,5087 Cho's Market,5087 F St,19124,"5087 Cho's Market, INC."
+1127,723 Z And C,723-25 Adams Ave,19124,723 Z And C INC
+1128,900 Anastasia,900 Pratt St,19124,900 Anastasia LLC
+1129,Adams Family Tavern,4690 Castor Ave,19124,"Adams Family Tavern, INC"
+1130,Alex 2015,1858 2nd Floor Wakeling St,19124,Alex 2015 LLC
+1131,Beer Harbor II,5450 Large St,19124,Beer Harbor II INC
+1132,Bg 1559,1559 E Hunting Park Ave,19124,Bg 1559 INC
+1133,Boleslaw Grochowski American Legion Post 396,2171 Wakeling St,19124,Boleslaw Grochowski American Legion Post 396
+1134,Chateau Operations,5121 Tulip St,19124,Chateau Operations INC
+1135,Duffy's Tavern,5104 Frankford Ave,19124,Gered's INC.
+1136,E J K Investments,4149 E Roosevelt Blvd,19124,E J K Investments LLC
+1137,El Paraiso Bar & Restaurante,3884 M St,19124,"El Paraiso Bar & Restaurante, LLC"
+1138,El Rey Del Sabor,4635-37 Frankford Ave,19124,Nevo Investments LLC
+1139,Elegante Bar Restaurant,1210 E Hunting Park Ave,19124,Elegante Bar Restaurant INC
+1140,Fits 4201,4201 E Cheltenham Ave,19124,Fits 4201 INC
+1141,H & M Beer,1344 E Luzerne St,19124,"H & M Beer, INC."
+1142,Jb&Al,5498 Oxford Ave,19124,Jb&Al LLC
+1143,Juniata Super Market,901 E Luzerne St,19124,Juniata Supermarket INC
+1144,Kt 4669,4669 Torresdale Ave,19124,Kt 4669 INC
+1145,La Guira,701 Adams Ave,19124,La Guira INC
+1146,La Rosa Linda,4565 Torresdale Ave,19124,La Rosa Linda INC
+1147,Lage & Lage,901-907 E Cayuga St,19124,"Lage & Lage, INC."
+1148,Lina 1071,4507 Frankford Ave,19124,Lina 1071 INC
+1149,Liu's Torresdale,5500 Torresdale Ave,19124,Liu's Torresdale INC
+1150,Lloyd C. Wilson Jr. Memorial Post #224,2006 E Orthodox St,19124,Lloyd C. Wilson Jr. Memorial Post #224
+1151,Lucky 4705,4705 Frankford Ave,19124,Lucky 4705 INC
+1152,Macumba Restaurant Bar,4501 Castor Ave,19124,La Cura INC
+1153,My Local Brew Works,4500 Worth St Ste J2,19124,Django & Jet LLC
+1154,Ok Beer Deli,5136 Torresdale Ave,19124,Ok Beer Deli LLC
+1155,Palapas Food II,5359 Oxford Ave,19124,Palapas Food II INC
+1156,Panasian Buffet,811 Adams Ave Unit 12,19124,Panasian Buffet INC
+1157,Papi Claudios,1020 E Hunting Park Ave Store No 2,19124,Papi Claudios INC
+1158,Q 901,4401 Frankford Ave,19124,Q 901 Corp
+1159,Romano's,1523 E Wingohocking St,19124,"Romano's, INC."
+1160,Royal Farms,2501 Church St,19124,Two Farms INC
+1161,Shoprite Of Bridge & Harbison #495,5597 Tulip St Unit 1,19124,Harbison Supermarkets LLC
+1162,Sph Success,4655 Frankford Ave,19124,Sph Success INC
+1163,The Point After,4250 Frankford Ave,19124,"The Point After, INC."
+1164,Two Boyz,898 Sanger St,19124,Two Boyz INC
+1165,W V Cold Beer,4738 Frankford Ave,19124,W V Cold Beer LLC
+1166,White Diamond Athletic Assn.,2312-20 Duncan St,19124,White Diamond Athletic Assn.
+1167,153 Bowen,153 East Chelten Ave,19144,153 Bowen INC
+1168,240 West Chelten Enterprises,240 W Chelten Ave,19144,240 West Chelten Enterprises INC
+1169,411 Maja League,411-13 E Penn St,19144,"411 Maja League, INC."
+1170,4523 Wayne,4523-25 Wayne Ave,19144,"4523 Wayne, INC."
+1171,4931 Liu,4931-33 Wayne Ave,19144,4931 Liu INC
+1172,5139 Kao,5139 Germantown Ave,19144,5139 Kao INC
+1173,5706,5706 Germantown Ave,19144,"5706, INC."
+1174,Brandywine Inn,304 W Chelten Ave,19144,Brandywine Inn Corp.
+1175,Continental Home Association,5151 Wissahickon Ave,19144,Continental Home Association
+1176,Deke's Bar-B-Que,137 Berkley St,19144,Jmdd LLC
+1177,G-Town Beer,67 W Chelten Ave,19144,G-Town Beer LLC
+1178,Sinas Wayne,4851-53 Wayne Ave,19144,Sinas Wayne INC
+1179,Young American Cidery,6350 Germantown Ave,19144,Young American Cider LLC
+1180,American Legion Lincoln Post No 89,1940-42 Federal St,19146,American Legion Lincoln Post No 89
+1181,Choice Deli,1642 South St,19146,Jt Kerux INC
+1182,St. John Of The Jordan Club,1314-16 S 36th St & 3606 Sears St,19146,St. John Of The Jordan Club
+1183,7645 Capital Beer,7681 Frankford Ave,19136,7645 Capital Beer LLC
+1184,7701 Coolies,7701 & Rear 7703 Walker St,19136,7701 Coolies LLC
+1185,Ancient Order Of Hibernians Div 61,4131 Rhawn St,19136,Ancient Order Of Hibernians Div 61
+1186,Bock6,3608 Rhawn St,19136,Bock6 LLC
+1187,Charles P McMenamy Post No 178 American Legion,8041-43 Frankford Ave,19136,Charles P McMenamy Post No 178 American Legion
+1188,City Distilling,7600 State Rd,19136,City Distilling LLC
+1189,Ctt Holdings,7401 State Rd,19136,Ctt Holdings LLC
+1190,Forrest Hill A. C.,4620 Rhawn St,19136,Forrest Hill A. C.
+1191,Gino's Pizza Cafe,7326-28 Frankford Ave,19136,Dinofa Corporation
+1192,Her Lucky 777,9041-43 Ashton Rd,19136,Her Lucky 777 INC
+1193,Holme 3089,3089 Holme Ave,19136,Holme 3089 INC
+1194,Killard,8400 Torresdale Ave,19136,"Killard, LLC"
+1195,La Wave Restaurant And Lounge,4314-4318 Megargee St,19136,A & J Ownership LLC
+1196,M & W Press,4638-40 Kraydor St,19136,M & W Press INC
+1197,M.T.K. 7412 Frankford,7412 Frankford Ave,19136,"M.T.K. 7412 Frankford, INC."
+1198,Philadelphia Centurions Mc,7343 Melrose St,19136,Philadelphia Centurions Mc
+1199,Pjp Marketplace #3,8920 Frankford Ave,19136,Be Holdings Co 3 LLC
+1200,Ramblers,2911 Holme Ave,19136,Ramblers LLC
+1201,Seafood Bay,8006 Frankford Ave,19136,"Seafood Bay, INC."
+1202,Splitsville Cafe,3075 Holme Ave,19136,Rip Tide LLC
+1203,Steven Tavern,7447 Torresdale Ave,19136,Steven Tavern INC
+1204,Sweet Lucy's,7500 State Rd,19136,Sweet Lucy's Smokehouse LLC
+1205,Tacony 1,4028 Sheffield Ave.,19136,Tacony 1 INC
+1206,The Dining Car,8826 Frankford Ave,19136,The New Dining Car INC
+1207,"The William D. Oxley Post No.133, The American Legion",7900 Torresdale Avenue,19136,"The William D. Oxley Post No.133, The American Legion"
+1208,Village Of Cottage Green,9001 Ashton Rd,19136,"Village Of Cottage Green, INC."
+1209,1931 W. Hunting Park,1931 W Hunting Park Ave,19140,1931 W. Hunting Park INC.
+1210,201 Deli,3509-15 Germantown Ave,19140,201 Deli INC
+1211,201 J Lee,201-203 W Westmoreland St,19140,201 J Lee INC
+1212,2054 Joe's International Bar,2054 Dennie St,19140,"2054 Joe's International Bar, INC."
+1213,2100 Hunting Park,2100 W Hunting Park Ave,19140,"2100 Hunting Park, INC."
+1214,2222 Hunting,2222-28 W Hunting Park Ave,19140,2222 Hunting INC
+1215,3528 Tnt,3528 N 17th St,19140,3528 Tnt INC
+1216,3651 N 5th Enterprises,3651 N 5th St,19140,3651 N 5th Enterprises LLC
+1217,3737 Lounge,3737 N 2nd St,19140,Leel Corp
+1218,3800 Lin,3800 N 6th St,19140,3800 Lin INC
+1219,4201 Fairhill,4201 N Fairhill St,19140,4201 Fairhill INC
+1220,4210,4210 N 15th St,19140,"4210, INC."
+1221,4500 Beer Depot,4500 N 2oth St,19140,"4500 Beer Depot, INC."
+1222,4628 Bou,4628 N Mascher St,19140,4628 Bou INC
+1223,4637 N 5th,4637 N 5th St,19140,4637 N 5th INC
+1224,4659 Uruguay,4659-61 N 5th St,19140,4659 Uruguay INC
+1225,601 Middlebrook,601 W Bristol St,19140,"601 Middlebrook, INC."
+1226,Amanda 3860,3860 N 9th St,19140,Amanda 3860 INC
+1227,American Defenders Civic Assn.,2111 W Tioga St,19140,American Defenders Civic Assn. INC.
+1228,B Bar,3630 N 17th St,19140,"3630 North, INC"
+1229,Big Ryan's Restaurant,4173-4175 Germantown Ave,19140,Big Ryan's Restaurant INC
+1230,Brillante Mini Market,3301 N 6th St,19140,Brillante Mini Market INC
+1231,Chico's Bar,800 W Wingohocking St,19140,"Chico's Bar, INC."
+1232,Club 151,4128 N Broad St,19140,Club 151 INC.
+1233,Coopers Bar And Grill,100 W Wyoming Ave,19140,Coopers Bar And Grill INC
+1234,Demente Lounge And Restaurant,3246 N 5th St,19140,Demente Lounge And Restaurant LLC
+1235,El Consorcio #2,4265 N 8th St,19140,El Consorcio #2 INC
+1236,Erie's La Cabana,740 W Erie Ave,19140,Erie's La Cabana LLC
+1237,Hooper's Lounge,3709 Schuyler St,19140,Hooper's Lounge INC
+1238,La Familia Latina Supermarket,3357-61 N 5th St,19140,La Familia Latina Supermarket INC
+1239,"La Isla Bar, INC. II",717 W Luzerne St,19140,"La Isla Bar, INC. II"
+1240,La Santa Bar Restaurant Management,4301 N 5th St,19140,La Santa Bar Restaurant Management Corporation
+1241,Laxmi Philadelphia,266-268 W Ontario St,19140,Laxmi Philadelphia LLC
+1242,Lee's Deli & Food Market,3404-06 N Front St,19140,Choe Front Deli INC
+1243,Maxs Steaks And Eagle Bar,3653 Germantown Ave,19140,Erie Ave Management LLC
+1244,Smalls 1643,1643-45-47 Hunting Park Ave,19140,Smalls 1643 INC
+1245,T & S,4415 North Broad St,19140,T & S Ltd
+1246,The Jolly Six,3634 N 17th St,19140,The Jolly Six
+1247,Tierra Colombiana Bar & Rest.,4531-4539 N 5th St,19140,Tierra Colombiana INC.
+1248,Torres Emporium,4500 N 5th St,19140,"Torres Emporium, INC."
+1249,Torres Premier Services,4001 N Reese St,19140,Torres Premier Services INC
+1250,1350 L & C,1350 Wagner Ave,19141,1350 L & C INC
+1251,4948 Broad St,4948-50 N Broad St,19141,4948 Broad St INC.
+1252,Absz,1757 Belfield Ave,19141,Absz INC
+1253,Che-Kev,4834-36 N Broad St,19141,Che-Kev INC
+1254,Circles Hall,4800 N Broad St,19141,Circles Hall INC
+1255,Cold Carry,5606 N Broad St,19141,Cold Carry INC
+1256,Enjoy Restaurant,6201 Ogontz Ave,19141,"Enjoy Restaurant, INC."
+1257,Jet Green,4943 N Broad St,19141,Jet Green LLC
+1258,Lasalle Union,Lasalle University 1900 W Olney Ave,19141,Aramark Educational Services LLC
+1259,New Deck City Deli,4752-54 N 11th St,19141,"New Deck City Deli, Ltd."
+1260,Pemar,1322 W Olney Ave,19141,Pemar INC.
+1261,Syd 5911,5911 N Broad St,19141,Syd 5911 INC
+1262,Tru Mark Financial Center,1900 W Olney Ave,19141,Aramark Educational Services LLC
+1263,Adam Kowalski Post No. 1 Polish Legion Of American Veterans,504-508 Hermit St,19127,Adam Kowalski Post No. 1 Polish Legion Of American Veterans
+1264,5818 Castor,5818 Castor Ave,19149,5818 Castor INC
+1265,5990 Julia,5990 Oxford Ave,19149,5990 Julia LLC
+1266,7103 Bustleton,7103 Bustleton Ave,19149,7103 Bustleton INC
+1267,7254 Castor,7254 Castor Ave,19149,7254 Castor INC
+1268,ACME Markets,2101-41 Cottman Ave,19149,ACME Markets INC
+1269,ACME Markets,6601 Roosevelt Blvd,19149,ACME Markets INC
+1270,Bamboo Bar,6238-40 Bustleton Ave,19149,Felipe INC
+1271,Bica Restaurant,6618 Castor Ave,19149,Bica Restaurant INC
+1272,Chen Six Pack,7015 Roosevelt Blvd Unit B,19149,Chen Six Pack INC
+1273,China Gourmet,2842 St Vincent St,19149,New Add-On Profit INC
+1274,David On,6600-02 Castor Ave,19149,David On INC
+1275,Jade And Friends Company,6836-38 Bustleton Ave,19149,Jade And Friends Company INC
+1276,Kings Food And Deli,6210-6212 Bustleton Ave,19149,Kings Food And Deli INC
+1277,Longshore 3401,3401-05 Longshore Ave,19149,Longshore 3401 INC
+1278,Morning Call 6033,6033 Castor Ave,19149,Morning Call 6033 INC
+1279,New Olympia House,7240-42 Castor Ave,19149,"New Olympia House, INC."
+1280,Palapa Food And Beverage,6518 Castor Ave,19149,Palapa Food And Beverage INC
+1281,Philly Premier Group,2825-35 Cottman Ave Units #1 & #3,19149,Philly Premier Group LLC
+1282,T Bird Lanes,5830 Castor Ave,19149,Advanced Thinking LLC
+1283,The Giant Company,2201 Cottman Ave Ste 001,19149,The Giant Company LLC
+1284,Chinatown Chess Club,1023 Arch St 2nd Floor,19107,Chinatown Chess Club
+1285,Pac A Deli,1200-02 Walnut St,19107,J And M 1200 LLC
+1286,Pennsylvania Convention Center,1101 Arch St,19107,Aramark Sports And Entertainment Services LLC / Aramark Sports And Entertainment Group LLC
+1287,The Masonic Library And Museum Of Pennsylvania,1 N Broad St,19107,The Masonic Library And Museum Of Pennsylvania
+1288,Velvet Whip Arts & Social,319 N 11th St (Basement),19107,Arts Across Genres
+1289,Colonel Charles Young Post #16 United American War Veterans,155-159 E Sharpnack St,19119,Colonel Charles Young Post #16 United American War Veterans
+1290,1338 Bt,1338 W Cambria St,19132,"1338 Bt, INC."
+1291,1501 Lehigh,1501 W Lehigh Ave,19132,"1501 Lehigh, INC."
+1292,1630 Un,1630C W Lehigh Ave,19132,1630 Un INC
+1293,2349 Wilson,2349 N 22nd St,19132,2349 Wilson INC
+1294,2358 Seng Enterprises,2358 N 15th St,19132,"2358 Seng Enterprises, INC."
+1295,2615 P L,2615 Cecil B Moore Ave,19121,2615 P L INC
+1296,2708 Alex,2708-10 W Allegheny Ave,19132,"2708 Alex, INC."
+1297,2769 C&L Enterprises,2769 N 24th St,19132,"2769 C&L Enterprises, INC."
+1298,2825 West Cecil B. Moore,1701-05 N Dover St,19121,"2825 West Cecil B. Moore, INC."
+1299,2900 Ridge,2900-06 Ridge Ave,19121,"2900 Ridge, INC."
+1300,3002 Fox Deli,3002 N 22nd St,19132,"3002 Fox Deli, INC."
+1301,3153 Taing,3153 N 22nd St,19132,"3153 Taing, INC."
+1302,32nd Street Pub,3200 W Allegheny Ave,19132,"32nd Street Pub, INC."
+1303,8 Jolly Gents,2711 N 19th St,19132,8 Jolly Gents INC.
+1304,Amc North Broad Street 7,1600 N Broad St,19121,American Multi-Cinema INC
+1305,American Legion Crispus Attucks Post No. 151,1716-18 N 24th St,19121,American Legion Crispus Attucks Post No. 151
+1306,Bou Tidarasy,2200 N 18th St,19132,"Bou Tidarasy, INC."
+1307,C & T,2150 N 20th St,19121,C & T INC
+1308,C. Lee,2272 N Bouvier St,19132,"C. Lee, INC."
+1309,Carolina Market,2952-54 Ridge Ave,19121,"Felton Gallon, Jr"
+1310,Chun 7129,2501 W Sterner St,19132,"Chun 7129, INC."
+1311,D & J Susquehanna,1639-43 W Susquehanna Ave,19121,D & J Susquehanna INC
+1312,D & R Rubio,2001 W York St,19132,D & R Rubio INC
+1313,Ev 29,2748 N 29th St,19132,Ev 29 INC
+1314,G A N,1700 W Allegheny Ave,19132,G A N INC
+1315,Global Spectrum,1776 N Broad St,19121,Global Spectrum LP
+1316,Hangry Joe's Hot Chicken,1422 Cecil B. Moore Ave,19121,Hangry Joe's LLC
+1317,Italian American Political & Moral Bocce Club Of Paradise,3123 N 30th St,19132,Italian American Political & Moral Bocce Club Of Paradise
+1318,Kitchen 89,3212 W Dauphin St,19132,Kitchen 89 INC
+1319,New 17,2501 N 17th St,19132,New 17 INC
+1320,Ottos Taproom,1216 N 29th St,19121,29flora LLC
+1321,Pat's Lounge,3251 Ridge Ave,19132,Pat's Lounge Corp
+1322,Ridge Mart,2248 Ridge Ave,19121,Ridge Mart INC
+1323,Rtng24,2400 N 16th St,19132,Rtng24 INC
+1324,Strawberry Deli,2224 N 29th St,19132,808-810 H & L INC
+1325,Success Beverage,1801 N 27th St,19121,Success Beverage INC
+1326,Sunshine Bar,1402-04 W Oxford St,19121,"Sunshine Bar, INC."
+1327,Tai & Delan,2349-51 N 26th St,19132,"Tai & Delan, INC"
+1328,Temple/Peabody,1431 Cecil B Moore Ave,19121,Liberty Collective LLC
+1329,Webb Brothers,1527-29-31 Cecil B Moore Ave,19121,Webb Brothers INC
+1330,Yang Tran,2200 W Lehigh Ave,19132,Yang Tran INC
+1331,Campo's Deli @ Market,214 Market St,19106,"Campo's Deli @ Market, INC."
+1332,National Constitution Center,525 Arch St,19106,Ovations Food Services LP
+1333,Penn's Landing,Great Plz Columbus Blvd At Chestnut St,19106,Penn's Landing LLC
+1334,Penn's Landing,Cherry Street Pier Columbus Blvd At Cherry St,19106,Penn's Landing LLC
+1335,Sues Market,275 St James Pl,19106,Sues Market INC
+1336,196 Nedro,196-198 W Nedro St,19120,"196 Nedro, INC."
+1337,198 J T Lounge,198 W Godfrey Ave,19120,198 J T Lounge INC
+1338,200 J J's Lounge,200 W Duncannon Ave,19120,"200 J J's Lounge, INC."
+1339,4711 D St,4709-4711 D St,19120,4711 D St INC
+1340,4766 I J C,4762-64-66 Rising Sun Ave,19120,4766 I J C INC
+1341,4900 Rockland,4900 N 5th St,19120,4900 Rockland INC
+1342,517 Rj,201 W Clarkson Ave,19120,517 Rj INC
+1343,5248 Rising Sun,5246-48 Rising Sun Ave,19120,5248 Rising Sun INC
+1344,5261 Perez,5261 N 5th St,19120,5261 Perez INC
+1345,5501 Front Street,5501 N Front St,19120,"5501 Front Street, INC."
+1346,5835 L & K,5835-39 Rising Sun Ave,19120,5835 L & K INC
+1347,Byun Sat Do,6201 N Front St Unit 120,19120,Byun Sat Do INC
+1348,El Balconcito,658 E Godfrey Ave,19120,"R & R And Sons, INC."
+1349,El Bochinche Restaurante,4940 N 5th St,19120,El Bochinche Restaurante INC
+1350,Godfrey Beer & Deli Takeout,910 W Godfrey Ave,19120,Godfrey Beer & Deli Takeout INC
+1351,Guate Gualan Restaurant,182 W Olney Ave,19120,Tetos Gualan INC
+1352,H Mart,6201 N Front St #124,19120,H Mart Philadelphia LLC
+1353,Hughes Bros Distillers,300 E Godfrey Ave Unit Bb2,19120,Hughes Bros Distillers LLC
+1354,Kim's Restaurant,5941-55 N 5th St,19120,"Kim's Restaurant, INC."
+1355,Lb's Lounge,5452-5454 N 5th St,19120,Vizion1928 LLC
+1356,Lor,5222-24 N 5th St,19120,Lor INC
+1357,Omars 5th,5048-50 N 5th St,19120,Omars 5th INC
+1358,Passion Bar And Restaurant,4827 Rising Sun Ave,19120,"Passion Bar And Restaurant, INC."
+1359,Pjp Marketplace #2,537 Adams Ave,19120,Be Holdings Co 2 LLC
+1360,Samy Eddy,5437 N Lawrence St,19120,Samy Eddy LLC
+1361,Savana Caribbean Cuisine,5694-96 Rising Sun Ave Units 6 & 7,19120,Savana Caribbean Cuisine Company
+1362,Shoprite Of Front & Olney,101 E Olney Ave,19120,Collins Family Markets INC
+1363,Sipz On 5th,5559 N 5th St,19120,Philly Grounds INC
+1364,Tk N5,5440 N 5th St,19120,Tk N5 INC
+1365,Uptop Bar & Lounge,6017 N 5th St,19120,Uptop Bar & Lounge LLC
+1366,1899 Hl,6601 Lansdowne Ave,19151,1899 Hl INC
+1367,400 Bryon,400 N 59th St,19151,400 Bryon INC
+1368,6200 Lansdowne,6200 Lansdowne Ave,19151,6200 Lansdowne INC
+1369,Applebee's Neighborhood Grill & Bar,7650 City Ave,19151,Delaware Valley Rose LP
+1370,Calabash Enterprise,6208 Lancaster Ave,19151,Calabash Enterprise INC
+1371,Cobbs Creek Golf Club,7400 Lansdowne Ave,19151,The Cobbs Creek Restoration And Community Foundation
+1372,Hilton Philadelphia City Ave,4200 City Line Ave,19151,"Stout Road Associates, INC"
+1373,Italian American Social Club Of West Philadelphia,6608 Haverford Ave,19151,Italian American Social Club Of West Philadelphia
+1374,Kl 96,900 N 66th St,19151,Kl 96 INC
+1375,Lancaster Deli,6233 Lancaster Ave,19151,Lancaster Deli INC
+1376,Lyric 99,6000-02 Haverford Ave,19151,"Lyric 99, INC."
+1377,Meng' Master Deli,567 N 63rd St,19151,"Meng' Master Deli, INC."
+1378,Mitchell & Mitchell Wines,7561 Malvern Ave,19151,Mitchell & Mitchell Wines LLC
+1379,Moze,6517-21 Haverford Ave,19151,"Moze, INC."
+1380,Ancient Order Of Hibernians Div 87 Port Richmond,3524 E Thompson St,19134,Ancient Order Of Hibernians Div 87 Port Richmond
+1381,Hecker's Deli,2620-22 E Venango St,19134,"Hecker's Deli, INC."
+1382,Lithuanian Republican Beneficial Club,3371-73 Edgemont St,19134,Lithuanian Republican Beneficial Club
+1383,Madison Athletic Assn.,3299 1/2 Gaul St,19134,Madison Athletic Assn.
+1384,Martin's Deli,2764-72 Kensington Ave,19134,Young And Sae INC
+1385,The United Republican Club 25th Ward,3156-58 Frankford Ave,19134,The United Republican Club 25th Ward
+1386,Venango Republican Assn. Of The Forty Fifth Ward,3614 Richmond St,19134,Venango Republican Assn. Of The Forty Fifth Ward
+1387,Windthorst Literary Association,3150-52 Gaul St,19134,Windthorst Literary Association
+1388,Filippo Palizzi Societa Di Mutuo Soccorso Di Vasto,1408 S 12th St,19147,Filippo Palizzi Societa Di Mutuo Soccorso Di Vasto
+1389,First Ward Italo-American Club,1537 S 6th St,19147,First Ward Italo-American Club
+1390,New Year's Shooters & Mummers Museum,1100 S 2nd St,19147,New Year's Shooters & Mummers Museum INC
+1391,Societa Di Mutuo Soccorso Messina & Provincia,1533 S 10th St,19147,Societa Di Mutuo Soccorso Messina & Provincia
+1392,St Casimirs Post No 652 INC Catholic War Veterans,1524 S 2nd St,19147,St Casimirs Post No 652 INC Catholic War Veterans
+1393,Town Food Market,428-430 S 13th St Store No 2,19147,Trishool INC
+1394,Cafe Dajti,8546 Bustleton Ave A/K/A 8550 Bustleton Ave Unit B,19152,Cafe Dajti LLC
+1395,Chef's Deli,2416 Rhawn St,19152,"Chef's Deli, INC."
+1396,El Barconcito II,7326 Castor Ave,19152,El Barconcito II INC
+1397,Empire 7312,7312-16 Castor Ave,19152,Empire 7312 LLC
+1398,Guanabara Bar & Grill,8014-8018 Castor Ave,19152,Wc Group LLC
+1399,Jpharv,8101-11 E Roosevelt Blvd,19152,"Jpharv, LLC"
+1400,Las Margaritas,2538-40 Welsh Rd,19152,"Las Margaritas, INC."
+1401,Leblon Sports Bar & Grill,8208 Roosevelt Blvd,19152,Fm Sports Bar & Grill LLC
+1402,M Amir C,7930-7932 Bustleton Ave,19152,M Amir C INC
+1403,Mediterranean 2000,8026-34 Bustleton Ave,19152,Santos Ent. Ltd.
+1404,Philadelphia Portuguese Club,2019-23 Rhawn St,19152,Philadelphia Portuguese Club
+1405,Portuguese-American Rosary Society Of Our Lady Of Fatima,8104 Castor Ave,19152,Portuguese-American Rosary Society Of Our Lady Of Fatima
+1406,Rhawn Pub,2420 Rhawn St,19152,Tm709 LLC
+1407,Riviera Cafe,7959A Castor Ave 1fl,19152,Riviera Cafe INC
+1408,Plays & Players Club,1714-16 Delancey St,19103,Plays & Players Club
+1409,The Academy Of Natural Sciences,1900 Benjamin Franklin Pkwy,19103,Academy Event Services INC
+1410,The Franklin Institute,222 N 20th St,19103,Levy Premium Foodservice LP
+1411,Roxborough Turners,418 Leverington Ave,19128,Roxborough Turners
+1412,Walnut Lane G C,800 Walnut Ln,19128,The First Tee Of Greater Philadelphia INC
+1413,Ancient Order Of Hibernians In America Ph 88,15000 Bustleton Ave,19116,Ancient Order Of Hibernians In America Ph 88
+1414,Barrel Splitters Brewing,1890 Woodhaven Rd Ste 2C,19116,B&S 1890 LLC
+1415,Caffe Michelangelo,11901 Bustleton Ave,19116,"Caffe Michelangelo, INC."
+1416,Camuna Cellars,2050R Byberry Rd,19116,Camuna Cellars LLC
+1417,Danube Swabian Assn. Of Philadelphia & Vicinity,1277 Southampton Rd,19116,Danube Swabian Assn. Of Philadelphia & Vicinity
+1418,Lascala's Fire,12002 E Roosevelt Blvd Ste 120,19116,Blaze Roosevelt Blvd LLC
+1419,New Georgian House,13033 Bustleton Ave,19116,New Georgian House LLC
+1420,Ninja Japanese Restaurant,14100 Bustleton Ave,19116,Ninja Japanese Restaurant LLC
+1421,P & P Caterers West,1075 Southampton Rd,19116,P & P Caterers West INC
+1422,Red Carpet Inn & Suites,11550 Roosevelt Blvd,19116,Vrisha Lodging LLC
+1423,Shop Rite,"11000 Roosevelt Blvd, Suite 2",19116,Shop Rite Supermarkets INC
+1424,Sons Of Philip,14000 Bustleton Ave 13575 Philmont Ave,19116,Sons Of Philip INC
+1425,Topgolf,2140 Byberry Rd,19116,Topgolf USA Nep LLC
+1426,Wacky Zaki,10002-04 Verree Rd,19116,Wacky Zaki INC
+1427,Citizens Bank Park,1 Citizens Bank Way,19148,Aramark Sports And Entertainment Services LLC
+1428,Lincoln Financial Field,1020 Pattison Ave,19148,Aramark Sports And Entertainment Services LLC
+1429,Quaker City String Band,1943-45 S 3rd St,19148,Quaker City String Band
+1430,Wells Fargo Sports Complex,Broad St & Pattison Ave,19148,Aramark Sports And Entertainment Services LLC
+1431,Wendy's Grocery And Deli,2312-14 S 7th St,19148,Jbk Realty LLC
+1432,American Legion Post 0200 Brignola-Cerone-Warriner,1838 S Bancroft St,19145,American Legion Post 0200 Brignola-Cerone-Warriner
+1433,"American Legion Post 293, James Boyle Home Association",2854 Winton St,19145,"American Legion Post 293, James Boyle Home Association"
+1434,Choir Soc Of The Holy Ghost Greek Catholic Church Of Phila. PA.,2301-09 S 25th St,19145,Choir Soc Of The Holy Ghost Greek Catholic Church Of Phila. PA.
+1435,Chun Mauv Kuoch Beer Deli,1655 S Chadwick St,19145,"Chun Mauv Kuoch Beer Deli, INC."
+1436,Improved Order Of Red Men Crow Tribe No. 423,1433 Jackson St,19145,Improved Order Of Red Men Crow Tribe No. 423
+1437,Italo-American Bocce Social Club Of Philadelphia,2001 Point Breeze Ave,19145,Italo-American Bocce Social Club Of Philadelphia
+1438,Thomas A Connor Club,1632 W Moyamensing Ave,19145,Thomas A Connor Club INC.
+1439,2027,2027 S 65th St,19142,"2027,INC."
+1440,3509 Germantown,6500 Paschall Ave,19142,3509 Germantown INC
+1441,6547,6547 Elmwood Ave,19142,"6547, INC."
+1442,67th & Dicks Ave.,6650 Dicks Ave,19142,"67th & Dicks Ave., INC."
+1443,American Legion INC. Wm. P. Roche Post No. 21,6400 Paschall Ave,19142,American Legion INC. Wm. P. Roche Post No. 21
+1444,Ena Blanch Ballroom,6716-22 Greenway Ave,19142,Claudette Ena Blanch Ballroom LLC
+1445,Fd Grill,2501 S Hobson St,19142,Fd Grill LLC
+1446,Fortune Deli,6165 Woodland Ave,19142,Fortune Deli INC
+1447,Hyunjin,6232-6236 Woodland Ave,19142,Hyunjin INC
+1448,J & J Fang,6419 Woodland Ave,19142,J & J Fang INC
+1449,Jin Min,7335-37 Elmwood Ave,19142,"Jin Min, INC."
+1450,4010,4010 Robbins St & Bsmt 4012 Robbins St,19135,4010 LLC
+1451,5800 Torresdale Avenue,5800 Torresdale Ave,19135,"5800 Torresdale Avenue, INC."
+1452,6029 Wayne,6029 Torresdale Ave,19135,6029 Wayne LLC
+1453,6453 Rpm,6453 Frankford Ave,19135,6453 Rpm INC
+1454,7026 Smv,7026 Frankford Ave,19135,7026 Smv Corp
+1455,7162 Torresdale,7162 Torresdale Ave,19135,7162 Torresdale INC
+1456,7165 Deli & Beer,7165 Torresdale Ave,19135,7165 Deli & Beer INC
+1457,Cazadores,6613 Frankford Ave,19135,Cazadores INC
+1458,Currans Irish Inn,6900 State Rd,19135,Currans Business Corp
+1459,Division #39 Ancient Order Of Hibernians,7229 Tulip St Tacony,19135,Division #39 Ancient Order Of Hibernians
+1460,Drunken Hen Eatery & Winery,6235 Frankford Ave,19135,Drunken Hen Eatery & Distillery LLC
+1461,Harbison Inn,4201-4211 Comly St,19135,Harbison Inn INC
+1462,Mayfair Sports Bar & Grill,6901 Frankford Ave,19135,Mayfair Sports Bar & Grill INC
+1463,Quaker City Yacht Club,7101 N Delaware Ave,19135,Quaker City Yacht Club
+1464,Rauchut,6501 Frankford Ave,19135,"Rauchut, INC."
+1465,Reale' Restaurant & Lounge,7233-35 Frankford Ave,19135,"Reale' Restaurant & Lounge, INC."
+1466,Sam 168,5944 Torresdale Ave,19135,Sam 168 INC
+1467,Son Van,5932 Torresdale Ave,19135,"Son Van, INC."
+1468,Tacony 2008,5921 Tacony St,19135,Tacony 2008 INC
+1469,Tacony-Mayfair Lodge No 447,4741 Friendship St,19135,Tacony-Mayfair Lodge No 447
+1470,Torresdale Pizza & Beer,6301 Torresdale Ave,19135,Torresdale Pizza & Beer LLC
+1471,Two Brothers' 6171 Torresdale,6171 Torresdale Ave,19135,Two Brothers' 6171 Torresdale INC
+1472,Wissinoming Yacht Club,11 Delaware Ave Lardners Point,19135,Wissinoming Yacht Club
+1473,3234 Academy,3234 Red Lion Rd Store 15,19114,"3234 Academy, INC."
+1474,4636,9961 Frankford Ave,19114,4636 INC
+1475,Academy Deli,3218-20 Red Lion Rd,19114,Academy Deli INC
+1476,Brick House Bar & Grille,3330-3332-3334-3336 Grant Ave,19114,Brick House Bar & Grille INC
+1477,Buffalo Wild Wings Grill & Bar #310,9701 Roosevelt Blvd,19114,Blazin Wings INC
+1478,Four Points Sheraton Philadelphia,9461 Roosevelt Blvd,19114,Paragon Hotels INC
+1479,Jimmys Timeout Sports Pub,5001-5005 Linden Ave,19114,Jimmys Timeout Sports Pub LLC
+1480,John F Byrne Golf Club,9550 Leon St,19114,The First Tee Of Greater Philadelphia INC
+1481,Lin's Willits,3217 Willits Rd,19114,Lin's Willits INC
+1482,Longhorn Steakhouse,Whitman Sq Shopping Center 9701 Roosevelt Blvd,19114,Rare Hospitality International INC
+1483,Maggie's Waterfront Cafe,9242-9250 N Delaware Ave,19114,Tkjr Restaurant Associates INC
+1484,Morrell Tavern,3800 Morrell Ave,19114,"Morrell Tavern, INC."
+1485,Original Ital Pizzeria & Rest,9436 State Rd,19114,"Graventi, INC."
+1486,Paddy Whacks Irish Sports Pub,9241-9245 Roosevelt Blvd Rear,19114,Welshpw LLC
+1487,Regina Coeli Home Association,9617 James St,19114,"Regina Coeli Home Association, INC."
+1488,Shoprite Of Morrell Plaza,9910 Frankford Ave,19114,McMenamin Family Shoprite INC
+1489,The Frosted Mug,3200-09 Red Lion Rd,19114,ACME Markets INC
+1490,The Giant Company,2550 Grant Ave,19114,The Giant Company LLC
+1491,The Union League Golf Club At Torresdale Frankford,Frankford And Grant Aves,19114,The Union League Golf Club At Torresdale Frankford LLC
+1492,Three Monkeys Cafe,9645-47 James St,19114,"2647 Jasper, INC."
+1493,Wawa,9101 Frankford Ave,19114,Wawa INC
+1494,Aramark Educational Services,730 S 43rd St,19104,Aramark Educational Services LLC
+1495,Five Star Deli,4204 Chester Ave,19104,"Five Star Deli, INC."
+1496,Penn Museum,3260 South St,19104,Restaurant Associates LLC
+1497,The Philadelphia Zoo,3400 W Girard Ave,19104,Aramark Sports And Entertainment Services LLC
+1498,University Of Pennsylvania,233 S 33rd St,19104,Aramark Sports And Entertainment Services LLC
+1499,Veterans Home Association Of Penn Central Post 204,3924 Chestnut St,19104,Veterans Home Association Of Penn Central Post 204
+1500,7701 Ogontz,7701 Ogontz Ave,19150,7701 Ogontz INC
+1501,7801 Provident,7801 Provident Rd,19150,7801 Provident INC
+1502,K Famous Deli,7522-24 Ogontz Ave,19150,K Famous Deli LLC
+1503,Kimci Market,7401 Stenton Ave,19150,Kimci Market INC
+1504,Peter's Steak,8016 Ogontz Ave,19150,"Peter's Steak House, INC."
+1505,T.B. Stenton,6402 Stenton Ave,19150,"T.B. Stenton, INC."
+1506,Wong,7610 Ogontz Ave,19150,Wong Corporation
+1507,275 Banhan,275-277 S 60th St,19139,"275 Banhan, INC."
+1508,5000 F & G,5000 Market St,19139,5000 F & G INC
+1509,5055 Haverford,5055 Haverford Ave,19139,5055 Haverford INC
+1510,5215 Market,5215-17 Market St,19139,"5215 Market, INC."
+1511,5568 Marcy,5568 Spruce St,19139,5568 Marcy INC
+1512,6054 Ethio,6052-6054 Market St,19139,"6054 Ethio, INC"
+1513,6100 Vine Estate,6100-02 Vine St,19139,6100 Vine Estate LLC
+1514,American Legion George T Cornish Post 292,4812 Fairmount Ave,19139,American Legion George T Cornish Post 292
+1515,Apc Power,5251-53 Market St,19139,Apc Power LLC
+1516,Cozy Bar,5100 Haverford Ave,19139,"Gil-Han, INC."
+1517,Edmondson,6004 Market St,19139,"Edmondson, INC."
+1518,Le Pearl,328 N 54th St,19139,"Le Pearl, INC."
+1519,Lucky Deli,24 N 52nd St,19139,Lucky Deli INC
+1520,Lychee 87,12 N 60th St,19139,Lychee 87 INC
+1521,Lychee 93,4653 Walnut St,19139,Lychee 93 INC
+1522,Maximum Level Lounge,5118 Sansom St,19139,Maximum Level INC
+1523,N & K Deli,6118-20 Market St,19139,"N & K Deli, INC."
+1524,S&V 5934,5934 Market St,19139,S&V 5934 INC
+1525,Steve's Sports Lounge,5300-02 Market St,19139,"Steve's Sports Lounge, INC."
+1526,The Fresh Grocer,5601 Chestnut St,19139,5601 Foods LLC
+1527,The Swank,101 S 60th St,19139,60th Hhs INC
+1528,Top Shelf Lounge,5564-66 Market St,19139,"Top Shelf Lounge, INC."
+1529,Watusi,4600 Walnut St Bsmt,19139,"Watusi, INC."
+1530,1701 Lim,5527 Lansdowne Ave,19131,"1701 Lim, INC."
+1531,5345 Wyalusing,5345 Wyalusing Ave,19131,5345 Wyalusing INC
+1532,5601 Massawa,5601-03 Wyalusing Ave,19131,"5601 Massawa, INC."
+1533,601 N 56th Street,601 N 56th St,19131,601 N 56th Street LLC
+1534,Browns Monument,4160 Monument Rd,19131,Browns Monument LLC
+1535,Browns Parkside,1575 N 52nd St Ste 400,19131,Browns Parkside LLC
+1536,C & S Deli,1346 N 52nd St,19131,"C & S Deli, INC."
+1537,Campion Center,2401 Cardinal Ave,19131,Aramark Educational Services LLC
+1538,Courtyard By Marriott-Philadelphia City Avenue,4100 Presidential Blvd,19131,"Scholar Hotels, LLC"
+1539,Elzina's,5639 Master St,19131,"Tracey Ricketts, INC."
+1540,Fuwa Deli,3987 Ford Rd,19131,Fuwa Deli LLC
+1541,Hagan Arena,St. Joseph's University 2450 N 54th St,19131,Aramark Educational Services LLC
+1542,Happy Hour,4091 Ford Rd,19131,"Happy Hour, INC."
+1543,Hawk & Barrel,2481 N 54th St,19131,Teb Of 54th Street LLC
+1544,I B P O E Of The World Leonard C. Irvin Lodge 994,5034 Lancaster Ave,19131,I B P O E Of The World Leonard C. Irvin Lodge 994
+1545,Jemal And Zeida,5500 West Girard Ave,19131,Jemal And Zeida INC
+1546,Joe's Kwik Marts,5110 City Line Ave,19131,Joe's Kwik Marts LLC
+1547,L & P 501,501 N 52nd St,19131,L & P 501 LLC
+1548,Maple Enterprises,4901-03 Lancaster Ave,19131,"Maple Enterprises, INC."
+1549,Moonlight,4528-30-32 Lancaster Ave,19131,Moonlight Corporation
+1550,Nomnol,1215 N 52nd St,19131,Nomnol INC
+1551,Please Touch Museum,Memorial Hall West Park 4231 Avenue Of The Republic,19131,Ovations Food Services LP
+1552,Pnh 683,683 N 52nd St,19131,Pnh 683 INC
+1553,Ron-Rod Tavern,1228 N 52nd St,19131,"Ron-Rod Tavern, INC."
+1554,Song & Philip,5238 Lancaster Ave,19131,Song & Philip INC
+1555,T.G.I. Friday's,4000 City Line Ave,19131,"Atlanta Restaurant Partners, LLC"
+1556,The Mann Center For Performing Arts,5201 Parkside Ave,19131,Legends Hospitality LLC
+1557,The Rabbit,2200-B Belmont Ave,19131,The Rabbit
+1558,Crystal Tea Room,1300 Market St Unit A,19101,"Finley Catering Co., INC."
+1559,Ulana,205 Bainbridge St,19027,Ulana Ltd.
