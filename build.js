@@ -259,13 +259,19 @@ function card(v, b, from, opts = {}) {
 </article>`;
 }
 
-function filterBar({ when = 'any', showWhen = true, showHood = true, hoods = [] }) {
+function filterBar({ when = 'any', showWhen = true, showHood = true, hoods = [], items = null }) {
+  if (items) {
+    // only neighborhoods that have happy hours on this page, with counts
+    const n = new Map();
+    for (const [v] of items) n.set(v.hoodSlug, (n.get(v.hoodSlug) || 0) + 1);
+    hoods = hoods.filter((h) => n.has(h.slug)).map((h) => ({ ...h, label: `${h.name} (${n.get(h.slug)})` }));
+  }
   return `<form class="filters" role="search" data-default-when="${when}" onsubmit="return false">
   ${showWhen ? `<label class="f-field"><span>When</span><select id="f-when" name="when">
     <option value="now">Live right now</option><option value="today">Today</option>
     ${DAY_FULL.map((d, i) => `<option value="${i}">${d}</option>`).join('')}
     <option value="any">Any day</option></select></label>` : ''}
-  ${showHood ? `<label class="f-field"><span>Neighborhood</span><select id="f-hood" name="hood"><option value="">All of Philly</option>${hoods.map((h) => `<option value="${esc(h.slug)}">${esc(h.name)}</option>`).join('')}</select></label>` : ''}
+  ${showHood ? `<label class="f-field"><span>Neighborhood</span><select id="f-hood" name="hood"><option value="">All of Philly</option>${hoods.map((h) => `<option value="${esc(h.slug)}">${esc(h.label || h.name)}</option>`).join('')}</select></label>` : ''}
   <label class="f-field f-search"><span>Search</span><input id="f-q" name="q" type="search" placeholder="Bar, deal, or drink" autocomplete="off"></label>
   <fieldset class="f-chips"><legend class="sr">Deal type</legend>${DEAL_TYPES.map(([k, l]) => `<label class="chip"><input type="checkbox" id="f-${k}" name="type" value="${k}"><span>${l}</span></label>`).join('')}</fieldset>
 </form>
@@ -382,7 +388,7 @@ async function main() {
   <h1><span class="hero-count" id="live-count">${hhVenues.length}</span> <span id="live-label">bars with happy hours in Philly</span></h1>
   <p class="lede">Every happy hour in the 215, sorted by what's pouring now. Pick a day, a neighborhood, or just follow the clock.</p>
 </section>
-${filterBar({ when: 'today', hoods })}
+${filterBar({ when: 'today', hoods, items: pairs() })}
 ${listHTML('index.html', pairs())}
 <h2 class="sec-h">Browse ${venues.length.toLocaleString()} Philly bars by neighborhood</h2>
 ${hoodGrid('index.html')}` : `<section class="hero">
@@ -405,7 +411,7 @@ ${hoodGrid('index.html')}`,
       body: `<section class="hero hero-sm"><p class="eyebrow">Select a day · ${d}</p>
   <h1>${d} Philadelphia Happy Hours</h1>
   <p class="lede">Browse these local bars to find the drink deals and food specials that fit your tastes. Can't find your favorite bar? <a href="${href(`${d.toLowerCase()}/index.html`, 'for-bars/')}">Send us the details.</a> Cheers!</p></section>
-${filterBar({ when: String(i), showWhen: false, hoods })}
+${filterBar({ when: String(i), showWhen: false, hoods, items })}
 ${listHTML(`${d.toLowerCase()}/index.html`, items)}`,
     });
   });
@@ -420,7 +426,7 @@ ${listHTML(`${d.toLowerCase()}/index.html`, items)}`,
     lastmod: newest(venuesOf(late)),
     body: `<section class="hero hero-sm"><p class="eyebrow">After 9 pm</p><h1>Late-night happy hours in Philly</h1>
   <p class="lede">For the after-work-shift crowd. Pennsylvania law ends every happy hour by midnight, so these run roughly 9 pm to close of the deal.</p></section>
-${filterBar({ when: 'any', hoods })}${listHTML('late-night/index.html', late)}`,
+${filterBar({ when: 'any', hoods, items: late })}${listHTML('late-night/index.html', late)}`,
   });
   const weekend = pairs((v, b) => b.days.includes(5) || b.days.includes(6));
   page('weekend/index.html', {
@@ -431,7 +437,7 @@ ${filterBar({ when: 'any', hoods })}${listHTML('late-night/index.html', late)}`,
     lastmod: newest(venuesOf(weekend)),
     body: `<section class="hero hero-sm"><p class="eyebrow">Saturday & Sunday</p><h1>Weekend happy hours in Philly</h1>
   <p class="lede">Happy hour doesn't have to mean leaving work at 5. These deals run on Saturdays and Sundays.</p></section>
-${filterBar({ when: 'any', hoods })}${listHTML('weekend/index.html', weekend)}`,
+${filterBar({ when: 'any', hoods, items: weekend })}${listHTML('weekend/index.html', weekend)}`,
   });
 
   // Neighborhoods
