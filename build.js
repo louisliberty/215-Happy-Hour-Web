@@ -143,33 +143,47 @@ async function loadRows() {
 function buildModel(rows) {
   const venues = new Map();
   const problems = [];
-  let notYet = 0;
+  const skipped = { hidden: 0, closed: 0, club: 0, deli: 0, companyName: 0 };
+  const slugs = new Set();
   rows.forEach((r, i) => {
-    if (r.active && !yes(r.active)) return;
     if (!r.name) return;
-    if (!r.days && !r.start && !r.end) { notYet++; return; } // not researched yet
-    const days = parseDays(r.days);
-    const start = toMin(r.start), end = toMin(r.end);
-    if (!days.length || start == null || end == null) {
-      problems.push(`Row ${i + 2} (${r.name}): check days/start/end`);
-      return;
+    if (r.active && !yes(r.active)) { skipped.hidden++; return; }
+    const status = (r.status || '').toLowerCase();
+    if (status === 'closed' || status === 'no hh') { skipped.closed++; return; }
+    const type = (r.type || '').toLowerCase();
+    if (type === 'private club') { skipped.club++; return; }              // members only
+    if (type.startsWith('deli')) { skipped.deli++; return; }               // take-out beer delis
+    if (/name on the sign/i.test(r.notes || '')) { skipped.companyName++; return; } // still a company name
+    const hasTimes = r.days || r.start || r.end;
+    let days = [], start = null, end = null;
+    if (hasTimes) {
+      days = parseDays(r.days); start = toMin(r.start); end = toMin(r.end);
+      if (!days.length || start == null || end == null) {
+        problems.push(`Row ${i + 2} (${r.name}): check days/start/end`);
+      }
     }
-    const slug = slugify(r.name);
-    if (!venues.has(slug)) {
-      venues.set(slug, {
+    const key = slugify(r.name) + '|' + slugify((r.address || '').replace(/\s(ste|suite|unit|fl|floor|space)\b.*$/i, ''));
+    if (!venues.has(key)) {
+      let slug = slugify(r.name);
+      if (slugs.has(slug)) slug = slugify(`${r.name} ${(r.address || r.neighborhood || i).toString().split(',')[0]}`);
+      while (slugs.has(slug)) slug += '-' + i;
+      slugs.add(slug);
+      const generic = /^bar \/ restaurant/.test(type);
+      venues.set(key, {
         slug, name: r.name, hood: r.neighborhood || 'Philadelphia',
         hoodSlug: slugify(r.neighborhood || 'philadelphia'),
         address: r.address, phone: r.phone, website: r.website, instagram: r.instagram,
-        lat: parseFloat(r.lat), lng: parseFloat(r.lng), vibe: r.vibe,
+        lat: parseFloat(r.lat), lng: parseFloat(r.lng), vibe: r.vibe || (generic ? '' : r.type),
         featured: false, classic: false, sample: false, verified: '', blocks: [],
       });
     }
-    const v = venues.get(slug);
+    const v = venues.get(key);
     for (const k of ['address', 'phone', 'website', 'instagram', 'vibe']) if (!v[k] && r[k]) v[k] = r[k];
     v.featured ||= yes(r.featured);
     v.classic ||= yes(r.classic);
     v.sample ||= yes(r.sample);
     if (r.verified && r.verified > v.verified) v.verified = r.verified;
+    if (!days.length || start == null || end == null) return; // listed without happy hour times yet
     if (end - start > 240) problems.push(`Row ${i + 2} (${r.name}): longer than PA's 4-hour daily limit`);
     if (end > 23 * 60 + 59) problems.push(`Row ${i + 2} (${r.name}): PA happy hours must end by midnight`);
     v.blocks.push({
@@ -184,7 +198,9 @@ function buildModel(rows) {
     if (v.weeklyMinutes > 24 * 60) problems.push(`${v.name}: more than PA's 24 hours per week`);
     v.blocks.sort((a, b) => a.days[0] - b.days[0] || a.start - b.start);
   }
-  if (notYet) console.log(`Skipped ${notYet} rows with no happy hour times yet`);
+  const withHH = list.filter((v) => v.blocks.length).length;
+  console.log(`${list.length} bars to publish: ${withHH} with happy hour times, ${list.length - withHH} without yet`);
+  console.log(`Left off the site: ${skipped.closed} closed or no happy hour, ${skipped.club} private clubs, ${skipped.deli} delis, ${skipped.companyName} still showing a company name, ${skipped.hidden} set to active = no`);
   problems.forEach((p) => console.warn('  ! ' + p));
   return list;
 }
@@ -231,14 +247,14 @@ function filterBar({ when = 'any', showWhen = true, showHood = true, hoods = [] 
 <p class="results" id="results" aria-live="polite"></p>`;
 }
 
-function shell(p, { title, description, body, schema, page = {}, venues, hoods }) {
+function shell(p, { title, description, body, schema, page = {}, venues, hoods, noindex = false }) {
   const featured = venues.filter((v) => v.featured);
   const css = href(p, '').replace(/index\.html$/, '') + 'styles.css';
   const js = href(p, '').replace(/index\.html$/, '') + 'app.js';
   const dayNav = DAY_FULL.map((d, i) => `<li><a href="${href(p, d.toLowerCase() + '/')}" data-day="${i}"${page.day === i ? ' aria-current="page"' : ''}>${d.toLowerCase()}</a></li>`).join('');
   const head = `<title>${esc(title)}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="${esc(description)}">
+<meta name="description" content="${esc(description)}">${noindex ? '\n<meta name="robots" content="noindex, follow">' : ''}
 ${PREVIEW ? '' : `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="canonical" href="${canonical(p)}">`}
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}">
@@ -257,7 +273,7 @@ ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script
     <h2 class="rail-h">Select a day</h2>
     <ul class="daynav">${dayNav}</ul>
     <h2 class="rail-h rail-h-hoods">Neighborhoods</h2>
-    <ul class="hoodnav">${hoods.map((h) => `<li><a href="${href(p, `neighborhoods/${h.slug}/`)}">${esc(h.name)}</a> <span>${h.count}</span></li>`).join('')}</ul>
+    <ul class="hoodnav">${hoods.map((h) => `<li><a href="${href(p, `neighborhoods/${h.slug}/`)}">${esc(h.name)}</a> <span title="${h.hhCount} with happy hours listed">${h.count}</span></li>`).join('')}</ul>
   </aside>
   <main id="main" class="main">${body}</main>
   <aside class="rail rail-right">
@@ -309,29 +325,40 @@ async function main() {
     if (!hoodMap.has(v.hoodSlug)) hoodMap.set(v.hoodSlug, { slug: v.hoodSlug, name: v.hood, venues: [] });
     hoodMap.get(v.hoodSlug).venues.push(v);
   }
-  const hoods = [...hoodMap.values()].map((h) => ({ ...h, count: h.venues.length })).sort((a, b) => a.name.localeCompare(b.name));
+  const hoods = [...hoodMap.values()].map((h) => ({ ...h, count: h.venues.length, hhCount: h.venues.filter((v) => v.blocks.length).length }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const hhVenues = venues.filter((v) => v.blocks.length);
+  const hoodGrid = (from) => `<ul class="hood-grid">${hoods.map((h) => `<li><a href="${href(from, `neighborhoods/${h.slug}/`)}"><strong>${esc(h.name)}</strong><span>${h.count} ${h.count === 1 ? 'bar' : 'bars'}${h.hhCount ? ` · ${h.hhCount} with happy hours` : ''}</span></a></li>`).join('')}</ul>`;
+  const dirList = (from, list) => `<ul class="dir-list">${list.map((v) => `<li><a href="${href(from, `bar/${v.slug}/`)}">${esc(v.name)}</a><span>${esc(v.address || '')}${v.vibe ? ' · ' + esc(v.vibe) : ''}</span></li>`).join('')}</ul>`;
   const ctx = { venues, hoods };
   const pairs = (filter = () => true) => venues.flatMap((v) => v.blocks.filter((b) => filter(v, b)).map((b) => [v, b]))
     .sort((x, y) => x[1].start - y[1].start || x[0].name.localeCompare(y[0].name));
   const listHTML = (from, items, opts) => items.length
     ? `<div class="hh-list">${items.map(([v, b]) => card(v, b, from, opts)).join('\n')}</div><p class="empty" id="empty" hidden>No happy hours match those filters. Try another day or neighborhood.</p>`
-    : `<p class="empty">No listings here yet.</p>`;
+    : `<p class="empty">No happy hours listed here yet. We're adding them every day.</p>`;
   const urls = [];
-  const page = (p, opts) => { write(p, shell(p, { ...ctx, ...opts })); urls.push(p); };
+  const page = (p, opts) => { write(p, shell(p, { ...ctx, ...opts })); if (!opts.noindex) urls.push(p); };
 
   // Home
   page('index.html', {
     title: `Philadelphia Happy Hours Today | ${config.siteName}`,
-    description: `Every happy hour in Philly, live: ${venues.length} bars and restaurants by neighborhood, day and deal. See what's pouring right now. Updated ${monthYear}.`,
+    description: `Every happy hour in Philly, live: ${hhVenues.length || venues.length} bars and restaurants by neighborhood, day and deal. See what's pouring right now. Updated ${monthYear}.`,
     page: { type: 'home' },
     schema: { '@context': 'https://schema.org', '@type': 'WebSite', name: config.siteName, url: config.siteUrl + '/', description: config.tagline },
-    body: `<section class="hero">
+    body: hhVenues.length ? `<section class="hero">
   <p class="eyebrow" id="clock">Philadelphia happy hours</p>
-  <h1><span class="hero-count" id="live-count">${venues.length}</span> <span id="live-label">bars with happy hours in Philly</span></h1>
+  <h1><span class="hero-count" id="live-count">${hhVenues.length}</span> <span id="live-label">bars with happy hours in Philly</span></h1>
   <p class="lede">Every happy hour in the 215, sorted by what's pouring now. Pick a day, a neighborhood, or just follow the clock.</p>
 </section>
 ${filterBar({ when: 'today', hoods })}
-${listHTML('index.html', pairs())}`,
+${listHTML('index.html', pairs())}
+<h2 class="sec-h">Browse ${venues.length.toLocaleString()} Philly bars by neighborhood</h2>
+${hoodGrid('index.html')}` : `<section class="hero">
+  <p class="eyebrow" id="clock">Philadelphia happy hours</p>
+  <h1><span class="hero-count">${venues.length.toLocaleString()}</span> Philly bars and restaurants</h1>
+  <p class="lede">We're adding happy hour times and specials every day. Pick a neighborhood to see its bars. Know a great happy hour? <a href="${href('index.html', 'for-bars/')}">Tell us.</a></p>
+</section>
+${hoodGrid('index.html')}`,
   });
 
   // Days
@@ -376,18 +403,20 @@ ${filterBar({ when: 'any', hoods })}${listHTML('weekend/index.html', weekend)}`,
     page: { type: 'hoods' },
     body: `<section class="hero hero-sm"><p class="eyebrow">Neighborhoods</p><h1>Happy hours by neighborhood</h1>
   <p class="lede">From Rittenhouse after-work spots to South Philly corner bars.</p></section>
-<ul class="hood-grid">${hoods.map((h) => `<li><a href="${href('neighborhoods/index.html', `neighborhoods/${h.slug}/`)}"><strong>${esc(h.name)}</strong><span>${h.count} ${h.count === 1 ? 'bar' : 'bars'}</span></a></li>`).join('')}</ul>`,
+${hoodGrid('neighborhoods/index.html')}`,
   });
   for (const h of hoods) {
     const p = `neighborhoods/${h.slug}/index.html`;
     const items = pairs((v) => v.hoodSlug === h.slug);
+    const others = h.venues.filter((v) => !v.blocks.length);
     page(p, {
-      title: `${h.name} Happy Hours – ${h.count} ${h.count === 1 ? 'Bar' : 'Bars'}, Updated ${monthYear} | ${config.siteName}`,
-      description: `Happy hour times and specials at ${h.count} ${h.name} bars and restaurants in Philadelphia. Drink and food deals by day.`,
+      title: `${h.name} Happy Hours & Bars – ${h.count} ${h.count === 1 ? 'Spot' : 'Spots'}, Updated ${monthYear} | ${config.siteName}`,
+      description: `Happy hour times and specials at ${h.name} bars and restaurants in Philadelphia${h.hhCount ? `, with deals at ${h.hhCount}` : ''}. ${h.count} bars listed.`,
       page: { type: 'hood', hood: h.slug },
       schema: { '@context': 'https://schema.org', '@type': 'ItemList', name: `${h.name} happy hours`, itemListElement: h.venues.map((v, i) => ({ '@type': 'ListItem', position: i + 1, url: canonical(`bar/${v.slug}/`), name: v.name })) },
       body: `<section class="hero hero-sm"><p class="eyebrow"><a href="${href(p, 'neighborhoods/')}">Neighborhoods</a> · ${esc(h.name)}</p><h1>${esc(h.name)} happy hours</h1></section>
-${filterBar({ when: 'any', showHood: false, hoods })}${listHTML(p, items, { hideHood: true })}`,
+${items.length ? filterBar({ when: 'any', showHood: false, hoods }) + listHTML(p, items, { hideHood: true }) : `<p class="lede">No happy hours listed in ${esc(h.name)} yet. Know one? Email <span class="sel">${esc(config.contactEmail)}</span>.</p>`}
+${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in ${esc(h.name)}</h2><p class="muted small">Happy hour times for these are coming soon.</p>${dirList(p, others)}` : ''}`,
     });
   }
 
@@ -397,10 +426,13 @@ ${filterBar({ when: 'any', showHood: false, hoods })}${listHTML(p, items, { hide
     const nearby = pairs((x) => x.hoodSlug === v.hoodSlug && x.slug !== v.slug).slice(0, 4);
     const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${v.name} ${v.address} Philadelphia PA`)}`;
     const summary = v.blocks.map((b) => `${daysLabel(b.days)} ${rangeLabel(b.start, b.end)}`).join('; ');
+    const hasHH = v.blocks.length > 0;
+    const sameHood = hoodMap.get(v.hoodSlug).venues.filter((x) => x !== v && !x.blocks.length).slice(0, 8);
     page(p, {
-      title: `${v.name} Happy Hour – Times & Specials | ${config.siteName}`,
-      description: `${v.name} happy hour in ${v.hood}: ${summary}. ${v.blocks[0].deals.slice(0, 3).join(', ')}.`,
+      title: hasHH ? `${v.name} Happy Hour – Times & Specials | ${config.siteName}` : `${v.name}, ${v.hood} | ${config.siteName}`,
+      description: hasHH ? `${v.name} happy hour in ${v.hood}: ${summary}. ${v.blocks[0].deals.slice(0, 3).join(', ')}.` : `${v.name} at ${v.address || v.hood}, Philadelphia. Happy hour times coming soon.`,
       page: { type: 'bar' },
+      noindex: !hasHH,
       schema: {
         '@context': 'https://schema.org', '@type': 'BarOrPub', name: v.name, url: v.website || canonical(p),
         address: { '@type': 'PostalAddress', streetAddress: v.address, addressLocality: 'Philadelphia', addressRegion: 'PA', addressCountry: 'US' },
@@ -412,10 +444,11 @@ ${filterBar({ when: 'any', showHood: false, hoods })}${listHTML(p, items, { hide
   <h1>${esc(v.name)}</h1>
   <p class="venue-facts">${esc(v.address || '')}${v.phone ? ` · <span class="sel">${esc(v.phone)}</span>` : ''}${v.website ? ` · <a href="${esc(v.website)}" target="_blank" rel="noopener">Website</a>` : ''}${v.instagram ? ` · <a href="https://instagram.com/${esc(v.instagram.replace('@', ''))}" target="_blank" rel="noopener">${esc(v.instagram)}</a>` : ''}</p>
   <p class="venue-actions"><a class="btn" href="${map}" target="_blank" rel="noopener">Get directions</a>${v.sample ? '<span class="badge badge-sample">Sample listing</span>' : ''}${v.classic ? '<span class="badge badge-classic">215 Classic</span>' : ''}</p></section>
-<h2 class="sec-h">Happy hour schedule</h2>
+${hasHH ? `<h2 class="sec-h">Happy hour schedule</h2>
 <div class="hh-list">${v.blocks.map((b) => card(v, b, p, { hideHood: true })).join('\n')}</div>
-<p class="report">Something changed? Email <span class="sel">${esc(config.contactEmail)}</span> with the bar name and the new specials.${v.verified ? ` Last verified ${fmtDate(v.verified)}.` : ''}</p>
-${nearby.length ? `<h2 class="sec-h">More happy hours in ${esc(v.hood)}</h2><div class="hh-list">${nearby.map(([x, b]) => card(x, b, p, { hideHood: true })).join('\n')}</div>` : ''}`,
+<p class="report">Something changed? Email <span class="sel">${esc(config.contactEmail)}</span> with the bar name and the new specials.${v.verified ? ` Last verified ${fmtDate(v.verified)}.` : ''}</p>` : `<div class="notice"><h2>Happy hour not listed yet</h2><p>We haven't confirmed ${esc(v.name)}'s happy hour. Work here or know the deals? Email <span class="sel">${esc(config.contactEmail)}</span> with the days, times and specials and we'll add them.</p></div>`}
+${nearby.length ? `<h2 class="sec-h">Happy hours nearby in ${esc(v.hood)}</h2><div class="hh-list">${nearby.map(([x, b]) => card(x, b, p, { hideHood: true })).join('\n')}</div>` : ''}
+${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h2>${dirList(p, sameHood)}` : ''}`,
     });
   }
 

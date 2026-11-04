@@ -244,3 +244,13 @@ select, input[type="search"], input[type="email"] {
 @media (prefers-reduced-motion: reduce) {
   .hh.is-live .hh-status::before { content: "● "; }
 }
+
+/* bar directory (places without happy hour times yet) */
+.dir-list { list-style: none; margin: 8px 0 0; padding: 0; columns: 2 280px; column-gap: 32px; }
+.dir-list li { break-inside: avoid; padding: 7px 0; border-bottom: 1px dashed var(--rule); display: flex; flex-direction: column; }
+.dir-list a { font-weight: 600; color: var(--olive-ink); text-decoration: none; }
+.dir-list a:hover { text-decoration: underline; }
+.dir-list span { font-size: .85rem; color: var(--muted); }
+.notice { margin: 18px 0; padding: 16px 18px; border: 2px dashed var(--rule); border-radius: var(--r); max-width: 62ch; }
+.notice h2 { font-family: var(--f-label); text-transform: uppercase; letter-spacing: .05em; font-size: 1.15rem; margin: 0 0 6px; color: var(--olive); }
+.notice p { margin: 0; }
