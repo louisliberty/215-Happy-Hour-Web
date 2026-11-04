@@ -11,7 +11,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites, scan-happy-hours]
+        options: [deploy, find-websites, scan-happy-hours, read-sheet]
 
 concurrency:
   group: deploy
@@ -80,3 +80,15 @@ jobs:
         run: python tools/scan_happy_hours.py tools/confirmed-websites.csv happy-hour-scan.jsonl
       - name: Print results
         run: echo "=====BEGIN JSONL=====" && cat happy-hour-scan.jsonl && echo "=====END JSONL====="
+
+  read-sheet:
+    # Prints the published Google Sheet tab to the log so Claude can read it
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'read-sheet'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the sheet
+        env:
+          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+        run: |
+          curl -sSL "$SHEET_CSV_URL" -o sheet.csv
+          echo "=====BEGIN CSV=====" && cat sheet.csv && echo && echo "=====END CSV====="
