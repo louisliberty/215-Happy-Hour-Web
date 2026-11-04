@@ -337,13 +337,20 @@ async function main() {
     ? `<div class="hh-list">${items.map(([v, b]) => card(v, b, from, opts)).join('\n')}</div><p class="empty" id="empty" hidden>No happy hours match those filters. Try another day or neighborhood.</p>`
     : `<p class="empty">No happy hours listed here yet. We're adding them every day.</p>`;
   const urls = [];
-  const page = (p, opts) => { write(p, shell(p, { ...ctx, ...opts })); if (!opts.noindex) urls.push(p); };
+  // lastmod = newest "verified" date among the bars a page shows (blank if none), so Google sees real changes only
+  const newest = (list) => list.map((v) => v.verified).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort().pop() || '';
+  const page = (p, opts) => {
+    write(p, shell(p, { ...ctx, ...opts }));
+    if (!opts.noindex) urls.push({ p, lastmod: opts.lastmod || '' });
+  };
+  const venuesOf = (items) => [...new Set(items.map(([v]) => v))];
 
   // Home
   page('index.html', {
     title: `Philadelphia Happy Hours Today | ${config.siteName}`,
     description: `Every happy hour in Philly, live: ${hhVenues.length || venues.length} bars and restaurants by neighborhood, day and deal. See what's pouring right now. Updated ${monthYear}.`,
     page: { type: 'home' },
+    lastmod: newest(venues),
     schema: { '@context': 'https://schema.org', '@type': 'WebSite', name: config.siteName, url: config.siteUrl + '/', description: config.tagline },
     body: hhVenues.length ? `<section class="hero">
   <p class="eyebrow" id="clock">Philadelphia happy hours</p>
@@ -368,6 +375,8 @@ ${hoodGrid('index.html')}`,
       title: `${d} Happy Hours in Philadelphia (${items.length} Deals) | ${config.siteName}`,
       description: `${d} happy hour specials at ${items.length} Philly bars and restaurants, with times, drink and food deals by neighborhood. Updated ${monthYear}.`,
       page: { type: 'day', day: i },
+      noindex: !items.length,
+      lastmod: newest(venuesOf(items)),
       body: `<section class="hero hero-sm"><p class="eyebrow">Select a day · ${d}</p>
   <h1>${d} Philadelphia Happy Hours</h1>
   <p class="lede">Browse these local bars to find the drink deals and food specials that fit your tastes. Can't find your favorite bar? <a href="${href(`${d.toLowerCase()}/index.html`, 'for-bars/')}">Send us the details.</a> Cheers!</p></section>
@@ -382,6 +391,8 @@ ${listHTML(`${d.toLowerCase()}/index.html`, items)}`,
     title: `Late-Night Happy Hours in Philadelphia | ${config.siteName}`,
     description: `Philly happy hours that start at 9 pm or later. Pennsylvania happy hours must end by midnight, so here's where to go after dinner.`,
     page: { type: 'list' },
+    noindex: !late.length,
+    lastmod: newest(venuesOf(late)),
     body: `<section class="hero hero-sm"><p class="eyebrow">After 9 pm</p><h1>Late-night happy hours in Philly</h1>
   <p class="lede">For the after-work-shift crowd. Pennsylvania law ends every happy hour by midnight, so these run roughly 9 pm to close of the deal.</p></section>
 ${filterBar({ when: 'any', hoods })}${listHTML('late-night/index.html', late)}`,
@@ -391,6 +402,8 @@ ${filterBar({ when: 'any', hoods })}${listHTML('late-night/index.html', late)}`,
     title: `Weekend Happy Hours in Philadelphia | ${config.siteName}`,
     description: `Saturday and Sunday happy hours in Philly, from day-drinking patios to late-night deals.`,
     page: { type: 'list' },
+    noindex: !weekend.length,
+    lastmod: newest(venuesOf(weekend)),
     body: `<section class="hero hero-sm"><p class="eyebrow">Saturday & Sunday</p><h1>Weekend happy hours in Philly</h1>
   <p class="lede">Happy hour doesn't have to mean leaving work at 5. These deals run on Saturdays and Sundays.</p></section>
 ${filterBar({ when: 'any', hoods })}${listHTML('weekend/index.html', weekend)}`,
@@ -401,6 +414,7 @@ ${filterBar({ when: 'any', hoods })}${listHTML('weekend/index.html', weekend)}`,
     title: `Philadelphia Happy Hours by Neighborhood | ${config.siteName}`,
     description: `Find happy hours in ${hoods.slice(0, 5).map((h) => h.name).join(', ')} and every Philly neighborhood.`,
     page: { type: 'hoods' },
+    lastmod: newest(venues),
     body: `<section class="hero hero-sm"><p class="eyebrow">Neighborhoods</p><h1>Happy hours by neighborhood</h1>
   <p class="lede">From Rittenhouse after-work spots to South Philly corner bars.</p></section>
 ${hoodGrid('neighborhoods/index.html')}`,
@@ -413,6 +427,7 @@ ${hoodGrid('neighborhoods/index.html')}`,
       title: `${h.name} Happy Hours & Bars – ${h.count} ${h.count === 1 ? 'Spot' : 'Spots'}, Updated ${monthYear} | ${config.siteName}`,
       description: `Happy hour times and specials at ${h.name} bars and restaurants in Philadelphia${h.hhCount ? `, with deals at ${h.hhCount}` : ''}. ${h.count} bars listed.`,
       page: { type: 'hood', hood: h.slug },
+      lastmod: newest(h.venues),
       schema: { '@context': 'https://schema.org', '@type': 'ItemList', name: `${h.name} happy hours`, itemListElement: h.venues.map((v, i) => ({ '@type': 'ListItem', position: i + 1, url: canonical(`bar/${v.slug}/`), name: v.name })) },
       body: `<section class="hero hero-sm"><p class="eyebrow"><a href="${href(p, 'neighborhoods/')}">Neighborhoods</a> · ${esc(h.name)}</p><h1>${esc(h.name)} happy hours</h1></section>
 ${items.length ? filterBar({ when: 'any', showHood: false, hoods }) + listHTML(p, items, { hideHood: true }) : `<p class="lede">No happy hours listed in ${esc(h.name)} yet. Know one? Email <span class="sel">${esc(config.contactEmail)}</span>.</p>`}
@@ -433,6 +448,7 @@ ${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in $
       description: hasHH ? `${v.name} happy hour in ${v.hood}: ${summary}. ${v.blocks[0].deals.slice(0, 3).join(', ')}.` : `${v.name} at ${v.address || v.hood}, Philadelphia. Happy hour times coming soon.`,
       page: { type: 'bar' },
       noindex: !hasHH,
+      lastmod: newest([v]),
       schema: {
         '@context': 'https://schema.org', '@type': 'BarOrPub', name: v.name, url: v.website || canonical(p),
         address: { '@type': 'PostalAddress', streetAddress: v.address, addressLocality: 'Philadelphia', addressRegion: 'PA', addressCountry: 'US' },
@@ -512,11 +528,11 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
   fs.writeFileSync(path.join(OUT, 'favicon.svg'), LOGO.replace('class="mug" ', 'xmlns="http://www.w3.org/2000/svg" ').replace(/var\(--olive\)/g, '#4f6b34').replace(/var\(--cream\)/g, '#f3efcf'));
   if (!PREVIEW) {
     for (const f of fs.readdirSync(path.join(ROOT, 'static'))) fs.copyFileSync(path.join(ROOT, 'static', f), path.join(OUT, f));
-    const today = BUILD_DATE.toISOString().slice(0, 10);
-    fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${canonical(u)}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+    fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${canonical(u.p)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`);
+    console.log(`Sitemap: ${urls.length} pages`);
     fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
   }
-  console.log(`Built ${urls.length} pages for ${venues.length} venues in ${hoods.length} neighborhoods -> ${path.relative(ROOT, OUT)}/`);
+  console.log(`Built ${fs.readdirSync(OUT, { recursive: true }).filter((f) => f.endsWith('.html')).length} pages for ${venues.length} venues in ${hoods.length} neighborhoods -> ${path.relative(ROOT, OUT)}/`);
 }
 
 main();
