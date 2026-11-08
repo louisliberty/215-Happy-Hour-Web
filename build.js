@@ -151,9 +151,14 @@ function loadWebsiteRows() {
   if (!fs.existsSync(f)) return [];
   return parseCSV(fs.readFileSync(f, 'utf8')).map((r) => ({ ...r, _fromWebsite: true }));
 }
-const addrKey = (a) => slugify(String(a || '').toLowerCase()
-  .replace(/\s(ste|suite|unit|fl|floor|space|#).*$/i, '')
-  .replace(/\b(street|st|avenue|ave|boulevard|blvd|road|rd)\b/g, ''));
+// "1201-05 Frankford Ave 109 East Girard Ave" and "1201 Frankford Avenue" both -> "1201-frankford"
+const addrKey = (a) => {
+  let t = String(a || '').toLowerCase().split(',')[0];
+  const m = t.match(/^\s*(\d+)[a-z]?(?:\s*-\s*\d+[a-z]?)?\s+(.*?)\b(street|st|avenue|ave|boulevard|blvd|road|rd|place|pl|lane|ln|way|drive|dr|pike|square|sq)\b/);
+  if (m) t = `${m[1]} ${m[2]}`;
+  else t = t.replace(/\s(ste|suite|unit|fl|floor|space|#).*$/i, '');
+  return slugify(t.replace(/\b(north|south|east|west)\b/g, (d) => d[0]));
+};
 
 function buildModel(rows) {
   const venues = new Map();
@@ -170,7 +175,18 @@ function buildModel(rows) {
       if (blockedAddr.has(addrKey(r.address))) return;
       const k = byAddr.get(addrKey(r.address));
       if (k && sheetTimed.has(k)) return;       // the sheet wins
-      if (k) { const v = venues.get(k); r = { ...r, name: v.name, address: v.address, neighborhood: v.hood }; }
+      if (k) {
+        // matched a sheet bar by address: the name from the bar's own website wins over the license name
+        const v = venues.get(k);
+        if (r.name && slugify(r.name) !== slugify(v.name)) {
+          slugs.delete(v.slug);
+          let slug = slugify(r.name);
+          while (slugs.has(slug)) slug += '-' + i;
+          slugs.add(slug);
+          v.slug = slug; v.name = r.name;
+        }
+        r = { ...r, _key: k, name: v.name, address: v.address, neighborhood: v.hood };
+      }
       fromWebsite++;
     }
     if (r.active && !yes(r.active)) { skipped.hidden++; blockedAddr.add(addrKey(r.address)); return; }
@@ -188,7 +204,7 @@ function buildModel(rows) {
         problems.push(`Row ${i + 2} (${r.name}): check days/start/end`);
       }
     }
-    const key = slugify(r.name) + '|' + slugify((r.address || '').replace(/\s(ste|suite|unit|fl|floor|space)\b.*$/i, ''));
+    const key = r._key || slugify(r.name) + '|' + slugify((r.address || '').replace(/\s(ste|suite|unit|fl|floor|space)\b.*$/i, ''));
     if (!venues.has(key)) {
       let slug = slugify(r.name);
       if (slugs.has(slug)) slug = slugify(`${r.name} ${(r.address || r.neighborhood || i).toString().split(',')[0]}`);
@@ -218,6 +234,7 @@ function buildModel(rows) {
       days, start, end,
       deals: (r.deals || '').split('|').map((s) => s.trim()).filter(Boolean),
       tags: (r.tags || '').split(/[,|]/).map((s) => s.trim().toLowerCase()).filter(Boolean),
+      source: r.source_url || r.website || '', verified: r.verified || '',
     });
   });
   const list = [...venues.values()].sort((a, b) => a.name.localeCompare(b.name));
@@ -339,6 +356,44 @@ ${PREVIEW ? '<meta name="viewport" content="width=device-width, initial-scale=1,
 </head><body>
 ${content}
 </body></html>`;
+}
+
+/* ---------- weekly neighborhood CSV export ---------- */
+// One row per special per day for the current week (Mon-Sun, Philadelphia time).
+function weekExport(venues, hoodName) {
+  const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: config.timezone, year: 'numeric', month: '2-digit', day: '2-digit' });
+  const ref = process.env.EXPORT_DATE ? new Date(process.env.EXPORT_DATE + 'T17:00:00Z') : BUILD_DATE;
+  const wd = new Intl.DateTimeFormat('en-US', { timeZone: config.timezone, weekday: 'short' }).format(ref);
+  const todayIdx = DAYS.indexOf(wd);
+  const today = new Date(fmt.format(ref) + 'T12:00:00Z');
+  const monday = new Date(today.getTime() - todayIdx * 864e5);
+  const dates = DAYS.map((_, i) => new Date(monday.getTime() + i * 864e5).toISOString().slice(0, 10));
+  const hood = slugify(hoodName);
+  const rows = [];
+  const q = (x) => `"${String(x ?? '').replace(/"/g, '""')}"`;
+  const hm = (m) => (m == null ? '' : clock(m));
+  for (const v of venues.filter((x) => x.hoodSlug === hood)) {
+    for (const b of v.blocks) for (const d of b.days) {
+      const kind = b.start >= LATE_NIGHT_START ? 'Late-night happy hour' : 'Happy hour';
+      for (const deal of (b.deals.length ? b.deals : ['Happy hour (deals not listed on their site)'])) {
+        rows.push([dates[d], DAY_FULL[d], v.name, v.address, hm(b.start), hm(b.end), deal, kind, b.verified || v.verified, b.source, b.start, d]);
+      }
+    }
+  }
+  const f = path.join(ROOT, 'data', 'daily-specials.csv');
+  if (fs.existsSync(f)) {
+    for (const r of parseCSV(fs.readFileSync(f, 'utf8'))) {
+      if (slugify(r.neighborhood || '') !== hood) continue;
+      const st = toMin(r.start), en = toMin(r.end);
+      for (const d of parseDays(r.days)) {
+        rows.push([dates[d], DAY_FULL[d], r.name, r.address, hm(st), hm(en), r.special, 'Daily special', r.verified, r.source_url, st ?? 9999, d]);
+      }
+    }
+  }
+  rows.sort((a, b) => a[11] - b[11] || a[10] - b[10] || a[2].localeCompare(b[2]));
+  const head = ['week_of', 'date', 'day', 'bar', 'address', 'start', 'end', 'special', 'type', 'last_verified', 'source'];
+  const body = rows.map((r) => [dates[0], ...r.slice(0, 7), r[7], r[8], r[9]].map(q).join(','));
+  return { csv: '\ufeff' + [head.join(','), ...body].join('\r\n') + '\r\n', count: rows.length, week: dates[0] };
 }
 
 /* ---------- 404 ---------- */
@@ -617,7 +672,11 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
     for (const f of fs.readdirSync(path.join(ROOT, 'static'))) fs.copyFileSync(path.join(ROOT, 'static', f), path.join(OUT, f));
     fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${canonical(u.p)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`);
     console.log(`Sitemap: ${urls.length} pages`);
-    fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
+    fs.mkdirSync(path.join(OUT, 'exports'), { recursive: true });
+    const fx = weekExport(venues, 'Fishtown');
+    fs.writeFileSync(path.join(OUT, 'exports', 'fishtown-happy-hours.csv'), fx.csv);
+    console.log(`Fishtown export: ${fx.count} rows for the week of ${fx.week}`);
+    fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /exports/\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
   }
   console.log(`Built ${fs.readdirSync(OUT, { recursive: true }).filter((f) => f.endsWith('.html')).length} pages for ${venues.length} venues in ${hoods.length} neighborhoods -> ${path.relative(ROOT, OUT)}/`);
 }

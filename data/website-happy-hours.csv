@@ -2,10 +2,7 @@ name,neighborhood,address,days,start,end,deals,tags,verified,source_url
 1518 Bar & Grill,Center City,1518 Sansom St,Mon-Fri,17:00,19:00,$1 off draft & bottled beer|$5 Merlot & Chardonnay|$5 well drinks,"beer,wine,cocktails",2026-11-05,http://1518barandgrill.com/
 Recipe Philly,Center City,1401 Arch St,Daily,15:00,18:00,,,2026-11-05,https://www.recipe-philly.com/menus/
 The Cheesecake Factory,Center City,1426-30 Walnut St,Mon-Fri,16:00,18:00,Select food & drink specials,food,2026-11-05,https://locations.thecheesecakefactory.com/pa/philadelphia-181.html
-Cedar Point,Fishtown,2370-72 E Norris St,Sun-Fri,17:00,19:00,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-05,https://cedarpointbarandkitchen.com/
-Cedar Point,Fishtown,2370-72 E Norris St,Mon-Thu,22:00,23:00,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-05,https://cedarpointbarandkitchen.com/
-Cedar Point,Fishtown,2370-72 E Norris St,Fri,23:00,23:59,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-05,https://cedarpointbarandkitchen.com/
-Drafthouse,Fishtown,1235 E Palmer St,Tue-Fri,16:00,18:00,$1 off drafts,beer,2026-11-05,https://interstatedrafthouse.com/weekly-specials/
+Interstate Drafthouse,Fishtown,1235 E Palmer St,Tue-Fri,16:00,18:00,$1 off drafts,beer,2026-11-08,https://interstatedrafthouse.com/weekly-specials/
 Hard Rock Cafe,Midtown Village / Wash Sq West,1113-31 Market St,Mon-Fri,15:00,19:00,$5 domestic drafts|$6 import drafts|$6 well drinks|$7 select wines & cocktails|$8 nachos & loaded fries|$10 wings & sliders,"beer,wine,cocktails,food",2026-11-05,https://cafe.hardrock.com/philadelphia/
 Kiddo PHL,Midtown Village / Wash Sq West,1136 Pine St,"Mon,Wed,Thu,Fri",16:00,18:00,$10-12 pastas|$10 wine & cocktails|$5 draft beer & cider|$7 non-alcoholic drinks,"beer,wine,cocktails,food",2026-11-05,https://www.kiddorestaurant.com/
 Loch Bar Philly,Midtown Village / Wash Sq West,301 S Broad St,Mon-Fri,15:00,18:00,,,2026-11-05,https://lochbar.com/philly/
@@ -74,3 +71,12 @@ Currans Fox Chase,Fox Chase,7968 Verree Rd,Fri,16:00,18:00,$3 domestic drafts|$3
 Reale' Restaurant & Lounge,Tacony / Mayfair,7233-35 Frankford Ave,Mon-Fri,17:00,19:00,$5 select cocktails,cocktails,2026-11-05,https://www.realessportsbar.com/specials
 Jimmys Timeout Sports Pub,Torresdale,5001-5005 Linden Ave,Mon-Fri,15:00,17:00,Appetizer & drink specials,food,2026-11-05,https://www.jimmystimeout.com/
 Delilah's,Northern Liberties / Callowhill,100 Spring Garden St,Daily,17:00,20:00,"$2 off bar snacks, starters & drinks",food,2026-11-05,https://www.delilahs.com/
+Cedar Point,Fishtown,2370-72 E Norris St,Sun-Fri,17:00,19:00,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails|$5 chicken & waffle slider|$5 bang bang broccoli|$6 jerk street corn|$6 burnt ends bao bun|$5 hand-cut fries|$6 veggie wings cup,"beer,wine,cocktails,food",2026-11-08,https://cedarpointbarandkitchen.com/happy-hour-specials/
+Cedar Point,Fishtown,2370-72 E Norris St,Mon-Thu,22:00,23:00,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-08,https://cedarpointbarandkitchen.com/happy-hour-specials/
+Cedar Point,Fishtown,2370-72 E Norris St,Fri,23:00,23:59,$2 off draft beer|$2 off wine by the glass|$2 off select cocktails,"beer,wine,cocktails",2026-11-08,https://cedarpointbarandkitchen.com/happy-hour-specials/
+Frankford Hall,Fishtown,1210 Frankford Ave,Mon-Fri,16:00,18:00,Happy hour food & drink menu,"beer,food",2026-11-08,https://frankfordhall.com/
+Frankford Hall,Fishtown,1210 Frankford Ave,Sun,20:00,22:00,Happy hour food & drink menu,"beer,food",2026-11-08,https://frankfordhall.com/
+Johnny Brenda's,Fishtown,1201 Frankford Ave,Mon-Fri,16:00,18:00,Happy hour specials,beer,2026-11-08,https://johnnybrendas.com/menu-2/
+Laser Wolf,Fishtown,1301 N Howard St,Sun-Thu,17:00,18:00,Half-price 'For the Table' food|$10 wine by the glass|$12 signature cocktails|$5 beers,"beer,wine,cocktails,food",2026-11-08,https://www.laserwolfphilly.com/happy-hour
+Laser Wolf,Fishtown,1301 N Howard St,Sun-Thu,21:00,22:00,Half-price 'For the Table' food|$10 wine by the glass|$12 signature cocktails|$5 beers,"beer,wine,cocktails,food",2026-11-08,https://www.laserwolfphilly.com/happy-hour
+Yuhiro Sushi,Fishtown,2146 E Susquehanna Ave,Daily,17:00,19:00,Happy hour menu at the hand roll bar,food,2026-11-08,https://yuhirosushi.com/
