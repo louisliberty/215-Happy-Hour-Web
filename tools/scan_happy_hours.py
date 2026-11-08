@@ -18,6 +18,7 @@ import requests
 from bs4 import BeautifulSoup
 
 IN, OUT = sys.argv[1], sys.argv[2]
+MAXPAGES = int(sys.argv[3]) if len(sys.argv) > 3 else 6
 UA = {'User-Agent': 'Mozilla/5.0 (compatible; 215HappyHourBot/1.0; +https://215happyhour.com)'}
 LINK_HINT = re.compile(r'happy|hh\b|special|drink|cocktail|menu|bar\b|beverage|deal|late.?night', re.I)
 HH = re.compile(r'happy\s*-?\s*hours?|\bhh\b|half[- ]?price|\$\d', re.I)
@@ -96,16 +97,16 @@ def _scan(row):
         if href not in links and href != final:
             links.append(href)
     links.sort(key=lambda h: 0 if HAPPY.search(h) or 'special' in h.lower() else 1)
-    for href in links[:6]:
+    for href in links[:MAXPAGES]:
         h2, f2, _ = get(href)
         if not h2:
             continue
         t2, _ = text_of(h2)
         rec['pages'].append(f2)
         rec['snippets'] += [{'page': f2, 'text': s} for s in windows(t2)]
-        if len(rec['snippets']) >= 6:
+        if len(rec['snippets']) >= 8:
             break
-    rec['snippets'] = rec['snippets'][:6]
+    rec['snippets'] = rec['snippets'][:8]
     return rec
 
 

@@ -12,6 +12,10 @@ on:
         type: choice
         default: deploy
         options: [deploy, find-websites, scan-happy-hours, read-sheet]
+      list:
+        description: Website list for scan-happy-hours
+        type: string
+        default: tools/confirmed-websites.csv
 
 concurrency:
   group: deploy
@@ -77,7 +81,7 @@ jobs:
           python-version: "3.12"
       - run: pip install requests beautifulsoup4
       - name: Scan bar websites
-        run: python tools/scan_happy_hours.py tools/confirmed-websites.csv happy-hour-scan.jsonl
+        run: python tools/scan_happy_hours.py "${{ inputs.list || 'tools/confirmed-websites.csv' }}" happy-hour-scan.jsonl 10
       - name: Print results
         run: echo "=====BEGIN JSONL=====" && cat happy-hour-scan.jsonl && echo "=====END JSONL====="
 
