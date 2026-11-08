@@ -11,9 +11,9 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites, scan-happy-hours, read-sheet]
+        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages]
       list:
-        description: Website list for scan-happy-hours
+        description: Website list for scan-happy-hours, or URLs (space-separated) for print-pages
         type: string
         default: tools/confirmed-websites.csv
 
@@ -96,3 +96,17 @@ jobs:
         run: |
           curl -sSL "$SHEET_CSV_URL" -o sheet.csv
           echo "=====BEGIN CSV=====" && cat sheet.csv && echo && echo "=====END CSV====="
+
+  print-pages:
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'print-pages'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - name: Print pages
+        env:
+          URLS: ${{ inputs.list }}
+        run: python tools/print_pages.py $URLS
