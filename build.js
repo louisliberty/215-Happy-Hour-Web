@@ -36,7 +36,7 @@ const LATE_NIGHT_START = 21 * 60;
 const esc = (s = '') => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-const slugify = (s) => String(s).toLowerCase()
+const slugify = (s) => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/&/g, ' and ').replace(/['’]/g, '')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const yes = (v) => /^(y|yes|true|1|x)$/i.test(String(v || '').trim());
@@ -450,7 +450,10 @@ function notFoundBody(hhVenues) {
 
 /* ---------- pages ---------- */
 async function main() {
-  let venues = buildModel([...(await loadRows()), ...loadWebsiteRows()]);
+  // Only bars whose happy hour is published (on their own site, or confirmed in the sheet) are listed.
+  const everyone = buildModel([...(await loadRows()), ...loadWebsiteRows()]);
+  let venues = everyone.filter((v) => v.blocks.length);
+  console.log(`Listing ${venues.length} bars with happy hour details; ${everyone.length - venues.length} without are not listed`);
   if (!venues.length) {
     // Sheet has no bars with times yet: keep publishing the sample listings so code changes still go live.
     console.log('No bars with happy hour times in the sheet yet. Building from the sample listings in data/venues.csv.');
@@ -646,11 +649,14 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
     description: `Bars and restaurants: list your Philadelphia happy hour on 215 Happy Hour for free, or get featured.`,
     page: { type: 'bars' },
     body: `<section class="hero hero-sm"><p class="eyebrow">For bars & restaurants</p><h1>Put your happy hour in front of Philly</h1>
-  <p class="lede">Every bar gets a free listing. People use 215 Happy Hour to decide where to go in the next hour, so an accurate listing turns into foot traffic.</p></section>
-<h2 class="sec-h">Add or update your listing</h2>
-<p>Email <span class="sel" id="email">${esc(config.contactEmail)}</span> <button class="copy" type="button" data-copy="${esc(config.contactEmail)}">Copy</button> with:</p>
-<ol class="plain-list"><li>Bar name, address and neighborhood</li><li>Days and times of each happy hour</li><li>The specials, with prices</li><li>Your website and Instagram</li></ol>
-<p class="muted small">We confirm every listing before it goes live and show the date we last verified it.</p>
+  <p class="lede">Listings are free. People use 215 Happy Hour to decide where to go in the next hour, so an accurate listing turns into foot traffic.</p></section>
+<h2 class="sec-h">How to get listed</h2>
+<p>We list every Philly bar and restaurant that publishes its happy hour. The easiest way in is to put it on your own website:</p>
+<ol class="plain-list"><li>The days and times of each happy hour</li><li>The specials, with prices</li><li>Keep it as text on the page (or a linked PDF menu), not only in a photo</li></ol>
+<p>We check bar websites every week, so changes you make there show up here on their own.</p>
+<h2 class="sec-h">No website, or want to send it directly?</h2>
+<p>Email <span class="sel" id="email">${esc(config.contactEmail)}</span> <button class="copy" type="button" data-copy="${esc(config.contactEmail)}">Copy</button> with your bar's name and address, happy hour days and times, and specials with prices.</p>
+<p class="muted small">Every listing shows the date we last confirmed it.</p>
 <h2 class="sec-h">Get featured</h2>
 <div class="tiers">${tiers.map(([n, pr, f]) => `<div class="tier"><h3>${esc(n)}</h3><p class="price">${esc(pr)}</p><ul>${f.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>
 <p class="muted small">Every paid placement is labeled as sponsored. Ask about multi-location packages.</p>`,
