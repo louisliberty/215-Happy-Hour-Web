@@ -79,3 +79,17 @@ Add the site in [Google Search Console](https://search.google.com/search-console
 2. Map view on the home page (uses the lat/lng columns).
 3. "Claim your listing" form for bar owners, and the monthly stats email.
 4. Analytics (Google Analytics 4 or Plausible) so you can show bars their numbers.
+
+## Listing rule and the weekly check
+
+The site lists only bars that publish their happy hour: on their own website (found by the weekly scan and kept in `data/website-happy-hours.csv`) or entered in the Google Sheet (days, start, end, deals), for example after a call. Bars without that are not listed and go on the Call Agent list.
+
+Every Monday a scheduled Claude task runs the check:
+
+1. `read-sheet` task → save the sheet as `sheet.csv`
+2. `python tools/make_website_list.py sheet.csv tools/all-websites.csv`, commit and push
+3. `scan-happy-hours` task (reads every website, PDF menus, and retries JavaScript sites in a browser)
+4. `python tools/weekly_check.py happy-hour-scan.jsonl sheet.csv out/` → `out/review.txt` (new happy hours to review) and `out/listed-check.csv`; updates `data/scan-misses.csv`
+5. Review, then update `data/website-happy-hours.csv` and `data/review-notes.csv`. Bars whose site shows no happy hour 2 weeks in a row come off.
+6. `python tools/make_call_list.py sheet.csv happy-hour-scan.jsonl 215-Call-Agent-List.xlsx` (tabs: To call, Verify listed)
+7. The citywide CSV for the week is built by `build.js` at `/exports/philly-happy-hours.csv` (set `EXPORT_DATE=YYYY-MM-DD` to build a given week).

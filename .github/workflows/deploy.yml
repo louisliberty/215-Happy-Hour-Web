@@ -15,7 +15,7 @@ on:
       list:
         description: Website list for scan-happy-hours, or URLs (space-separated) for print-pages
         type: string
-        default: tools/confirmed-websites.csv
+        default: tools/all-websites.csv
 
 concurrency:
   group: deploy
@@ -81,7 +81,7 @@ jobs:
           python-version: "3.12"
       - run: pip install requests beautifulsoup4 pypdf playwright && python -m playwright install --with-deps chromium
       - name: Scan bar websites
-        run: python tools/scan_happy_hours.py "${{ inputs.list || 'tools/confirmed-websites.csv' }}" happy-hour-scan.jsonl 10
+        run: python tools/scan_happy_hours.py "${{ inputs.list || 'tools/all-websites.csv' }}" happy-hour-scan.jsonl 10
       - name: Print results
         run: echo "=====BEGIN JSONL=====" && cat happy-hour-scan.jsonl && echo "=====END JSONL====="
 

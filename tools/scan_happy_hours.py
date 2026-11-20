@@ -28,6 +28,7 @@ UA = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
 LINK_HINT = re.compile(r'happy|hh\b|special|drink|cocktail|menu|bar\b|beverage|deal|late.?night|hours', re.I)
 HAPPY = re.compile(r'happy\s*-?\s*hours?|\bhappy hr\b|\bhh\b', re.I)
 THIN = 300  # characters: less text than this usually means a JavaScript-only site
+BOT_CHECK = re.compile(r'just a moment|checking your browser|verify you are human|attention required|access denied', re.I)
 
 
 def get(url, binary=False):
@@ -126,7 +127,7 @@ def _scan(row):
         return rec
     rec['ok'] = True
     txt, soup = text_of(html)
-    rec['thin'] = len(txt) < THIN
+    rec['thin'] = len(txt) < THIN or bool(BOT_CHECK.search(txt[:400]))
     rec['pages'].append(final)
     rec['snippets'] += [{'page': final, 'text': s} for s in windows(txt)]
     for href in collect_links(soup, final, rec)[:MAXPAGES]:
@@ -170,10 +171,13 @@ async def browser_pass(recs):
                 except Exception as e:
                     rec['error'] = rec['error'] or f'browser: {type(e).__name__}'
                     return
+                txt, soup = text_of(html)
+                if BOT_CHECK.search(txt[:400]):
+                    rec['ok'], rec['error'] = False, 'blocked by a bot check'
+                    return
                 rec['ok'] = True
                 rec['error'] = ''
                 rec['via'] = 'browser'
-                txt, soup = text_of(html)
                 rec['thin'] = len(txt) < THIN
                 rec['pages'] = [final]
                 rec['snippets'] = [{'page': final, 'text': s} for s in windows(txt)]
