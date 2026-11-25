@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
-  215 Happy Hour — static site builder (no dependencies, Node 18+)
+  215 Happy Hour - static site builder (no dependencies, Node 18+)
 
   Usage:
     node build.js              -> builds the live site into ./dist
@@ -94,7 +94,7 @@ function daysLabel(days) {
     while (set.has((e + 1) % 7) && (e + 1) % 7 !== s) e = (e + 1) % 7;
     if (s === e) return DAYS[s];
     const len = ((e - s + 7) % 7) + 1;
-    return len === 2 ? `${DAYS[s]} & ${DAYS[e]}` : `${DAYS[s]}–${DAYS[e]}`;
+    return len === 2 ? `${DAYS[s]} & ${DAYS[e]}` : `${DAYS[s]}-${DAYS[e]}`;
   }
   return days.map((d) => DAYS[d]).join(', ');
 }
@@ -116,7 +116,7 @@ function clock(min, withAp = true) {
 }
 function rangeLabel(start, end) {
   const sameHalf = (start < 720) === (end < 720) && end < 23 * 60 + 59;
-  return `${clock(start, !sameHalf)}–${clock(end)}`;
+  return `${clock(start, !sameHalf)}-${clock(end)}`;
 }
 const fmtDate = (iso) => {
   const d = new Date(iso + 'T12:00:00');
@@ -275,7 +275,7 @@ function miles(a, b) {
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 const KIND = { 'hotel bar': 'hotel bar', brewery: 'brewery', distillery: 'distillery', 'winery / tasting room': 'winery and tasting room', 'stadium / venue': 'venue', airport: 'airport bar', 'golf course': 'golf course bar' };
-const fullDays = (days) => daysLabel(days).replace(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\b/g, (d) => DAY_FULL[DAYS.indexOf(d)]).replace('–', ' to ');
+const fullDays = (days) => daysLabel(days).replace(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\b/g, (d) => DAY_FULL[DAYS.indexOf(d)]).replace('-', ' to ');
 const lowerFirst = (t) => /^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t;
 const andList = (xs) => xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1];
 function venueSummary(v) {
@@ -366,7 +366,7 @@ ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script
   <p>215 Happy Hour is the go to source for <a href="${href(p, '')}">Philadelphia happy hours</a>.</p>
   <p class="foot-days">${DAY_FULL.map((d) => `<a href="${href(p, d.toLowerCase() + '/')}">${d} happy hour</a>`).join('<span aria-hidden="true"> | </span>')}</p>
   <p class="foot-small">Listings change. Confirm with the bar before you go. Please drink responsibly. · <a href="${href(p, 'for-bars/')}">Add or fix a listing</a></p>
-  <p class="foot-small">© ${config.since}–${BUILD_DATE.getFullYear()}, 215HappyHour.com. All rights reserved.</p>
+  <p class="foot-small">© ${config.since}-${BUILD_DATE.getFullYear()}, 215HappyHour.com. All rights reserved.</p>
 </div></footer>
 <script id="hh-config" type="application/json">${JSON.stringify({ tz: config.timezone, page })}</script>
 <script src="${js}" defer></script>`;
@@ -498,7 +498,8 @@ async function main() {
   const write = (p, html) => {
     const f = path.join(OUT, p);
     fs.mkdirSync(path.dirname(f), { recursive: true });
-    fs.writeFileSync(f, html);
+    // house style: plain hyphens only, never en or em dashes (also catches dashes typed into the data)
+    fs.writeFileSync(f, html.replace(/[\u2013\u2014]/g, '-'));
   };
   const hoodMap = new Map();
   for (const v of venues) {
@@ -604,7 +605,7 @@ ${hoodGrid('neighborhoods/index.html')}`,
     const items = pairs((v) => v.hoodSlug === h.slug);
     const others = h.venues.filter((v) => !v.blocks.length);
     page(p, {
-      title: `${h.name} Happy Hours & Bars – ${h.count} ${h.count === 1 ? 'Spot' : 'Spots'}, Updated ${monthYear} | ${config.siteName}`,
+      title: `${h.name} Happy Hours & Bars - ${h.count} ${h.count === 1 ? 'Spot' : 'Spots'}, Updated ${monthYear} | ${config.siteName}`,
       description: `Happy hour times and specials at ${h.name} bars and restaurants in Philadelphia${h.hhCount ? `, with deals at ${h.hhCount}` : ''}. ${h.count} bars listed.`,
       page: { type: 'hood', hood: h.slug },
       lastmod: newest(h.venues),
@@ -626,7 +627,7 @@ ${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in $
     const hasHH = v.blocks.length > 0;
     const sameHood = hoodMap.get(v.hoodSlug).venues.filter((x) => x !== v && !x.blocks.length).slice(0, 8);
     page(p, {
-      title: hasHH ? `${v.name} Happy Hour – Times & Specials | ${config.siteName}` : `${v.name}, ${v.hood} | ${config.siteName}`,
+      title: hasHH ? `${v.name} Happy Hour - Times & Specials | ${config.siteName}` : `${v.name}, ${v.hood} | ${config.siteName}`,
       description: hasHH ? `${v.name} happy hour in ${v.hood}: ${summary}. ${v.blocks[0].deals.slice(0, 3).join(', ')}.` : `${v.name} at ${v.address || v.hood}, Philadelphia. Happy hour times coming soon.`,
       page: { type: 'bar' },
       noindex: !hasHH,
@@ -682,7 +683,7 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
     ['Elephant & Castle', '1800 Market St.', '5:00pm - 7:00pm', ['$4 Coors Light', '$4 Yuengling Draft', '1/2 Priced Chicken Wings']],
   ];
   page('about/index.html', {
-    title: `About 215 Happy Hour – Philly's Happy Hour Source Since ${config.since}`,
+    title: `About 215 Happy Hour - Philly's Happy Hour Source Since ${config.since}`,
     description: `215 Happy Hour has listed Philadelphia happy hours since ${config.since}. Here's the story, and a look back at the original site.`,
     page: { type: 'about' },
     body: `<section class="hero hero-sm"><p class="eyebrow">Since ${config.since}</p><h1>Philadelphia's happy hour source, then and now</h1>
@@ -739,7 +740,7 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
     console.log(`Sitemap: ${urls.length} pages`);
     fs.mkdirSync(path.join(OUT, 'exports'), { recursive: true });
     const fx = weekExport(venues, BLOCKED_ADDR);
-    fs.writeFileSync(path.join(OUT, 'exports', 'philly-happy-hours.csv'), fx.csv);
+    fs.writeFileSync(path.join(OUT, 'exports', 'philly-happy-hours.csv'), fx.csv.replace(/[\u2013\u2014]/g, '-'));
     console.log(`Citywide export: ${fx.count} rows for the week of ${fx.week}`);
     fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /exports/\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
   }

@@ -18,7 +18,7 @@ Google Sheet  ──►  GitHub Actions (node build.js)  ──►  HostGator /2
 | `static/.htaccess` | HTTPS, no-www, 404 page, and redirects from the 2009 URLs (`monday.html` → `/monday/`). |
 | `.github/workflows/deploy.yml` | Builds and uploads to HostGator. |
 
-Pages it creates: home (live now), Monday–Sunday, late night, weekend, every neighborhood, every bar, about (with the 2011 archive), for bars, 404, `sitemap.xml`, `robots.txt`.
+Pages it creates: home (live now), Monday-Sunday, late night, weekend, every neighborhood, every bar, about (with the 2011 archive), for bars, 404, `sitemap.xml`, `robots.txt`.
 
 ## One-time setup
 
@@ -41,7 +41,7 @@ Pages it creates: home (live now), Monday–Sunday, late night, weekend, every n
 | vibe | sports bar | Shown on the bar page |
 | verified | 2026-11-04 | Date you last confirmed it. Older than 120 days shows "Needs re-check" |
 | featured | yes | Paid placement. Highlighted and listed in "Featured bars" |
-| classic | yes | Was on the original 2009–2012 site. Gets the "215 Classic" badge |
+| classic | yes | Was on the original 2009-2012 site. Gets the "215 Classic" badge |
 | sample | yes | Placeholder. **Delete every `sample = yes` row before launch** |
 | active | yes | Set to `no` to hide a row without deleting it |
 
@@ -98,3 +98,7 @@ Every Monday a scheduled Claude task runs the check:
    - Fill in the deals whenever the page lists them. A listing with blank deals is incomplete.
 6. `python tools/make_call_list.py sheet.csv happy-hour-scan.jsonl 215-Call-Agent-List.xlsx` (tabs: To call, Verify listed)
 7. The citywide CSV for the week is built by `build.js` at `/exports/philly-happy-hours.csv` (set `EXPORT_DATE=YYYY-MM-DD` to build a given week).
+
+## House style
+
+Use plain hyphens (-) everywhere on the site: times (3-6 pm), day ranges (Mon-Fri), titles. Never en dashes (–) or em dashes (—). The build also converts any that slip in through the sheet or website data.

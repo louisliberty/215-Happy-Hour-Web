@@ -1,4 +1,4 @@
-# 215 Happy Hour — Apache settings for HostGator
+# 215 Happy Hour - Apache settings for HostGator
 
 Options -Indexes
 DirectoryIndex index.html
