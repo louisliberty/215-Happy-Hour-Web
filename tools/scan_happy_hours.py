@@ -300,7 +300,7 @@ async def browser_pass(recs):
     todo = [r for r in recs if not r.get('offsite') and (not r['ok'] or r['thin'] or not has_times(r))]
     if not todo:
         return
-    sem = asyncio.Semaphore(6)
+    sem = asyncio.Semaphore(10)
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         ctx = await browser.new_context(user_agent=UA['User-Agent'])

@@ -103,7 +103,7 @@ jobs:
     # One-off: read each confirmed bar website for happy hour mentions
     if: github.event_name == 'workflow_dispatch' && inputs.task == 'scan-happy-hours'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
