@@ -91,5 +91,10 @@ Every Monday a scheduled Claude task runs the check:
 3. `scan-happy-hours` task (reads every website, PDF menus, and retries JavaScript sites in a browser)
 4. `python tools/weekly_check.py happy-hour-scan.jsonl sheet.csv out/` → `out/review.txt` (new happy hours to review) and `out/listed-check.csv`; updates `data/scan-misses.csv`
 5. Review, then update `data/website-happy-hours.csv` and `data/review-notes.csv`. Bars whose site shows no happy hour 2 weeks in a row come off.
+   Accuracy rules for this step:
+   - Change a listed bar's days or times only when the source text states the new ones exactly. Never round (4:30 is not 4:00) and never fill in from a vague line.
+   - When a site has a dedicated happy hour page (e.g. /happy-hour, /events/happy-hour, /specials), use that page as `source_url` and take times and deals from it over the home page.
+   - If a page contradicts itself (a header time vs. a detailed list), use the detailed list and note it in `data/review-notes.csv`.
+   - Fill in the deals whenever the page lists them. A listing with blank deals is incomplete.
 6. `python tools/make_call_list.py sheet.csv happy-hour-scan.jsonl 215-Call-Agent-List.xlsx` (tabs: To call, Verify listed)
 7. The citywide CSV for the week is built by `build.js` at `/exports/philly-happy-hours.csv` (set `EXPORT_DATE=YYYY-MM-DD` to build a given week).

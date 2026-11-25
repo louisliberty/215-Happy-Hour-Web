@@ -107,3 +107,5 @@ for c in drop:
     print(f"  - {c['name']} | {c['address']} | last seen {c['last_seen']}")
 if not drop:
     print('  (none)')
+print('\nBefore editing data/website-happy-hours.csv: change days/times only when the source states them exactly '
+      '(never round), prefer a dedicated happy hour page as source_url, and fill in deals when the page lists them. See README.')
