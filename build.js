@@ -216,13 +216,13 @@ function buildModel(rows) {
         slug, name: r.name, hood: r.neighborhood || 'Philadelphia',
         hoodSlug: slugify(r.neighborhood || 'philadelphia'),
         address: r.address, phone: r.phone, website: r.website, instagram: r.instagram,
-        lat: parseFloat(r.lat), lng: parseFloat(r.lng), vibe: r.vibe || (generic ? '' : r.type),
+        lat: parseFloat(r.lat), lng: parseFloat(r.lng), vibe: r.vibe || (generic ? '' : r.type), about: r.about || '',
         featured: false, classic: false, sample: false, verified: '', blocks: [],
       });
     }
     const v = venues.get(key);
     if (!r._fromWebsite && !byAddr.has(addrKey(r.address))) byAddr.set(addrKey(r.address), key);
-    for (const k of ['address', 'phone', 'website', 'instagram', 'vibe']) if (!v[k] && r[k]) v[k] = r[k];
+    for (const k of ['address', 'phone', 'website', 'instagram', 'vibe', 'about']) if (!v[k] && r[k]) v[k] = r[k];
     v.featured ||= yes(r.featured);
     v.classic ||= yes(r.classic);
     v.sample ||= yes(r.sample);
@@ -266,6 +266,25 @@ const canonical = (p) => config.siteUrl + '/' + p.replace(/index\.html$/, '');
 // Logo: Liberty Pint (the Liberty Bell as a beer, crack and all). Fixed colors so it looks the same in light and dark mode.
 const LOGO = `<svg class="mug" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="7" fill="#4f6b34"/><g transform="translate(32 32) scale(1.17) translate(-32 -31.2)"><path d="M22 22C22 14 42 14 42 22V34C42 41 45 45 49 46.5Q51 47.2 51 49V49.6Q51 51 49.6 51H14.4Q13 51 13 49.6V49Q13 47.2 15 46.5C19 45 22 41 22 34Z" fill="#f2a93b"/><g fill="#f6f0d6"><rect x="28.6" y="11.4" width="6.8" height="6" rx="2.2"/><path d="M22 22C22 14 42 14 42 22V26Q38.5 29.5 35 26Q32 23 29 26Q25.5 29.5 22 26Z"/></g><rect x="13" y="47.6" width="38" height="1.1" fill="#4f6b34"/><path d="M30.8 47.6L33.4 41.8L30.4 37L32.6 32.2" fill="none" stroke="#4f6b34" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></g></svg>`;
 
+
+/* ---------- bar page helpers ---------- */
+function miles(a, b) {
+  const R = 3958.8, r = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * r, dLng = (b.lng - a.lng) * r;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const KIND = { 'hotel bar': 'hotel bar', brewery: 'brewery', distillery: 'distillery', 'winery / tasting room': 'winery and tasting room', 'stadium / venue': 'venue', airport: 'airport bar', 'golf course': 'golf course bar' };
+const fullDays = (days) => daysLabel(days).replace(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\b/g, (d) => DAY_FULL[DAYS.indexOf(d)]).replace('–', ' to ');
+const lowerFirst = (t) => /^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t;
+const andList = (xs) => xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1];
+function venueSummary(v) {
+  const kind = KIND[String(v.vibe || '').toLowerCase()];
+  const sched = andList(v.blocks.map((b) => `${fullDays(b.days)}, ${rangeLabel(b.start, b.end)}`));
+  const deals = [...new Set(v.blocks.flatMap((b) => b.deals))].filter((d) => !/^happy hour( menu| specials)?$/i.test(d) && !/first come/i.test(d)).slice(0, 3).map(lowerFirst);
+  return `${kind ? `This ${kind} in ${v.hood}` : `${v.name} in ${v.hood}`} runs happy hour ${sched}${deals.length ? `, with ${andList(deals)}` : ''}.`;
+}
+const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
 
 function card(v, b, from, opts = {}) {
   const late = b.start >= LATE_NIGHT_START;
@@ -455,6 +474,21 @@ async function main() {
   const everyone = buildModel([...(await loadRows()), ...loadWebsiteRows()]);
   let venues = everyone.filter((v) => v.blocks.length);
   console.log(`Listing ${venues.length} bars with happy hour details; ${everyone.length - venues.length} without are not listed`);
+  // map coordinates (tools/geocode.py) and hand-written bar descriptions, matched by address
+  const byKey = (f) => fs.existsSync(f) ? new Map(parseCSV(fs.readFileSync(f, 'utf8')).map((r) => [addrKey(r.address), r])) : new Map();
+  const coords = byKey(path.join(ROOT, 'data', 'coords.csv'));
+  const notes = byKey(path.join(ROOT, 'data', 'bar-notes.csv'));
+  for (const v of venues) {
+    const c = coords.get(addrKey(v.address));
+    if (c && !isFinite(v.lat)) { v.lat = parseFloat(c.lat); v.lng = parseFloat(c.lng); }
+    const n = notes.get(addrKey(v.address));
+    if (n && n.about) v.about = n.about;
+  }
+  console.log(`Map coordinates for ${venues.filter((v) => isFinite(v.lat)).length} of ${venues.length} bars`);
+  if (process.env.LIST_VENUES) {
+    fs.writeFileSync(process.env.LIST_VENUES, 'name,address\n' + venues.map((v) => [v.name, v.address].map((x) => `"${String(x || '').replace(/"/g, '""')}"`).join(',')).join('\n') + '\n');
+    console.log(`Wrote ${venues.length} bars to ${process.env.LIST_VENUES}`);
+  }
   if (!venues.length) {
     // Sheet has no bars with times yet: keep publishing the sample listings so code changes still go live.
     console.log('No bars with happy hour times in the sheet yet. Building from the sample listings in data/venues.csv.');
@@ -584,7 +618,9 @@ ${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in $
   // Venues
   for (const v of venues) {
     const p = `bar/${v.slug}/index.html`;
-    const nearby = pairs((x) => x.hoodSlug === v.hoodSlug && x.slug !== v.slug).slice(0, 4);
+    // nearby: closest bars within 1.5 miles; fill from the same neighborhood when coordinates are missing
+    let near = isFinite(v.lat) ? venues.filter((x) => x !== v && x.blocks.length && isFinite(x.lat)).map((x) => ({ x, d: miles(v, x) })).filter((o) => o.d <= 1.5).sort((a, b) => a.d - b.d).slice(0, 6) : [];
+    if (near.length < 3) near = near.concat(venues.filter((x) => x !== v && x.blocks.length && x.hoodSlug === v.hoodSlug && !near.some((o) => o.x === x)).map((x) => ({ x, d: null }))).slice(0, 6);
     const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${v.name} ${v.address} Philadelphia PA`)}`;
     const summary = v.blocks.map((b) => `${daysLabel(b.days)} ${rangeLabel(b.start, b.end)}`).join('; ');
     const hasHH = v.blocks.length > 0;
@@ -602,14 +638,36 @@ ${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in $
         ...(isFinite(v.lat) ? { geo: { '@type': 'GeoCoordinates', latitude: v.lat, longitude: v.lng } } : {}),
         makesOffer: v.blocks.flatMap((b) => b.deals.map((d) => ({ '@type': 'Offer', name: d, description: `Happy hour ${daysLabel(b.days)} ${rangeLabel(b.start, b.end)}` }))),
       },
-      body: `<section class="hero hero-sm venue-hero"><p class="eyebrow"><a href="${href(p, `neighborhoods/${v.hoodSlug}/`)}">${esc(v.hood)}</a>${v.vibe ? ' · ' + esc(v.vibe) : ''}</p>
-  <h1>${esc(v.name)}</h1>
-  <p class="venue-facts">${esc(v.address || '')}${v.phone ? ` · <span class="sel">${esc(v.phone)}</span>` : ''}${v.website ? ` · <a href="${esc(v.website)}" target="_blank" rel="noopener">Website</a>` : ''}${v.instagram ? ` · <a href="https://instagram.com/${esc(v.instagram.replace('@', ''))}" target="_blank" rel="noopener">${esc(v.instagram)}</a>` : ''}</p>
-  <p class="venue-actions"><a class="btn" href="${map}" target="_blank" rel="noopener">Get directions</a>${v.sample ? '<span class="badge badge-sample">Sample listing</span>' : ''}${v.classic ? '<span class="badge badge-classic">215 Classic</span>' : ''}</p></section>
-${hasHH ? `<h2 class="sec-h">Happy hour schedule</h2>
-<div class="hh-list">${v.blocks.map((b) => card(v, b, p, { hideHood: true })).join('\n')}</div>
-<p class="report">Something changed? Email <span class="sel">${esc(config.contactEmail)}</span> with the bar name and the new specials.${v.verified ? ` Last verified ${fmtDate(v.verified)}.` : ''}</p>` : `<div class="notice"><h2>Happy hour not listed yet</h2><p>We haven't confirmed ${esc(v.name)}'s happy hour. Work here or know the deals? Email <span class="sel">${esc(config.contactEmail)}</span> with the days, times and specials and we'll add them.</p></div>`}
-${nearby.length ? `<h2 class="sec-h">Happy hours nearby in ${esc(v.hood)}</h2><div class="hh-list">${nearby.map(([x, b]) => card(x, b, p, { hideHood: true })).join('\n')}</div>` : ''}
+      body: `<section class="vcard" aria-labelledby="v-name">
+  <p class="eyebrow"><a href="${href(p, `neighborhoods/${v.hoodSlug}/`)}">${esc(v.hood)}</a>${v.vibe ? ' · ' + esc(v.vibe) : ''}${v.classic ? ' · <span class="badge badge-classic">215 Classic</span>' : ''}</p>
+  <h1 id="v-name" class="v-name">${esc(v.name)}</h1>
+  ${hasHH ? `<p class="vstatus" data-blocks='${JSON.stringify(v.blocks.map((b) => [b.days, b.start, b.end]))}'><span class="vstatus-dot" aria-hidden="true"></span><span class="vstatus-text">${esc(summary)}</span></p>` : ''}
+  ${v.about ? `<p class="v-about">${esc(v.about)}</p>` : ''}${hasHH ? `<p class="v-summary">${esc(venueSummary(v))}</p>` : ''}
+  <dl class="v-facts">
+    ${v.address ? `<div><dt>Address</dt><dd>${esc(v.address)}<br><a href="${map}" target="_blank" rel="noopener">Get directions</a></dd></div>` : ''}
+    ${v.phone ? `<div><dt>Phone</dt><dd><a href="tel:${esc(v.phone.replace(/[^0-9+]/g, ''))}">${esc(v.phone)}</a></dd></div>` : ''}
+    ${v.website ? `<div><dt>Website</dt><dd><a href="${esc(v.website)}" target="_blank" rel="noopener">${esc(host(v.website) || 'Visit site')}</a>${v.instagram ? `<br><a href="https://instagram.com/${esc(v.instagram.replace('@', ''))}" target="_blank" rel="noopener">${esc(v.instagram)}</a>` : ''}</dd></div>` : ''}
+    ${v.verified ? `<div><dt>Last verified</dt><dd>${fmtDate(v.verified)}</dd></div>` : ''}
+  </dl>
+  ${v.sample ? '<p><span class="badge badge-sample">Sample listing</span></p>' : ''}
+</section>
+${hasHH ? (() => {
+      const sameDeals = v.blocks.every((b) => JSON.stringify(b.deals) === JSON.stringify(v.blocks[0].deals));
+      const dealList = (ds) => ds.length ? `<ul class="deal-list">${ds.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : '<p class="muted">Deals not posted yet. Ask at the bar, or email us if you know them.</p>';
+      const src = v.blocks.map((b) => b.source).find(Boolean);
+      return `<div class="v-grid">
+  <section class="v-panel" aria-labelledby="v-week"><h2 id="v-week" class="v-h">This week</h2>
+    <ol class="week">${DAY_FULL.map((d, i) => { const bs = v.blocks.filter((b) => b.days.includes(i)); return `<li data-day="${i}"${bs.length ? '' : ' class="is-off"'}><span class="wk-day">${d}</span><span class="wk-time">${bs.length ? bs.map((b) => rangeLabel(b.start, b.end)).join(' &amp; ') : 'No happy hour'}</span></li>`; }).join('')}</ol>
+  </section>
+  <section class="v-panel" aria-labelledby="v-deals"><h2 id="v-deals" class="v-h">The deals</h2>
+    ${sameDeals ? dealList(v.blocks[0].deals) : v.blocks.map((b) => `<h3 class="v-sub">${daysLabel(b.days)} · ${rangeLabel(b.start, b.end)}</h3>${dealList(b.deals)}`).join('')}
+    ${src ? `<p class="v-source">Source: <a href="${esc(src)}" target="_blank" rel="noopener">${esc(host(src))}</a>${v.verified ? ` · checked ${fmtDate(v.verified)}` : ''}</p>` : ''}
+  </section>
+</div>
+<p class="report">Something changed? Email <span class="sel">${esc(config.contactEmail)}</span> with the bar name and the new specials.</p>`;
+    })() : `<div class="notice"><h2>Happy hour not listed yet</h2><p>We haven't confirmed ${esc(v.name)}'s happy hour. Work here or know the deals? Email <span class="sel">${esc(config.contactEmail)}</span> with the days, times and specials and we'll add them.</p></div>`}
+${near.length ? `<section class="nearby" aria-labelledby="v-near"><h2 id="v-near" class="sec-h">Nearby happy hours</h2><p class="muted small">${near[0].d != null ? 'Closest first, by walking distance.' : `More in ${esc(v.hood)}.`}</p>
+<ul class="near-grid">${near.map(({ x, d }) => `<li><a class="near-card" href="${href(p, `bar/${x.slug}/`)}"><span class="nc-name">${esc(x.name)}</span><span class="nc-where">${d != null ? `${d < 0.1 ? '<0.1' : d.toFixed(1)} mi · ${Math.max(1, Math.round(d * 20))} min walk · ` : ''}${esc(x.hood)}</span><span class="nc-when">${esc(x.blocks.map((b) => `${daysLabel(b.days)} ${rangeLabel(b.start, b.end)}`).slice(0, 2).join(' · '))}</span>${x.blocks[0].deals.length ? `<span class="nc-deals">${esc(x.blocks[0].deals.slice(0, 2).join(' · '))}</span>` : ''}</a></li>`).join('')}</ul></section>` : ''}
 ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h2>${dirList(p, sameHood)}` : ''}`,
     });
   }

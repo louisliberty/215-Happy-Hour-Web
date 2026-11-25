@@ -80,6 +80,32 @@
       }
     });
 
+    // bar page: today's row in the week table, and the live status pill
+    document.querySelectorAll('.week li[data-day]').forEach(function (li) {
+      li.classList.toggle('is-today', +li.dataset.day === now.day);
+    });
+    var vs = document.querySelector('.vstatus[data-blocks]');
+    if (vs) {
+      var blocks = JSON.parse(vs.dataset.blocks), txt = '', cls = '';
+      blocks.forEach(function (b) {
+        if (!txt && b[0].indexOf(now.day) !== -1 && now.min >= b[1] && now.min < b[2]) { txt = 'Happy hour now · ' + span(b[2] - now.min) + ' left'; cls = 'is-live'; }
+      });
+      if (!txt) {
+        for (var k = 0; k < 8 && !txt; k++) {
+          var d = (now.day + k) % 7, best = null;
+          blocks.forEach(function (b) {
+            if (b[0].indexOf(d) !== -1 && (k > 0 || b[1] > now.min) && (best === null || b[1] < best)) best = b[1];
+          });
+          if (best !== null) {
+            if (k === 0) { var w = best - now.min; txt = w <= 90 ? 'Starts in ' + span(w) : 'Today at ' + clock(best); cls = 'is-soon'; }
+            else txt = 'Next: ' + (k === 1 ? 'tomorrow' : DAYS[d]) + ' at ' + clock(best);
+          }
+        }
+      }
+      vs.className = 'vstatus' + (cls ? ' ' + cls : '');
+      vs.querySelector('.vstatus-text').textContent = txt;
+    }
+
     var clockEl = document.getElementById('clock');
     if (clockEl) clockEl.textContent = DAYS[now.day] + ' · ' + clock(now.min) + ' in Philly';
     var countEl = document.getElementById('live-count');

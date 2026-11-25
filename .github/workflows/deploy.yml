@@ -11,7 +11,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages]
+        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages, geocode]
       list:
         description: Website list for scan-happy-hours, or URLs (space-separated) for print-pages
         type: string
@@ -110,3 +110,29 @@ jobs:
         env:
           URLS: ${{ inputs.list }}
         run: python tools/print_pages.py $URLS
+
+  geocode:
+    # Map coordinates for every listed bar, for "nearby happy hours" on bar pages
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'geocode'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: List the bars the site publishes
+        env:
+          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+          LIST_VENUES: venues.csv
+        run: node build.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python tools/geocode.py venues.csv data/coords.csv
+      - name: Print results
+        run: echo "=====BEGIN CSV=====" && cat data/coords.csv && echo "=====END CSV====="
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coords
+          path: data/coords.csv
