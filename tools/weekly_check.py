@@ -7,6 +7,8 @@ Writes:
   OUTDIR/review.txt         bars whose website mentions happy hour but aren't listed yet,
                             with a suggested days/times/deals line and the text it came from
   OUTDIR/listed-check.csv   every listed bar: seen this week, missed, or site didn't load
+  OUTDIR/weekly-specials.txt  listed bars whose site shows day-of-the-week deals near a price (Taco Tuesday,
+                            $1 wings...), with what data/daily-specials.csv has now, for the weekly specials review
 Updates data/scan-misses.csv (consecutive weeks a listed bar's site loaded but showed no
 happy hour) and prints the bars that have missed 2 weeks in a row.
 """
@@ -96,11 +98,31 @@ for rec in scan:
                  + f"  TEXT: {ev}\n")
 open(os.path.join(OUTDIR, 'review.txt'), 'w', encoding='utf-8').write('\n'.join(lines))
 
+# 3) weekly specials at listed bars
+have = {}
+for r in read_csv(os.path.join(DATA, 'daily-specials.csv')):
+    have.setdefault(addr_key(r['address']), []).append(f"{r['days']}: {r['special']}")
+wk, n_wk = [], 0
+for (name, ak), r in bars.items():
+    recs = list(by_addr.get(ak, []))
+    s2 = by_site.get(site_key(r['source_url']))
+    if s2 and s2 not in recs:
+        recs.append(s2)
+    cands = [w for rec in recs for w in rec.get('weekly', [])]
+    if not cands and ak not in have:
+        continue
+    n_wk += 1
+    wk.append(f"{name} | {r['address']} | {r['neighborhood']}\n"
+              + (''.join(f"  HAVE: {h}\n" for h in have.get(ak, [])) or '  HAVE: (none)\n')
+              + ''.join(f"  SITE ({w['page']}): {re.sub(chr(10), ' ', w['text'])[:700]}\n" for w in cands[:3]))
+open(os.path.join(OUTDIR, 'weekly-specials.txt'), 'w', encoding='utf-8').write('\n'.join(wk))
+
 counts = {}
 for c in check:
     counts[c['status']] = counts.get(c['status'], 0) + 1
 print(f'Listed bars: {len(check)} | ' + ', '.join(f'{k}: {v}' for k, v in sorted(counts.items())))
 print(f'Not listed but mention happy hour (to review): {n_new} -> {OUTDIR}/review.txt')
+print(f'Listed bars with weekly specials to check: {n_wk} -> {OUTDIR}/weekly-specials.txt')
 drop = [c for c in check if int(c['misses_in_a_row']) >= 2]
 print('Missed 2+ weeks in a row (remove from the site, add to the call list):')
 for c in drop:

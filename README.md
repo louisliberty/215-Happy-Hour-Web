@@ -89,6 +89,7 @@ The site builds from it every hour (`tools/site_export.sql`). The Google Sheet i
   sends them to Supabase (`tools/db_import.py --website-only`). Website happy hours are replaced; anything edited in
   Supabase is kept. What a bar told us (call, owner, hand entry) beats what its website says.
 - `data/review-decisions.csv`: decisions from the weekly review, applied on push (`tools/db_apply_decisions.py`).
+- `data/daily-specials.csv`: weekly specials from websites (day-of-the-week deals that aren't happy hour), synced to the `daily_specials` table. They show on bar pages and day pages, apart from happy hours.
 - Phone agent: `docs/call-agent-api.md` (`next_calls`, `record_call`).
 - Nightly: encrypted backup of every table (job file, 30 days) and a size check that fails over 400 MB.
 

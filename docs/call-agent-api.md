@@ -47,6 +47,7 @@ asked not to be called never come back. Change the timing in Supabase's SQL edit
   "specials_change_notes": "",
   "listed_info_correct": "yes | no | partly | n/a",
   "other_specials": "",
+  "weekly_specials": [ { "days": ["Tue"], "special": "$4 tacos & $7 margaritas", "start": "", "end": "" } ],
   "public_name": "the name the place goes by, if different from bar_name (e.g. the bar inside a hotel)",
   "spoke_with": "first name, role",
   "callback_time": "",
@@ -70,3 +71,10 @@ Returns `{"ok": true, "action": "...", "review": "..."}`:
 | `saved` | Stored only (voicemail, no answer, refused...). `review` is set when a person should look (e.g. reported closed) |
 
 Every call is stored untouched in the `calls` table either way.
+
+## Weekly specials
+
+Ask "Do you have any weekly specials on particular days?" and send each as `weekly_specials`: the days, the deal with
+its price, and times only if they're limited (most run all day). These are not happy hour (Taco Tuesday, $1 wings,
+a Thursday burger deal). Leave out loyalty points, trivia nights and to-go discounts. With high confidence they go
+live and replace the bar's earlier specials; otherwise they're held for the weekly review.

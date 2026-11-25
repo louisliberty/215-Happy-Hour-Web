@@ -41,7 +41,7 @@ jobs:
           if echo "$changed" | grep -q '^supabase/migrations/'; then
             bash tools/db_migrate.sh
           fi
-          if echo "$changed" | grep -qE '^data/(website-happy-hours|coords|bar-notes)\.csv$'; then
+          if echo "$changed" | grep -qE '^data/(website-happy-hours|daily-specials|coords|bar-notes)\.csv$'; then
             python3 tools/db_import.py --website-only import.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f import.sql
           else
             echo "No happy hour data changes in this push"
@@ -57,6 +57,7 @@ jobs:
           [ -n "$SUPABASE_DB_URL" ] || { echo "No SUPABASE_DB_URL secret: building from the Google Sheet"; exit 0; }
           psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -At -f tools/site_export.sql
           echo "DB_CSV=db.csv" >> "$GITHUB_ENV"
+          echo "DAILY_CSV=daily.csv" >> "$GITHUB_ENV"
 
       - uses: actions/setup-node@v4
         with:

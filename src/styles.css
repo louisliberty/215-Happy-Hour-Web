@@ -338,3 +338,13 @@ select, input[type="search"], input[type="email"] {
 .nc-where { font-size: .85rem; color: var(--muted); }
 .nc-when { font-family: var(--f-label); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: .9rem; color: var(--amber); }
 .nc-deals { font-size: .9rem; }
+
+/* weekly specials (separate from happy hour) */
+.v-weekly { margin-top: 18px; }
+.v-weekly .week li { align-items: baseline; }
+.v-weekly .wk-special { text-align: right; }
+.also-today { margin-top: 30px; padding-top: 6px; border-top: 1px dashed var(--rule); }
+.also-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.also-list li { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--paper); }
+.also-list a { font-weight: 700; }
+.also-deal { font-size: .95rem; }

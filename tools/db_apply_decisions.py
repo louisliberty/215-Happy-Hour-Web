@@ -10,6 +10,8 @@ data/review-decisions.csv columns: kind,id,decision,note,date
   happy_hour decisions
     approve   goes live; replaces what the site listed for that bar from its website or from earlier calls
     reject    not published (wrong, illegal, or the website is right)
+  weekly_special decisions (a held weekly special from a call)
+    approve   goes live          reject    not published
   call decisions
     dismiss        nothing to change
     closed         the bar is permanently closed: its listing comes off the site
@@ -50,6 +52,10 @@ from happy_hours h where h.id = {q(rid)} and h.review_status = 'needs_review' an
             f"""update establishments e set status = 'listed' from happy_hours h
 where h.id = {q(rid)} and h.review_status = 'live' and e.id = h.establishment_id and e.status not in ('closed', 'private', 'inactive');""",
         ]
+    elif kind == 'weekly_special' and dec in ('approve', 'reject'):
+        st = 'live' if dec == 'approve' else 'rejected'
+        sql.append(f"update daily_specials set review_status = '{st}', review_note = {q(stamp)} where id = {q(rid)} and review_status = 'needs_review';")
+        continue
     elif kind == 'happy_hour' and dec == 'reject':
         sql.append(f"update happy_hours set review_status = 'rejected', review_note = {q(stamp)} where id = {q(rid)} and review_status = 'needs_review';")
     elif kind == 'call' and dec.startswith('rename:'):

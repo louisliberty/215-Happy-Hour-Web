@@ -45,6 +45,9 @@ MENU_HOSTS = re.compile(r'toasttab\.com|popmenu|getbento|bentobox|squarespace-cd
 PROBES = ['happy-hour', 'happyhour', 'happy-hours', 'specials', 'events/happy-hour', 'happy-hour-menu', 'daily-specials',
           'menus', 'menu', 'drinks', 'drink-menu', 'bar-menu']
 MAX_SNIPPETS = 12
+# weekly specials: a weekday (or "Taco Tuesday", "Wing Wednesday") near a price, on a page that isn't only a calendar
+WEEKDAY = re.compile(r'\b(mon|tues|wednes|thurs|fri|satur|sun)days?\b', re.I)
+PRICE = re.compile(r'\$\s?\d|\bhalf[- ]?(off|price)\b|\b\d+% off\b|\bbogo\b', re.I)
 FULL = 4000
 
 
@@ -92,6 +95,21 @@ def snippets_for(url, txt, how):
         start = max(0, m.start() - 150) if m else 0
         return [{'page': url, 'text': txt[start:start + FULL], 'how': how, 'whole_page': True}]
     return [{'page': url, 'text': s, 'how': how} for s in windows(txt)]
+
+
+def weekly_for(url, txt, how):
+    """Text around weekday + price mentions: candidates for weekly specials (not happy hour)."""
+    out, last = [], -10**9
+    for m in WEEKDAY.finditer(txt):
+        if m.start() - last < 900:
+            continue
+        window = txt[max(0, m.start() - 80): m.start() + 900]
+        if PRICE.search(window):
+            last = m.start()
+            out.append({'page': url, 'text': window, 'how': how})
+        if len(out) >= 6:
+            break
+    return out
 
 
 def same_site(a, b):
@@ -210,7 +228,7 @@ def scan(row):
         return _scan(row)
     except Exception as e:  # never let one odd site stop the whole run
         return {'row': row['row'], 'name': row['name'], 'website': row['website'], 'ok': False, 'pages': [], 'snippets': [],
-                'pdfs': [], 'images': [], 'tried': [], 'error': f'error: {type(e).__name__}', 'thin': False}
+                'pdfs': [], 'images': [], 'tried': [], 'weekly': [], 'error': f'error: {type(e).__name__}', 'thin': False}
 
 
 def visit(rec, url, how):
@@ -222,6 +240,7 @@ def visit(rec, url, how):
         return None
     rec['pages'].append(f)
     rec['snippets'] += snippets_for(f, t, how)
+    rec['weekly'] += weekly_for(f, t, how)
     return soup, f
 
 
@@ -230,7 +249,7 @@ def _scan(row):
     if not url.startswith('http'):
         url = 'http://' + url
     rec = {'row': row['row'], 'name': row['name'], 'website': url, 'ok': False, 'pages': [], 'snippets': [], 'pdfs': [],
-           'images': [], 'tried': ['home'], 'error': '', 'thin': False}
+           'images': [], 'tried': ['home'], 'weekly': [], 'error': '', 'thin': False}
     html, final, info = get(url)
     if not html:
         rec['error'] = info
@@ -247,6 +266,7 @@ def _scan(row):
     rec['thin'] = len(txt) < THIN or bool(BOT_CHECK.search(txt[:400]))
     rec['pages'].append(final)
     rec['snippets'] += snippets_for(final, txt, 'home')
+    rec['weekly'] += weekly_for(final, txt, 'home')
     links = collect(soup, final, rec)
     links.sort(key=lambda h: 0 if HH_URL.search(h) else 1 if MENU_HOSTS.search(urlparse(h).netloc) else 2)
 
@@ -334,6 +354,7 @@ async def browser_pass(recs):
                 if final not in rec['pages']:
                     rec['pages'].append(final)
                 rec['snippets'] += snippets_for(final, txt, 'browser')
+                rec['weekly'] += weekly_for(final, txt, 'browser')
                 links = collect(soup, final, rec)
                 links.sort(key=lambda h: 0 if HH_URL.search(h) else 1)
                 for href in [h for h in links if h not in rec['pages']][:6]:
@@ -344,6 +365,7 @@ async def browser_pass(recs):
                     t2, s2 = text_of(h2)
                     rec['pages'].append(f2)
                     rec['snippets'] += snippets_for(f2, t2, 'browser')
+                    rec['weekly'] += weekly_for(f2, t2, 'browser')
                     collect(s2, f2, rec)
                     if has_times(rec):
                         break
@@ -367,6 +389,7 @@ with ThreadPoolExecutor(max_workers=4) as pool:
     list(pool.map(ocr_images, todo))
 for r in recs:
     r['snippets'] = dedupe(r['snippets'])[:MAX_SNIPPETS]
+    r['weekly'] = dedupe(r.get('weekly', []))[:8]
     r['found_by'] = sorted({s.get('how', '') for s in r['snippets']})
     r['has_times'] = has_times(r)
 with open(OUT, 'w', encoding='utf-8') as f:
@@ -378,5 +401,6 @@ for r in recs:
         by[h] = by.get(h, 0) + 1
 print(f'Sites: {len(recs)}  reachable: {sum(r["ok"] for r in recs)}  '
       f'mention happy hour: {sum(bool(r["snippets"]) for r in recs)}  with days/times: {sum(r["has_times"] for r in recs)}  '
-      f'with PDF menus: {sum(bool(r["pdfs"]) for r in recs)}  images read: {sum("image" in r["tried"] for r in recs)}')
+      f'with PDF menus: {sum(bool(r["pdfs"]) for r in recs)}  images read: {sum("image" in r["tried"] for r in recs)}  '
+      f'weekly-special candidates: {sum(bool(r["weekly"]) for r in recs)}')
 print('Found by: ' + ', '.join(f'{k} {v}' for k, v in sorted(by.items())))

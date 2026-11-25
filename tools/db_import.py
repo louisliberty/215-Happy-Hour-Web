@@ -83,11 +83,12 @@ def q(v):
 
 sheet = [] if WEBSITE_ONLY else sheet_rows(SHEET)
 website_rows = read_csv(os.path.join(DATA, 'website-happy-hours.csv'))
+special_rows = read_csv(os.path.join(DATA, 'daily-specials.csv'))
 coords = {addr_key(r['address']): r for r in read_csv(os.path.join(DATA, 'coords.csv'))}
 notes = {addr_key(r['address']): r for r in read_csv(os.path.join(DATA, 'bar-notes.csv'))}
 reviews = {addr_key(r['address']): r for r in read_csv(os.path.join(DATA, 'review-notes.csv'))}
 
-est, hh, skipped, keys = [], [], [], set()
+est, hh, skipped, keys, ds = [], [], [], set(), []
 
 
 def add_est(r, status=None):
@@ -121,6 +122,13 @@ for r in website_rows:
     add_hh(k, r['name'], parse_days(r['days']), r['start'], r['end'],
            [d.strip() for d in r['deals'].split('|') if d.strip()],
            [t.strip() for t in re.split(r'[,|]', r['tags']) if t.strip()], 'website', r['source_url'], r['verified'])
+for r in special_rows:   # weekly specials from websites
+    k = addr_key(r['address'])
+    if k not in keys and not any(k == e[4] for e in est):
+        add_est({'name': r['name'], 'address': r['address'], 'neighborhood': r['neighborhood'], 'website': r['source_url']}, 'to_research')
+    days = parse_days(r['days'])
+    if days and (r.get('special') or '').strip():
+        ds.append([k, r['name'], days, r.get('start') or None, r.get('end') or None, r['special'], r.get('source_url'), r.get('verified') or None])
 for r in sheet:
     days = parse_days(r.get('days'))
     if days and r.get('start') and r.get('end'):
@@ -136,6 +144,9 @@ sql = ['begin;',
        'source text, source_url text, verified_on date) on commit drop;']
 for i in range(0, len(est), 500):
     sql.append(f'insert into s_est values\n' + ',\n'.join('(' + ','.join(q(v) for v in row) + ')' for row in est[i:i + 500]) + ';')
+sql.append('create temp table s_ds (k text, name text, days text[], start_time time, end_time time, special text, source_url text, verified_on date) on commit drop;')
+if ds:
+    sql.append('insert into s_ds values\n' + ',\n'.join('(' + ','.join(q(v) for v in row) + ')' for row in ds) + ';')
 if hh:
     sql.append('insert into s_hh values\n' + ',\n'.join('(' + ','.join(q(v) for v in row) + ')' for row in hh) + ';')
 cols = ', '.join(E_COLS)
@@ -163,7 +174,14 @@ if geo:
 if about:
     fill.append('update establishments e set about = a.about from (values ' + ', '.join(f'({q(k)}, {q(t)})' for k, t in about)
                 + ') as a(k, about) where e.addr_key = a.k;')
-sql += (website_only if WEBSITE_ONLY else full) + fill + [
+specials = ["delete from daily_specials where source = 'website';",
+            """insert into daily_specials (establishment_id, days, start_time, end_time, special, source, source_url, verified_on, review_status)
+select m.eid, s.days, s.start_time, s.end_time, s.special, 'website', s.source_url, s.verified_on,
+       case when exists (select 1 from daily_specials x where x.establishment_id = m.eid and x.review_status = 'live'
+                         and x.source in ('call', 'owner', 'manual')) then 'retired' else 'live' end
+from s_ds s cross join lateral (select e.id as eid from establishments e where e.addr_key = s.k
+  order by (e.name = s.name) desc, (e.license_no is null), e.created_at limit 1) m;"""]
+sql += (website_only if WEBSITE_ONLY else full) + fill + specials + [
     """with m as (
   select s.*, (select e.id from establishments e where e.addr_key = s.k
                order by (e.name = s.name) desc, (e.license_no is null), e.created_at limit 1) as eid
@@ -187,6 +205,6 @@ where e.status = 'listed' and not exists (select 1 from happy_hours h where h.es
     "select count(*) as happy_hour_windows, count(distinct establishment_id) as listed_establishments from happy_hours where review_status = 'live';",
 ]
 open(OUT, 'w', encoding='utf-8').write('\n'.join(sql) + '\n')
-print(f'{len(est)} establishments and {len(hh)} happy hour windows -> {OUT}')
+print(f'{len(est)} establishments, {len(hh)} happy hour windows and {len(ds)} weekly specials -> {OUT}')
 if skipped:
     print('Skipped (no usable days/times, or longer than PA allows): ' + '; '.join(skipped))

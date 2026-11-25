@@ -381,7 +381,7 @@ ${content}
 
 /* ---------- weekly citywide CSV export ---------- */
 // One row per special per day for the current week (Mon-Sun, Philadelphia time), all of Philadelphia County.
-function weekExport(venues, blocked) {
+function weekExport(venues, blocked, specialRows = []) {
   const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: config.timezone, year: 'numeric', month: '2-digit', day: '2-digit' });
   const ref = process.env.EXPORT_DATE ? new Date(process.env.EXPORT_DATE + 'T17:00:00Z') : BUILD_DATE;
   const wd = new Intl.DateTimeFormat('en-US', { timeZone: config.timezone, weekday: 'short' }).format(ref);
@@ -400,9 +400,8 @@ function weekExport(venues, blocked) {
       }
     }
   }
-  const f = path.join(ROOT, 'data', 'daily-specials.csv');
-  if (fs.existsSync(f)) {
-    for (const r of parseCSV(fs.readFileSync(f, 'utf8'))) {
+  {
+    for (const r of specialRows) {
       if (blocked && blocked.has(addrKey(r.address))) continue;
       const st = toMin(r.start), en = toMin(r.end);
       for (const d of parseDays(r.days)) {
@@ -491,6 +490,18 @@ async function main() {
     if (n && n.about) v.about = n.about;
   }
   console.log(`Map coordinates for ${venues.filter((v) => isFinite(v.lat)).length} of ${venues.length} bars`);
+  // Weekly specials (Taco Tuesday, $1 wings...): kept apart from happy hours. From Supabase (DAILY_CSV) or the repo file.
+  const specialsFile = process.env.DAILY_CSV || path.join(ROOT, 'data', 'daily-specials.csv');
+  const specialRows = fs.existsSync(specialsFile) ? parseCSV(fs.readFileSync(specialsFile, 'utf8')).filter((r) => r.special && !BLOCKED_ADDR.has(addrKey(r.address))) : [];
+  const vByAddr = new Map(venues.map((v) => [addrKey(v.address), v]));
+  const vByName = new Map(venues.map((v) => [slugify(v.name), v]));
+  for (const v of venues) v.specials = [];
+  for (const r of specialRows) {
+    const v = vByAddr.get(addrKey(r.address)) || vByName.get(slugify(r.name));
+    const days = parseDays(r.days);
+    if (v && days.length) v.specials.push({ days, start: toMin(r.start), end: toMin(r.end), special: r.special, verified: r.verified, source: r.source_url });
+  }
+  console.log(`Weekly specials: ${specialRows.length} rows, ${venues.filter((v) => v.specials.length).length} listed bars show them`);
   if (process.env.LIST_VENUES) {
     fs.writeFileSync(process.env.LIST_VENUES, 'name,address\n' + venues.map((v) => [v.name, v.address].map((x) => `"${String(x || '').replace(/"/g, '""')}"`).join(',')).join('\n') + '\n');
     console.log(`Wrote ${venues.length} bars to ${process.env.LIST_VENUES}`);
@@ -568,7 +579,14 @@ ${hoodGrid('index.html')}`,
   <h1>${d} Philadelphia Happy Hours</h1>
   <p class="lede">Browse these local bars to find the drink deals and food specials that fit your tastes. Can't find your favorite bar? <a href="${href(`${d.toLowerCase()}/index.html`, 'for-bars/')}">Send us the details.</a> Cheers!</p></section>
 ${filterBar({ when: String(i), showWhen: false, hoods, items })}
-${listHTML(`${d.toLowerCase()}/index.html`, items)}`,
+${listHTML(`${d.toLowerCase()}/index.html`, items)}
+${(() => {
+      const sp = venues.flatMap((v) => v.specials.filter((x) => x.days.includes(i)).map((x) => ({ v, x }))).sort((a, b) => a.v.name.localeCompare(b.v.name));
+      const from = `${d.toLowerCase()}/index.html`;
+      return sp.length ? `<section class="also-today" aria-labelledby="also-h"><h2 id="also-h" class="sec-h">Also on ${d}s: weekly specials</h2>
+<p class="muted small">Not happy hours: day-of-the-week deals at bars we list.</p>
+<ul class="also-list">${sp.map(({ v, x }) => `<li><a href="${href(from, `bar/${v.slug}/`)}">${esc(v.name)}</a> <span class="muted">${esc(v.hood)}</span><span class="also-deal">${esc(x.special)}${x.start != null && x.end != null ? ` · ${rangeLabel(x.start, x.end)}` : ''}</span></li>`).join('')}</ul></section>` : '';
+    })()}`,
     });
   });
 
@@ -671,6 +689,11 @@ ${hasHH ? (() => {
     ${src ? `<p class="v-source">Source: <a href="${esc(src)}" target="_blank" rel="noopener">${esc(host(src))}</a>${v.verified ? ` · checked ${fmtDate(v.verified)}` : ''}</p>` : ''}
   </section>
 </div>
+${v.specials.length ? `<section class="v-panel v-weekly" aria-labelledby="v-weekly"><h2 id="v-weekly" class="v-h">Weekly specials</h2>
+    <p class="muted small">Separate from happy hour: these run on their own days and times.</p>
+    <ol class="week">${DAY_FULL.map((d, i) => { const ss = v.specials.filter((x) => x.days.includes(i)); return ss.length ? `<li data-day="${i}"><span class="wk-day">${d}</span><span class="wk-special">${ss.map((x) => esc(x.special) + (x.start != null && x.end != null ? ` <span class="muted">(${rangeLabel(x.start, x.end)})</span>` : '')).join('<br>')}</span></li>` : ''; }).join('')}</ol>
+    ${v.specials[0].source ? `<p class="v-source">Source: <a href="${esc(v.specials[0].source)}" target="_blank" rel="noopener">${esc(host(v.specials[0].source))}</a>${v.specials[0].verified ? ` · checked ${fmtDate(v.specials[0].verified)}` : ''}</p>` : ''}
+  </section>` : ''}
 <p class="report">Something changed? Email <span class="sel">${esc(config.contactEmail)}</span> with the bar name and the new specials.</p>`;
     })() : `<div class="notice"><h2>Happy hour not listed yet</h2><p>We haven't confirmed ${esc(v.name)}'s happy hour. Work here or know the deals? Email <span class="sel">${esc(config.contactEmail)}</span> with the days, times and specials and we'll add them.</p></div>`}
 ${near.length ? `<section class="nearby" aria-labelledby="v-near"><h2 id="v-near" class="sec-h">Nearby happy hours</h2><p class="muted small">${near[0].d != null ? 'Closest first, by walking distance.' : `More in ${esc(v.hood)}.`}</p>
@@ -745,7 +768,7 @@ ${!hasHH && sameHood.length ? `<h2 class="sec-h">Other bars in ${esc(v.hood)}</h
     fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${canonical(u.p)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`);
     console.log(`Sitemap: ${urls.length} pages`);
     fs.mkdirSync(path.join(OUT, 'exports'), { recursive: true });
-    const fx = weekExport(venues, BLOCKED_ADDR);
+    const fx = weekExport(venues, BLOCKED_ADDR, specialRows);
     fs.writeFileSync(path.join(OUT, 'exports', 'philly-happy-hours.csv'), fx.csv.replace(/[\u2013\u2014]/g, '-'));
     console.log(`Citywide export: ${fx.count} rows for the week of ${fx.week}`);
     fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /exports/\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
