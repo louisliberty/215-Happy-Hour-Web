@@ -4,14 +4,15 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 * * * *"   # every hour, picks up Google Sheet changes
+    - cron: "17 * * * *"   # every hour: rebuild the site from Supabase
+    - cron: "41 8 * * *"   # nightly (3:41 am Philly time): encrypted database backup and size check
   workflow_dispatch:        # "Run workflow" button in the Actions tab
     inputs:
       task:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages, geocode, db-setup]
+        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages, geocode, db-setup, db-backup]
       list:
         description: Website list for scan-happy-hours, or URLs (space-separated) for print-pages
         type: string
@@ -23,10 +24,37 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.event_name != 'workflow_dispatch' || inputs.task == 'deploy'
+    if: (github.event_name != 'workflow_dispatch' && github.event.schedule != '41 8 * * *') || inputs.task == 'deploy'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Send repo changes to Supabase (table changes, website happy hours, coordinates, descriptions)
+        if: github.event_name == 'push'
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          [ -n "$SUPABASE_DB_URL" ] || { echo "No SUPABASE_DB_URL secret: skipping"; exit 0; }
+          changed=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
+          if echo "$changed" | grep -q '^supabase/migrations/'; then
+            for f in supabase/migrations/*.sql; do psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f "$f"; done
+            echo "Applied table changes"
+          fi
+          if echo "$changed" | grep -qE '^data/(website-happy-hours|coords|bar-notes)\.csv$'; then
+            python3 tools/db_import.py --website-only import.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f import.sql
+          else
+            echo "No happy hour data changes in this push"
+          fi
+
+      - name: Export live happy hours from Supabase
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          [ -n "$SUPABASE_DB_URL" ] || { echo "No SUPABASE_DB_URL secret: building from the Google Sheet"; exit 0; }
+          psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -At -f tools/site_export.sql
+          echo "DB_CSV=db.csv" >> "$GITHUB_ENV"
 
       - uses: actions/setup-node@v4
         with:
@@ -122,9 +150,9 @@ jobs:
           node-version: 20
       - name: List the bars the site publishes
         env:
-          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
           LIST_VENUES: venues.csv
-        run: node build.js
+        run: psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -At -f tools/site_export.sql && DB_CSV=db.csv node build.js
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -155,3 +183,44 @@ jobs:
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
         run: python3 tools/db_import.py sheet.csv import.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f import.sql
+
+  db-backup:
+    # Nightly: every table, encrypted (the repo is public), kept 30 days as a job file. Fails, and GitHub emails
+    # you, if the database nears the free plan's 500 MB limit.
+    if: github.event.schedule == '41 8 * * *' || (github.event_name == 'workflow_dispatch' && inputs.task == 'db-backup')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export every table
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mkdir backup
+          for t in establishments happy_hours calls website_checks; do
+            psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -c "\copy $t to 'backup/$t.csv' with (format csv, header)"
+          done
+          cp supabase/migrations/*.sql backup/
+          tar czf backup.tgz backup
+      - name: Encrypt
+        env:
+          BACKUP_KEY: ${{ secrets.BACKUP_KEY || secrets.SUPABASE_DB_URL }}
+        run: |
+          echo "BACKUP_FILE=supabase-backup-$(date -u +%F).tgz.gpg" >> "$GITHUB_ENV"
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$BACKUP_KEY" --symmetric --cipher-algo AES256 \
+            -o "supabase-backup-$(date -u +%F).tgz.gpg" backup.tgz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BACKUP_FILE }}
+          path: ${{ env.BACKUP_FILE }}
+          retention-days: 30
+      - name: Size check
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mb=$(psql "$SUPABASE_DB_URL" -At -c "select pg_database_size(current_database()) / 1048576")
+          rows=$(psql "$SUPABASE_DB_URL" -At -F ', ' -c "select (select count(*) from establishments) || ' establishments', (select count(*) from happy_hours) || ' happy hours', (select count(*) from calls) || ' calls', (select count(*) from website_checks) || ' website checks'")
+          echo "Database size: ${mb} MB of the free plan's 500 MB. ${rows}." | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "$mb" -ge 400 ]; then
+            echo "::error::The Supabase database is ${mb} MB, close to the free plan's 500 MB limit. Time to upgrade to Pro."
+            exit 1
+          fi

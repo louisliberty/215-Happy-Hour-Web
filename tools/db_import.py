@@ -2,8 +2,14 @@
 Write the SQL that loads everything into Supabase: the Google Sheet's establishments,
 the happy hours found on bar websites, map coordinates, bar descriptions and review notes.
 
-    python tools/db_import.py sheet.csv import.sql
+    python tools/db_import.py sheet.csv import.sql          # full load (sheet + website happy hours)
+    python tools/db_import.py --website-only import.sql     # only the repo's website happy hours, coordinates, descriptions
     psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f import.sql
+
+--website-only runs on every push that changes those data files (e.g. the Monday check). It never
+changes establishment details edited in Supabase; it only adds bars it doesn't know yet, fills in
+missing coordinates, applies descriptions, and replaces happy hours whose source is 'website'.
+To protect a website happy hour you corrected by hand in Supabase, set its source to 'manual'.
 
 Safe to re-run. Establishments are matched by PLCB license number (or name + address
 when there is none) and existing values are kept when the sheet cell is blank.
@@ -20,7 +26,8 @@ from common import addr_key, read_csv, sheet_rows  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-SHEET, OUT = sys.argv[1], sys.argv[2]
+WEBSITE_ONLY = sys.argv[1] == '--website-only'
+SHEET, OUT = (None, sys.argv[2]) if WEBSITE_ONLY else (sys.argv[1], sys.argv[2])
 
 
 def parse_days(s):
@@ -74,7 +81,7 @@ def q(v):
     return "'" + v.replace("'", "''") + "'" if v else 'null'
 
 
-sheet = sheet_rows(SHEET)
+sheet = [] if WEBSITE_ONLY else sheet_rows(SHEET)
 website_rows = read_csv(os.path.join(DATA, 'website-happy-hours.csv'))
 coords = {addr_key(r['address']): r for r in read_csv(os.path.join(DATA, 'coords.csv'))}
 notes = {addr_key(r['address']): r for r in read_csv(os.path.join(DATA, 'bar-notes.csv'))}
@@ -133,7 +140,7 @@ if hh:
     sql.append('insert into s_hh values\n' + ',\n'.join('(' + ','.join(q(v) for v in row) + ')' for row in hh) + ';')
 cols = ', '.join(E_COLS)
 upd = ', '.join(f'{c} = coalesce(excluded.{c}, establishments.{c})' for c in KEEP)
-sql += [
+full = [
     f"""insert into establishments ({cols}) select distinct on (license_no) {cols} from s_est where license_no is not null
 on conflict (license_no) do update set {upd},
   status = case when establishments.status in ('listed', 'to_call', 'do_not_call', 'no_happy_hour') and excluded.status = 'to_research'
@@ -142,7 +149,21 @@ on conflict (license_no) do update set {upd},
 from s_est s where s.license_no is null and e.license_no is null and e.name = s.name and coalesce(e.address, '') = coalesce(s.address, '');""",
     f"""insert into establishments ({cols}) select {cols} from s_est s where s.license_no is null
 and not exists (select 1 from establishments e where e.license_no is null and e.name = s.name and coalesce(e.address, '') = coalesce(s.address, ''));""",
-    "delete from happy_hours where source in ('website', 'sheet');",
+    "delete from happy_hours where source in ('website', 'sheet');"]
+website_only = [
+    f"""insert into establishments ({cols}) select distinct on (s.addr_key) {cols} from s_est s
+where not exists (select 1 from establishments e where e.addr_key = s.addr_key);""",
+    "delete from happy_hours where source = 'website';"]
+geo = [(k, float(c['lat']), float(c['lng'])) for k, c in coords.items() if c.get('lat')]
+about = [(k, n['about']) for k, n in notes.items() if (n.get('about') or '').strip()]
+fill = []
+if geo:
+    fill.append('update establishments e set lat = g.lat, lng = g.lng from (values ' + ', '.join(f'({q(k)}, {la}, {ln})' for k, la, ln in geo)
+                + ') as g(k, lat, lng) where e.addr_key = g.k and e.lat is null;')
+if about:
+    fill.append('update establishments e set about = a.about from (values ' + ', '.join(f'({q(k)}, {q(t)})' for k, t in about)
+                + ') as a(k, about) where e.addr_key = a.k;')
+sql += (website_only if WEBSITE_ONLY else full) + fill + [
     """with m as (
   select s.*, (select e.id from establishments e where e.addr_key = s.k
                order by (e.name = s.name) desc, (e.license_no is null), e.created_at limit 1) as eid

@@ -18,6 +18,9 @@ RewriteRule ^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\.html?$ 
 RewriteRule ^about\.html?$ /about/ [R=301,L,NC]
 RewriteRule ^contact\.html?$ /for-bars/ [R=301,L,NC]
 RewriteRule ^site_?map\.html?$ /neighborhoods/ [R=301,L,NC]
+# bar pages whose addresses changed
+RewriteRule ^bar/landmark-americana-tap-and-grill-1680/?$ /bar/landmark-americana-tap-and-grill-3333-market-st/ [R=301,L]
+RewriteRule ^bar/uchi-philadelphia-1595/?$ /bar/uchi-philadelphia/ [R=301,L]
 </IfModule>
 
 <IfModule mod_expires.c>

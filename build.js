@@ -471,7 +471,13 @@ function notFoundBody(hhVenues) {
 /* ---------- pages ---------- */
 async function main() {
   // Only bars whose happy hour is published (on their own site, or confirmed in the sheet) are listed.
-  const everyone = buildModel([...(await loadRows()), ...loadWebsiteRows()]);
+  // DB_CSV: the deploy job exports live happy hours from Supabase (tools/site_export.sql) and builds from that.
+  // Without it (local previews), build from the Google Sheet and data/website-happy-hours.csv as before.
+  const dbRows = process.env.DB_CSV ? parseCSV(fs.readFileSync(process.env.DB_CSV, 'utf8')) : null;
+  if (dbRows) console.log(`Building from Supabase: ${dbRows.length} happy hour rows in ${process.env.DB_CSV}`);
+  // safety: never publish a near-empty site because of a bad export; the build stops and the last good site stays up
+  if (dbRows && dbRows.length < 50) throw new Error(`Supabase export has only ${dbRows.length} happy hours; refusing to publish. Check the database.`);
+  const everyone = buildModel(dbRows || [...(await loadRows()), ...loadWebsiteRows()]);
   let venues = everyone.filter((v) => v.blocks.length);
   console.log(`Listing ${venues.length} bars with happy hour details; ${everyone.length - venues.length} without are not listed`);
   // map coordinates (tools/geocode.py) and hand-written bar descriptions, matched by address
