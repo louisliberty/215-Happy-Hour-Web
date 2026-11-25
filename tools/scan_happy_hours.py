@@ -294,7 +294,7 @@ def dedupe(snips):
 async def browser_pass(recs):
     """Real browser for sites that failed, are thin, or showed no happy hour times on the first pass."""
     from playwright.async_api import async_playwright
-    todo = [r for r in recs if not r['ok'] or r['thin'] or not has_times(r)]
+    todo = [r for r in recs if not r.get('offsite') and (not r['ok'] or r['thin'] or not has_times(r))]
     if not todo:
         return
     sem = asyncio.Semaphore(6)
