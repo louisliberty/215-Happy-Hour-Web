@@ -44,12 +44,16 @@ for row in csv.DictReader(open(IN, encoding='utf-8-sig')):
 from happy_hours h where h.id = {q(rid)} and h.review_status = 'needs_review' and x.establishment_id = h.establishment_id
   and x.review_status = 'live' and (x.source = 'website' or (x.source = 'call' and x.call_id is distinct from h.call_id));""",
             f"update happy_hours set review_status = 'live', review_note = {q(stamp)} where id = {q(rid)} and review_status = 'needs_review';",
+            # approved with days, times and deals: that call got everything, so the bar rests for 6 months
+            f"update calls c set info_complete = true from happy_hours h where h.id = {q(rid)} and h.review_status = 'live' and c.id = h.call_id and cardinality(h.deals) > 0;",
             f"""update establishments e set status = 'listed' from happy_hours h
 where h.id = {q(rid)} and h.review_status = 'live' and e.id = h.establishment_id and e.status not in ('closed', 'private', 'inactive');""",
         ]
     elif kind == 'happy_hour' and dec == 'reject':
         sql.append(f"update happy_hours set review_status = 'rejected', review_note = {q(stamp)} where id = {q(rid)} and review_status = 'needs_review';")
     elif kind == 'call' and dec in ('dismiss', 'closed', 'no_happy_hour') or (kind == 'call' and dec.startswith('match:')):
+        if dec == 'no_happy_hour':
+            sql.append(f"update calls set info_complete = true where id = {q(rid)};")
         if dec == 'closed':
             sql.append(f"update establishments e set status = 'closed' from calls c where c.id = {q(rid)} and e.id = c.establishment_id;")
         elif dec == 'no_happy_hour':

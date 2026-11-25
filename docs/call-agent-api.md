@@ -19,8 +19,10 @@ To replace it: `update private.settings set value = encode(gen_random_bytes(24),
 Returns a list: `establishment_id`, `bar_name`, `address`, `neighborhood`, `phone`, `call_type` (`new` or `verify`),
 `listed_info` (what the site lists now, for verify calls). Never-called bars come first.
 
-Nothing calls on its own: the agent only gets bars when someone asks it for the next batch. A bar that answered
-(a completed call) isn't offered again for 180 days; an unanswered attempt can be retried after 7 days. Bars that
+Nothing calls on its own: the agent only gets bars when someone asks it for the next batch. A bar rests for 180 days
+only after a complete call: it confirmed what we list, gave days, times and deals that went live, or clearly said it
+has no happy hour. Anything less (voicemail, no answer, unclear, low confidence, missing deals, rejected in review)
+can be retried after 7 days. `record_call` returns `"complete": true/false`. Bars that
 asked not to be called never come back. Change the timing in Supabase's SQL editor:
 `update private.settings set value = '365' where key = 'recall_after_days';` (or `retry_after_days`).
 
