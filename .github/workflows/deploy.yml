@@ -39,8 +39,7 @@ jobs:
           [ -n "$SUPABASE_DB_URL" ] || { echo "No SUPABASE_DB_URL secret: skipping"; exit 0; }
           changed=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
           if echo "$changed" | grep -q '^supabase/migrations/'; then
-            for f in supabase/migrations/*.sql; do psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f "$f"; done
-            echo "Applied table changes"
+            bash tools/db_migrate.sh
           fi
           if echo "$changed" | grep -qE '^data/(website-happy-hours|coords|bar-notes)\.csv$'; then
             python3 tools/db_import.py --website-only import.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f import.sql
@@ -182,7 +181,7 @@ jobs:
       - name: Create or update tables
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
-        run: for f in supabase/migrations/*.sql; do psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f "$f"; done
+        run: bash tools/db_migrate.sh
       - name: Load establishments and happy hours
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
