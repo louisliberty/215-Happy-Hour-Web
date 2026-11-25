@@ -17,7 +17,8 @@ To replace it: `update private.settings set value = encode(gen_random_bytes(24),
 { "token": "...", "how_many": 10 }
 ```
 Returns a list: `establishment_id`, `bar_name`, `address`, `neighborhood`, `phone`, `call_type` (`new` or `verify`),
-`listed_info` (what the site lists now, for verify calls). Never-called bars come first.
+`listed_info` (what the site lists now, for verify calls), `ask_for` (who to ask for, e.g. the bar inside a hotel).
+Some names come from liquor licenses and may be company names: use the name staff know, and report it as `public_name`. Never-called bars come first.
 
 Who's in the queue: bars, restaurants, hotel bars, breweries, distilleries and winery tasting rooms with a phone
 number. Grocery chains, markets, delis, bottle shops, convenience stores and gas stations are left out, and "beer only"
@@ -46,6 +47,7 @@ asked not to be called never come back. Change the timing in Supabase's SQL edit
   "specials_change_notes": "",
   "listed_info_correct": "yes | no | partly | n/a",
   "other_specials": "",
+  "public_name": "the name the place goes by, if different from bar_name (e.g. the bar inside a hotel)",
   "spoke_with": "first name, role",
   "callback_time": "",
   "do_not_call": false,

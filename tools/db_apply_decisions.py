@@ -15,6 +15,7 @@ data/review-decisions.csv columns: kind,id,decision,note,date
     closed         the bar is permanently closed: its listing comes off the site
     no_happy_hour  the bar confirmed it has no happy hour: any listing comes off the site
     match:<establishment id>   the call was for this bar (when it couldn't be matched automatically)
+    rename:<name>  the bar goes by this name (from the call's public_name); the company name stays as legal_name
 
 Runs on every push that changes the file. Applying the same decision twice changes nothing.
 """
@@ -51,6 +52,14 @@ where h.id = {q(rid)} and h.review_status = 'live' and e.id = h.establishment_id
         ]
     elif kind == 'happy_hour' and dec == 'reject':
         sql.append(f"update happy_hours set review_status = 'rejected', review_note = {q(stamp)} where id = {q(rid)} and review_status = 'needs_review';")
+    elif kind == 'call' and dec.startswith('rename:'):
+        name = (row.get('decision') or '').strip()[len('rename:'):].strip()
+        if not name:
+            bad.append(f'call {rid}: rename without a name')
+            continue
+        sql += [f"update establishments e set legal_name = coalesce(e.legal_name, e.name), name = {q(name)} from calls c where c.id = {q(rid)} and e.id = c.establishment_id;",
+                f"update calls set processed = true, review_note = {q(stamp)} where id = {q(rid)};"]
+        continue
     elif kind == 'call' and dec in ('dismiss', 'closed', 'no_happy_hour') or (kind == 'call' and dec.startswith('match:')):
         if dec == 'no_happy_hour':
             sql.append(f"update calls set info_complete = true where id = {q(rid)};")
