@@ -17,9 +17,12 @@ To replace it: `update private.settings set value = encode(gen_random_bytes(24),
 { "token": "...", "how_many": 10 }
 ```
 Returns a list: `establishment_id`, `bar_name`, `address`, `neighborhood`, `phone`, `call_type` (`new` or `verify`),
-`listed_info` (what the site lists now, for verify calls). Never-called bars come first. A bar comes back again
-after 7 days if its specials change weekly, 30 monthly, 90 seasonal, 180 never, 60 otherwise. Bars that asked
-not to be called never come back.
+`listed_info` (what the site lists now, for verify calls). Never-called bars come first.
+
+Nothing calls on its own: the agent only gets bars when someone asks it for the next batch. A bar that answered
+(a completed call) isn't offered again for 180 days; an unanswered attempt can be retried after 7 days. Bars that
+asked not to be called never come back. Change the timing in Supabase's SQL editor:
+`update private.settings set value = '365' where key = 'recall_after_days';` (or `retry_after_days`).
 
 ## 2. Report a call: `record_call`
 
