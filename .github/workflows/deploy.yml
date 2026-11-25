@@ -11,7 +11,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages, geocode]
+        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages, geocode, db-setup]
       list:
         description: Website list for scan-happy-hours, or URLs (space-separated) for print-pages
         type: string
@@ -136,3 +136,22 @@ jobs:
         with:
           name: coords
           path: data/coords.csv
+
+  db-setup:
+    # Create or update the Supabase tables, then load the sheet and the verified happy hours into them
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'db-setup'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the Google Sheet
+        env:
+          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+        run: curl -sSfL "$SHEET_CSV_URL" -o sheet.csv && wc -l sheet.csv
+      - name: Create or update tables
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: for f in supabase/migrations/*.sql; do psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f "$f"; done
+      - name: Load establishments and happy hours
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: python3 tools/db_import.py sheet.csv import.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f import.sql
