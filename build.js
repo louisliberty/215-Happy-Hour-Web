@@ -284,6 +284,15 @@ function venueSummary(v) {
   const deals = [...new Set(v.blocks.flatMap((b) => b.deals))].filter((d) => !/^happy hour( menu| specials)?$/i.test(d) && !/first come/i.test(d)).slice(0, 3).map(lowerFirst);
   return `${kind ? `This ${kind} in ${v.hood}` : `${v.name} in ${v.hood}`} runs happy hour ${sched}${deals.length ? `, with ${andList(deals)}` : ''}.`;
 }
+const DRINK = /\b(draft|drafts|draught|draughts|beer|beers|lager|pilsner|ipa|ale|stout|cider|bottle|bottles|cans?|pints?|wine|wines|ros[ée]|prosecco|sparkling|bubbles|sangria|spritz|spritzes|cocktail|cocktails|martini|margarita|margaritas|mojito|old fashioned|daiquiri|colada|mule|negroni|sour|well|wells|shots?|liquor|spirits|highball|highballs|seltzer|seltzers|white claw|tito'?s|bourbon|whiskey|whisky|tequila|vodka|gin|rum|mimosa|drinks?|city wide|aperitifs?|apéritifs?|amaro|vermouth|high life|bellini|hard cider|kombucha|somm|glass|glasses|pours?|flights?|reds?|whites?)\b|ros[ée]/i;
+const FOOD = /\b(sauce|mussels|clams|oysters?|wings?|tacos?|pizzas?|fries|burgers?|sandwich(es)?|sliders?|plates?|appetizers?|apps|bites|snacks?|nachos|empanadas|pierogies|dinners?|entr[ée]es?|steak|chicken|salad|soup|dumplings|bruschetta|meatballs|popcorn|pickles|egg rolls?|tenders|quesadillas?|chips|queso|guac|cheese|calamari|shrimp|crab|eggs|menu)\b/i;
+const isDrink = (d) => DRINK.test(d) && !FOOD.test(d);
+const PRICE_RE = /^((?:\$\d+(?:\.\d{2})?(?:\s*-\s*\$?\d+(?:\.\d{2})?)?(?:\s+off)?)|half[- ](?:price|off)|\d+% off|bogo)\s*:?\s*(.*)$/i;
+function splitDeal(d) {
+  const m = String(d).match(PRICE_RE);
+  if (!m || !m[2]) return { price: '', item: d };
+  return { price: m[1].replace(/^half[- ]/i, 'Half-'), item: m[2][0].toUpperCase() + m[2].slice(1) };
+}
 const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
 
 function card(v, b, from, opts = {}) {
@@ -678,13 +687,19 @@ ${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in $
 </section>
 ${hasHH ? (() => {
       const sameDeals = v.blocks.every((b) => JSON.stringify(b.deals) === JSON.stringify(v.blocks[0].deals));
-      const dealList = (ds) => ds.length ? `<ul class="deal-list">${ds.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : '<p class="muted">Deals not posted yet. Ask at the bar, or email us if you know them.</p>';
+      const menuList = (ds) => ds.map((d) => { const x = splitDeal(d); return `<li><span class="m-price">${esc(x.price)}</span><span class="m-item">${esc(x.item)}</span></li>`; }).join('');
+      const dealList = (ds) => {
+        if (!ds.length) return '<p class="muted">Deals not posted yet. Ask at the bar, or email us if you know them.</p>';
+        const drinks = ds.filter(isDrink), food = ds.filter((d) => !isDrink(d));
+        if (!drinks.length || !food.length) return `<ul class="menu">${menuList(ds)}</ul>`;
+        return `<h3 class="m-group">Drinks</h3><ul class="menu">${menuList(drinks)}</ul><h3 class="m-group">Food</h3><ul class="menu">${menuList(food)}</ul>`;
+      };
       const src = v.blocks.map((b) => b.source).find(Boolean);
-      return `<div class="v-grid">
-  <section class="v-panel" aria-labelledby="v-week"><h2 id="v-week" class="v-h">This week</h2>
-    <ol class="week">${DAY_FULL.map((d, i) => { const bs = v.blocks.filter((b) => b.days.includes(i)); return `<li data-day="${i}"${bs.length ? '' : ' class="is-off"'}><span class="wk-day">${d}</span><span class="wk-time">${bs.length ? bs.map((b) => rangeLabel(b.start, b.end)).join(' &amp; ') : 'No happy hour'}</span></li>`; }).join('')}</ol>
+      return `<div class="v-stack">
+  <section class="v-panel v-week" aria-labelledby="v-week"><h2 id="v-week" class="v-h">This week</h2>
+    <ol class="weekstrip">${DAY_FULL.map((d, i) => { const bs = v.blocks.filter((b) => b.days.includes(i)); return `<li data-day="${i}"${bs.length ? '' : ' class="is-off"'}><span class="ws-day" title="${d}">${DAYS[i]}</span><span class="ws-time">${bs.length ? bs.map((b) => rangeLabel(b.start, b.end)).join('<br>') : 'None'}</span></li>`; }).join('')}</ol>
   </section>
-  <section class="v-panel" aria-labelledby="v-deals"><h2 id="v-deals" class="v-h">The deals</h2>
+  <section class="v-panel v-deals" aria-labelledby="v-deals"><h2 id="v-deals" class="v-h">The deals</h2>
     ${sameDeals ? dealList(v.blocks[0].deals) : v.blocks.map((b) => `<h3 class="v-sub">${daysLabel(b.days)} · ${rangeLabel(b.start, b.end)}</h3>${dealList(b.deals)}`).join('')}
     ${v.specials.some((x) => x.happyHour) ? `<h3 class="v-sub">Plus a special each day</h3><ol class="week hh-daily">${DAY_FULL.map((d, i) => { const ss = v.specials.filter((x) => x.happyHour && x.days.includes(i)); return ss.length ? `<li data-day="${i}"><span class="wk-day">${d}</span><span class="wk-special">${ss.map((x) => esc(x.special)).join('<br>')}</span></li>` : ''; }).join('')}</ol>` : ''}
     ${src ? `<p class="v-source">Source: <a href="${esc(src)}" target="_blank" rel="noopener">${esc(host(src))}</a>${v.verified ? ` · checked ${fmtDate(v.verified)}` : ''}</p>` : ''}

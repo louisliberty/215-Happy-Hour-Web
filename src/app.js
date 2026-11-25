@@ -81,7 +81,7 @@
     });
 
     // bar page: today's row in the week table, and the live status pill
-    document.querySelectorAll('.week li[data-day]').forEach(function (li) {
+    document.querySelectorAll('.week li[data-day], .weekstrip li[data-day]').forEach(function (li) {
       li.classList.toggle('is-today', +li.dataset.day === now.day);
     });
     var vs = document.querySelector('.vstatus[data-blocks]');

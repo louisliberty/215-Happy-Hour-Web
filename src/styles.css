@@ -351,3 +351,22 @@ select, input[type="search"], input[type="email"] {
 .hh-deals .deal-today { border-color: var(--amber); background: var(--amber-soft); }
 .hh-daily { margin-top: 2px; }
 .hh-daily .wk-special { text-align: right; }
+
+/* bar page: compact week strip above a full-width menu */
+.v-stack { display: grid; gap: 16px; }
+.weekstrip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.weekstrip li { display: grid; gap: 2px; justify-items: center; text-align: center; padding: 8px 4px; border-radius: var(--r); background: var(--ground); border: 1px solid var(--rule); }
+.ws-day { font-family: var(--f-label); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .9rem; }
+.ws-time { font-weight: 600; font-size: .92rem; color: var(--olive-ink); font-variant-numeric: tabular-nums; line-height: 1.25; }
+.weekstrip li.is-off { background: transparent; border-style: dashed; }
+.weekstrip li.is-off .ws-day, .weekstrip li.is-off .ws-time { color: var(--muted); font-weight: 400; }
+.weekstrip li.is-today { background: var(--amber-soft); border-color: var(--amber); }
+.weekstrip li.is-today .ws-day { color: var(--amber); }
+@media (max-width: 520px) { .ws-time { font-size: .74rem; } .ws-day { font-size: .78rem; } .weekstrip { gap: 3px; } .weekstrip li { padding: 6px 2px; } }
+.m-group { font-family: var(--f-label); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .95rem; color: var(--olive); margin: 14px 0 4px; }
+.v-deals .v-h + .m-group { margin-top: 0; }
+.menu { list-style: none; margin: 0; padding: 0; columns: 2 300px; column-gap: 32px; }
+.menu li { break-inside: avoid; display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--rule); line-height: 1.4; }
+.m-price { font-weight: 700; color: var(--olive-ink); font-variant-numeric: tabular-nums; }
+.m-item { min-width: 0; }
+@media (max-width: 520px) { .hh-daily li, .v-weekly .week li { flex-direction: column; gap: 2px; } .hh-daily .wk-special, .v-weekly .wk-special { text-align: left; } .menu li { grid-template-columns: 3.6rem minmax(0, 1fr); } }
