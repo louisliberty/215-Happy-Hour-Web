@@ -19,6 +19,11 @@ To replace it: `update private.settings set value = encode(gen_random_bytes(24),
 Returns a list: `establishment_id`, `bar_name`, `address`, `neighborhood`, `phone`, `call_type` (`new` or `verify`),
 `listed_info` (what the site lists now, for verify calls). Never-called bars come first.
 
+Who's in the queue: bars, restaurants, hotel bars, breweries, distilleries and winery tasting rooms with a phone
+number. Grocery chains, markets, delis, bottle shops, convenience stores and gas stations are left out, and "beer only"
+licenses count only when the name looks like a bar or restaurant. Override one place in Supabase with
+`update establishments set call_eligible = false where name = '...';` (true = always call, empty = automatic).
+
 Nothing calls on its own: the agent only gets bars when someone asks it for the next batch. A bar rests for 180 days
 only after a complete call: it confirmed what we list, gave days, times and deals that went live, or clearly said it
 has no happy hour. Anything less (voicemail, no answer, unclear, low confidence, missing deals, rejected in review)
