@@ -263,7 +263,8 @@ function href(from, to) {
 const canonical = (p) => config.siteUrl + '/' + p.replace(/index\.html$/, '');
 
 /* ---------- pieces ---------- */
-const LOGO = `<svg class="mug" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="7" fill="var(--olive)"/><path d="M14 22h9v4h-5v12h5v4h-9z" fill="var(--cream)"/><path d="M22 15c2-3 5-3 7-1 2-3 7-3 9 0 2-2 6-1 6 3v32a3 3 0 0 1-3 3H25a3 3 0 0 1-3-3z" fill="var(--cream)"/><g fill="var(--olive)" font-family="Georgia,serif" font-size="9.5" text-anchor="middle"><text x="33.5" y="28">2</text><text x="33.5" y="38">1</text><text x="33.5" y="48">5</text></g></svg>`;
+// Logo: the original 215 mug, sized to fill its square; "2 1 5" centered in the mug body.
+const LOGO = `<svg class="mug" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="7" fill="var(--olive)"/><g transform="translate(32 32) scale(1.08) translate(-28.5 -32)" fill="var(--cream)"><path d="M21 21H11a3 3 0 0 0-3 3v20a3 3 0 0 0 3 3h10v-6h-7V27h7z"/><path d="M21 13c2-5 7-6 10-3 2-4 9-4 11 0 3-3 7-2 7 3v41a3 3 0 0 1-3 3H24a3 3 0 0 1-3-3z"/><g fill="var(--olive)" font-family="Georgia,'Times New Roman',serif" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="central"><text x="35" y="23.5">2</text><text x="35" y="35">1</text><text x="35" y="46.5">5</text></g></g></svg>`;
 
 
 function card(v, b, from, opts = {}) {
