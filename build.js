@@ -290,23 +290,46 @@ const isDrink = (d) => DRINK.test(d) && !FOOD.test(d);
 const PRICE_RE = /^((?:\$\d+(?:\.\d{2})?(?:\s*-\s*\$?\d+(?:\.\d{2})?)?(?:\s+off)?)|half[- ](?:price|off)|\d+% off|bogo)\s*:?\s*(.*)$/i;
 function splitDeal(d) {
   const m = String(d).match(PRICE_RE);
-  if (!m || !m[2]) return { price: '', item: d };
-  return { price: m[1].replace(/^half[- ]/i, 'Half-'), item: m[2][0].toUpperCase() + m[2].slice(1) };
+  if (!m || !m[2]) return { price: '', item: d, raw: d };
+  return { price: m[1].replace(/^half[- ]/i, 'Half-'), item: m[2][0].toUpperCase() + m[2].slice(1), raw: m[2] };
 }
 const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
 
+// The 3-4 deals a list row shows: oysters first, then the cheapest drinks, then the cheapest food.
+function topDeals(deals) {
+  const parsed = deals.filter((d) => !/first come|^happy hour( menu| specials)?$/i.test(d)).map((d) => {
+    const x = splitDeal(d);
+    const n = parseFloat((x.price.match(/[\d.]+/) || [])[0]);
+    return { x, n: isNaN(n) ? 50 : n, oyster: /oyster/i.test(d), drink: isDrink(d) };
+  });
+  const byPrice = (a, b) => a.n - b.n;
+  const order = [...parsed.filter((p) => p.oyster), ...parsed.filter((p) => p.drink && !p.oyster).sort(byPrice).slice(0, 3),
+    ...parsed.filter((p) => !p.drink && !p.oyster).sort(byPrice).slice(0, 1)];
+  for (const p of parsed) if (order.length < 4 && !order.includes(p)) order.push(p);
+  const top = order.slice(0, 4);
+  const label = (p) => p.x.price ? `${p.x.price.replace(/^Half-/, 'half-')} ${p.x.raw.split(':')[0].trim()}` : p.x.raw.split(':')[0].trim();
+  return { text: top.map(label).join(' · '), more: parsed.length - top.length };
+}
+
 function card(v, b, from, opts = {}) {
   const late = b.start >= LATE_NIGHT_START;
-  const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${v.name} ${v.address} Philadelphia PA`)}`;
   const stale = v.verified && (BUILD_DATE - new Date(v.verified)) / 864e5 > config.staleAfterDays;
-  return `<article class="hh${v.featured ? ' is-featured' : ''}" data-days="${b.days.join(',')}" data-start="${b.start}" data-end="${b.end}" data-hood="${esc(v.hoodSlug)}" data-tags="${esc(b.tags.join(','))}" data-name="${esc((v.name + ' ' + v.hood + ' ' + b.deals.join(' ')).toLowerCase())}"${late ? ' data-late="1"' : ''}>
-  <div class="hh-time"><span class="hh-range">${rangeLabel(b.start, b.end)}</span><span class="hh-days">${daysLabel(b.days)}</span><span class="hh-status" aria-live="polite"></span></div>
-  <div class="hh-body">
-    <h3 class="hh-name"><a href="${href(from, `bar/${v.slug}/`)}">${esc(v.name)}</a>${v.phone ? ` <span class="hh-phone">${esc(v.phone)}</span>` : ''}</h3>
-    <p class="hh-where">${opts.hideHood ? '' : `<a href="${href(from, `neighborhoods/${v.hoodSlug}/`)}">${esc(v.hood)}</a> · `}${esc(v.address || '')}</p>
-    <ul class="hh-deals">${b.deals.map((d) => `<li>${esc(d)}</li>`).join('')}${opts.day != null ? (v.specials || []).filter((x) => x.happyHour && x.days.includes(opts.day)).map((x) => `<li class="deal-today">${DAY_FULL[opts.day]} special: ${esc(x.special)}</li>`).join('') : ''}</ul>
-    <p class="hh-meta">${v.featured ? '<span class="badge badge-feat">Featured</span>' : ''}${v.classic ? '<span class="badge badge-classic">215 Classic</span>' : ''}${late ? '<span class="badge">Late night</span>' : ''}${v.sample ? '<span class="badge badge-sample" title="Placeholder listing for layout. Replace with a real bar.">Sample listing</span>' : ''}${v.verified ? `<span class="verified${stale ? ' is-stale' : ''}">${stale ? 'Needs re-check' : 'Verified ' + fmtDate(v.verified)}</span>` : ''}<a class="dir" href="${map}" target="_blank" rel="noopener">Directions</a></p>
-  </div>
+  const top = topDeals(b.deals);
+  // that day's happy hour special: shown for the page's day, or picked by the day filter in the browser
+  const specials = (v.specials || []).filter((x) => x.happyHour && x.days.some((d) => b.days.includes(d)));
+  const specialHTML = specials.flatMap((x) => x.days.filter((d) => b.days.includes(d)).map((d) =>
+    `<p class="hh-special" data-sday="${d}"${opts.day === d ? '' : ' hidden'}>${DAY_FULL[d]} special: ${esc(x.special)}</p>`)).join('');
+  const badges = `${v.featured ? '<span class="badge badge-feat">Featured</span>' : ''}${v.classic ? '<span class="badge badge-classic">215 Classic</span>' : ''}${v.sample ? '<span class="badge badge-sample">Sample listing</span>' : ''}${stale ? '<span class="verified is-stale">Needs re-check</span>' : ''}`;
+  return `<article class="hh${v.featured ? ' is-featured' : ''}" data-days="${b.days.join(',')}" data-start="${b.start}" data-end="${b.end}" data-hood="${esc(v.hoodSlug)}" data-tags="${esc(b.tags.join(','))}" data-name="${esc((v.name + ' ' + v.hood + ' ' + b.deals.join(' ')).toLowerCase())}"${isFinite(v.lat) ? ` data-lat="${v.lat}" data-lng="${v.lng}"` : ''}${late ? ' data-late="1"' : ''}>
+  <a class="hh-link" href="${href(from, `bar/${v.slug}/`)}">
+    <div class="hh-time"><span class="hh-range">${rangeLabel(b.start, b.end)}</span><span class="hh-days">${daysLabel(b.days)}</span><span class="hh-status" aria-live="polite"></span></div>
+    <div class="hh-body">
+      <h3 class="hh-name">${esc(v.name)}${opts.hideHood ? '' : ` <span class="hh-hood">${esc(v.hood)}</span>`}<span class="hh-dist"></span></h3>
+      <p class="hh-deals">${top.text ? esc(top.text) : 'Deals not posted yet'}${top.more > 0 ? ` <span class="hh-more">+${top.more} more</span>` : ''}</p>
+      ${specialHTML}${badges ? `<p class="hh-meta">${badges}</p>` : ''}
+    </div>
+    <svg class="hh-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+  </a>
 </article>`;
 }
 
@@ -324,6 +347,7 @@ function filterBar({ when = 'any', showWhen = true, showHood = true, hoods = [],
     <option value="any">Any day</option></select></label>` : ''}
   ${showHood ? `<label class="f-field"><span>Neighborhood</span><select id="f-hood" name="hood"><option value="">All of Philly</option>${hoods.map((h) => `<option value="${esc(h.slug)}">${esc(h.label || h.name)}</option>`).join('')}</select></label>` : ''}
   <label class="f-field f-search"><span>Search</span><input id="f-q" name="q" type="search" placeholder="Bar, deal, or drink" autocomplete="off"></label>
+  <div class="f-field f-near"><span aria-hidden="true">&nbsp;</span><button type="button" id="f-near" class="near-btn" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Near me</button></div>
   <fieldset class="f-chips"><legend class="sr">Deal type</legend>${DEAL_TYPES.map(([k, l]) => `<label class="chip"><input type="checkbox" id="f-${k}" name="type" value="${k}"><span>${l}</span></label>`).join('')}</fieldset>
 </form>
 <p class="results" id="results" aria-live="polite"></p>`;

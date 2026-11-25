@@ -33,7 +33,13 @@
     c._days = c.dataset.days.split(',').map(Number);
     c._start = +c.dataset.start; c._end = +c.dataset.end;
     c._tags = (c.dataset.tags || '').split(',');
+    c._lat = c.dataset.lat ? +c.dataset.lat : null; c._lng = c.dataset.lng ? +c.dataset.lng : null;
   });
+  var near = null; // the viewer's position once they tap "Near me"
+  function miles(a, b, c, d) {
+    var r = Math.PI / 180, x = Math.sin((c - a) * r / 2), y = Math.sin((d - b) * r / 2);
+    return 2 * 3958.8 * Math.asin(Math.sqrt(x * x + Math.cos(a * r) * Math.cos(c * r) * y * y));
+  }
 
   var form = document.querySelector('.filters');
   var fWhen = document.getElementById('f-when');
@@ -142,11 +148,48 @@
       if (ok) shown++;
     });
 
+    // that day's happy hour special on each row
+    cards.forEach(function (c) {
+      c.querySelectorAll('.hh-special[data-sday]').forEach(function (p) { p.hidden = day < 0 || +p.dataset.sday !== day; });
+      var dist = c.querySelector('.hh-dist');
+      c._dist = near && c._lat != null ? miles(near[0], near[1], c._lat, c._lng) : 9999;
+      if (dist) dist.textContent = near && c._lat != null ? ' · ' + (c._dist < 0.1 ? 'steps away' : c._dist.toFixed(1) + ' mi') : '';
+    });
+
     if (list) {
-      var order = day === now.day
-        ? cards.slice().sort(function (a, b) { return a._rank - b._rank || a._key - b._key; })
-        : original;
-      order.forEach(function (c) { list.appendChild(c); });
+      // groups: today -> happening now / starting soon / later today / ended; another day -> afternoon / evening / late night
+      var group = function (c) {
+        if (day < 0) return '';
+        if (day === now.day) {
+          if (c._rank === 0) return 'Happening now';
+          if (c._rank === 1) return c._start - now.min <= 60 ? 'Starting soon' : 'Later today';
+          return 'Ended earlier today';
+        }
+        return c._start < 17 * 60 ? 'Afternoon' : c._start < 21 * 60 ? 'Evening' : 'Late night';
+      };
+      var gOrder = ['Happening now', 'Starting soon', 'Later today', 'Ended earlier today', 'Afternoon', 'Evening', 'Late night', ''];
+      var order = cards.slice().sort(function (a, b) {
+        return gOrder.indexOf(group(a)) - gOrder.indexOf(group(b)) ||
+          (near ? a._dist - b._dist : 0) ||
+          (day === now.day && a._rank === 0 ? a._end - b._end : a._start - b._start) ||
+          original.indexOf(a) - original.indexOf(b);
+      });
+      list.querySelectorAll('.grp-h').forEach(function (h) { h.remove(); });
+      var last = null, counts = {};
+      order.forEach(function (c) { if (!c.hidden) { var g = group(c); counts[g] = (counts[g] || 0) + 1; } });
+      order.forEach(function (c) {
+        var g = group(c);
+        if (!c.hidden && g && g !== last) {
+          var h = document.createElement('h2');
+          h.className = 'grp-h';
+          h.innerHTML = '<span></span><span class="grp-n"></span>';
+          h.firstChild.textContent = g;
+          h.lastChild.textContent = counts[g] + (near ? ' · nearest first' : '');
+          list.appendChild(h);
+          last = g;
+        }
+        list.appendChild(c);
+      });
     }
     if (empty) empty.hidden = shown !== 0;
     if (results && form) {
@@ -154,6 +197,20 @@
       var where = when === 'now' ? ' live right now' : day === now.day ? ' today' : day >= 0 ? ' on ' + DAYS[day] : '';
       results.textContent = shown + label + where;
     }
+  }
+
+  var nearBtn = document.getElementById('f-near');
+  if (nearBtn) {
+    nearBtn.addEventListener('click', function () {
+      if (near) { near = null; nearBtn.setAttribute('aria-pressed', 'false'); nearBtn.lastChild.textContent = 'Near me'; apply(); return; }
+      if (!navigator.geolocation) { nearBtn.lastChild.textContent = 'Location unavailable'; return; }
+      nearBtn.lastChild.textContent = 'Finding you...';
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        near = [pos.coords.latitude, pos.coords.longitude];
+        nearBtn.setAttribute('aria-pressed', 'true'); nearBtn.lastChild.textContent = 'Nearest first';
+        apply();
+      }, function () { nearBtn.lastChild.textContent = 'Location blocked'; }, { timeout: 10000, maximumAge: 300000 });
+    });
   }
 
   if (form) {
