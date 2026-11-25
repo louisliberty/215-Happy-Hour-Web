@@ -72,7 +72,7 @@ end $$;
 --   * Differs from what the bar's website says, low confidence, or breaks a rule -> saved as needs_review.
 --   * Bar asks not to be called -> removed from the call queue (listing stays).
 -- Returns {"ok": true, "action": "...", "review": "..."}.
-create or replace function public.record_call(token text, result jsonb)
+create or replace function private.record_call_inner(token text, result jsonb)
 returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
 declare
   r jsonb := coalesce(result, '{}'::jsonb);
@@ -112,7 +112,7 @@ begin
 
   if eid is null then
     update calls set processed = false where id = call_id;
-    return jsonb_build_object('ok', true, 'action', 'saved', 'review', 'Could not match this call to a bar (no establishment_id or known phone)');
+    return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'saved', 'review', 'Could not match this call to a bar (no establishment_id or known phone)');
   end if;
 
   select status into status_now from establishments where id = eid;
@@ -128,9 +128,9 @@ begin
     update calls set processed = true where id = call_id;
     if outcome = 'permanently_closed' then
       update calls set processed = false where id = call_id;
-      return jsonb_build_object('ok', true, 'action', 'saved', 'review', 'Reported permanently closed: confirm before taking the listing down');
+      return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'saved', 'review', 'Reported permanently closed: confirm before taking the listing down');
     end if;
-    return jsonb_build_object('ok', true, 'action', 'saved', 'review', null);
+    return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'saved', 'review', null);
   end if;
 
   select exists (select 1 from happy_hours where establishment_id = eid and review_status = 'live'),
@@ -141,22 +141,22 @@ begin
   if has_live and listed_ok = 'yes' then
     update happy_hours set verified_on = current_date where establishment_id = eid and review_status = 'live';
     update calls set processed = true where id = call_id;
-    return jsonb_build_object('ok', true, 'action', 'verified', 'review', null);
+    return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'verified', 'review', null);
   end if;
 
   if has_hh = 'no' then
     if has_live then
       update calls set processed = false where id = call_id;
-      return jsonb_build_object('ok', true, 'action', 'saved', 'review', 'Bar says no happy hour, but one is listed: check before removing');
+      return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'saved', 'review', 'Bar says no happy hour, but one is listed: check before removing');
     end if;
     if conf = 'high' then update establishments set status = 'no_happy_hour' where id = eid and status not in ('closed'); end if;
     update calls set processed = conf = 'high' where id = call_id;
-    return jsonb_build_object('ok', true, 'action', 'no_happy_hour', 'review', case when conf = 'high' then null else 'Low confidence "no happy hour"' end);
+    return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'no_happy_hour', 'review', case when conf = 'high' then null else 'Low confidence "no happy hour"' end);
   end if;
 
   if has_hh <> 'yes' or jsonb_typeof(r->'schedule') <> 'array' or jsonb_array_length(r->'schedule') = 0 then
     update calls set processed = false where id = call_id;
-    return jsonb_build_object('ok', true, 'action', 'saved', 'review', 'Happy hour unclear or no schedule given');
+    return jsonb_build_object('call_id', call_id, 'ok', true, 'action', 'saved', 'review', 'Happy hour unclear or no schedule given');
   end if;
 
   -- deals: [{"item":"draft beers","price":"$5","notes":"bar only"}] -> "$5 draft beers (bar only)"
@@ -203,8 +203,20 @@ begin
   if action = 'published' then
     update establishments set status = 'listed' where id = eid and status not in ('closed');
   end if;
-  return jsonb_build_object('ok', true, 'action', action, 'review', review);
+  return jsonb_build_object('call_id', call_id, 'ok', true, 'action', action, 'review', review);
 end $$;
+
+-- Public entry point: runs the logic above, then keeps the review reason on the call record.
+alter table calls add column if not exists review_note text;
+create or replace function public.record_call(token text, result jsonb)
+returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
+declare res jsonb;
+begin
+  res := private.record_call_inner(token, result);
+  update calls set review_note = res->>'review' where id = (res->>'call_id')::uuid;
+  return res;
+end $$;
+revoke all on function private.record_call_inner(text, jsonb) from public;
 
 -- Only these two entry points are open, and only with the token.
 revoke all on function public.next_calls(text, int) from public;

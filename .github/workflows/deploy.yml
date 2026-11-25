@@ -12,7 +12,7 @@ on:
         description: What to run
         type: choice
         default: deploy
-        options: [deploy, find-websites, scan-happy-hours, read-sheet, print-pages, geocode, db-setup, db-backup]
+        options: [deploy, read-db, scan-happy-hours, print-pages, geocode, db-backup, read-sheet, find-websites, db-setup]
       list:
         description: Website list for scan-happy-hours, or URLs (space-separated) for print-pages
         type: string
@@ -46,6 +46,9 @@ jobs:
             python3 tools/db_import.py --website-only import.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -f import.sql
           else
             echo "No happy hour data changes in this push"
+          fi
+          if echo "$changed" | grep -q '^data/review-decisions\.csv$'; then
+            python3 tools/db_apply_decisions.py data/review-decisions.csv decisions.sql && psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -q -At -f decisions.sql
           fi
 
       - name: Export live happy hours from Supabase
@@ -224,3 +227,19 @@ jobs:
             echo "::error::The Supabase database is ${mb} MB, close to the free plan's 500 MB limit. Time to upgrade to Pro."
             exit 1
           fi
+
+  read-db:
+    # For the weekly check: every establishment (old sheet columns), the review queue and what the site publishes
+    if: github.event_name == 'workflow_dispatch' && inputs.task == 'read-db'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export from Supabase
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -At -f tools/db_read.sql
+      - name: Print the files
+        run: |
+          echo "=====BEGIN CSV=====" && cat sheet.csv && echo "=====END CSV====="
+          echo "=====BEGIN REVIEW CSV=====" && cat review.csv && echo "=====END REVIEW CSV====="
+          echo "=====BEGIN DB CSV=====" && cat db.csv && echo "=====END DB CSV====="

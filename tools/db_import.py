@@ -169,8 +169,12 @@ sql += (website_only if WEBSITE_ONLY else full) + fill + [
                order by (e.name = s.name) desc, (e.license_no is null), e.created_at limit 1) as eid
   from s_hh s),
 ins as (
-  insert into happy_hours (establishment_id, days, start_time, end_time, deals, tags, source, source_url, verified_on)
-  select eid, days, start_time, end_time, deals, tags, source, source_url, verified_on from m where eid is not null)
+  insert into happy_hours (establishment_id, days, start_time, end_time, deals, tags, source, source_url, verified_on, review_status)
+  select eid, days, start_time, end_time, deals, tags, source, source_url, verified_on,
+         -- what the bar told us (call, owner, hand entry) beats what its website says
+         case when exists (select 1 from happy_hours x where x.establishment_id = m.eid and x.review_status = 'live'
+                           and x.source in ('call', 'owner', 'manual')) then 'retired' else 'live' end
+  from m where eid is not null)
 -- the name the bar uses on its own website wins over the license-list name
 update establishments e set name = m.name from m where e.id = m.eid and m.source = 'website' and e.name <> m.name;""",
     """update establishments e set status = 'listed'

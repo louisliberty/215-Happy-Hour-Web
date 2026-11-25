@@ -80,24 +80,38 @@ Add the site in [Google Search Console](https://search.google.com/search-console
 3. "Claim your listing" form for bar owners, and the monthly stats email.
 4. Analytics (Google Analytics 4 or Plausible) so you can show bars their numbers.
 
+## Data: Supabase
+
+Supabase is the one database (tables: establishments, happy_hours, calls, website_checks; view: call_queue).
+The site builds from it every hour (`tools/site_export.sql`). The Google Sheet is no longer read.
+
+- `data/website-happy-hours.csv`, `data/coords.csv`, `data/bar-notes.csv`: when a push changes them, the deploy job
+  sends them to Supabase (`tools/db_import.py --website-only`). Website happy hours are replaced; anything edited in
+  Supabase is kept. What a bar told us (call, owner, hand entry) beats what its website says.
+- `data/review-decisions.csv`: decisions from the weekly review, applied on push (`tools/db_apply_decisions.py`).
+- Phone agent: `docs/call-agent-api.md` (`next_calls`, `record_call`).
+- Nightly: encrypted backup of every table (job file, 30 days) and a size check that fails over 400 MB.
+
 ## Listing rule and the weekly check
 
-The site lists only bars that publish their happy hour: on their own website (found by the weekly scan and kept in `data/website-happy-hours.csv`) or entered in the Google Sheet (days, start, end, deals), for example after a call. Bars without that are not listed and go on the Call Agent list.
+The site lists only bars whose happy hour is published on their own website or confirmed by the bar (phone call,
+owner, or hand entry in Supabase). Nobody guesses.
 
 Every Monday a scheduled Claude task runs the check:
 
-1. `read-sheet` task → save the sheet as `sheet.csv`
+1. `read-db` task -> `sheet.csv` (every establishment), `review.csv` (waiting for a decision), `db.csv` (what the site shows)
 2. `python tools/make_website_list.py sheet.csv tools/all-websites.csv`, commit and push
 3. `scan-happy-hours` task (reads every website, PDF menus, and retries JavaScript sites in a browser)
-4. `python tools/weekly_check.py happy-hour-scan.jsonl sheet.csv out/` → `out/review.txt` (new happy hours to review) and `out/listed-check.csv`; updates `data/scan-misses.csv`
-5. Review, then update `data/website-happy-hours.csv` and `data/review-notes.csv`. Bars whose site shows no happy hour 2 weeks in a row come off.
+4. `python tools/weekly_check.py happy-hour-scan.jsonl sheet.csv out/` -> `out/review.txt` and `out/listed-check.csv`; updates `data/scan-misses.csv`
+5. Update `data/website-happy-hours.csv` and `data/review-notes.csv`. Bars whose site shows no happy hour 2 weeks in a row come off.
    Accuracy rules for this step:
    - Change a listed bar's days or times only when the source text states the new ones exactly. Never round (4:30 is not 4:00) and never fill in from a vague line.
    - When a site has a dedicated happy hour page (e.g. /happy-hour, /events/happy-hour, /specials), use that page as `source_url` and take times and deals from it over the home page.
    - If a page contradicts itself (a header time vs. a detailed list), use the detailed list and note it in `data/review-notes.csv`.
    - Fill in the deals whenever the page lists them. A listing with blank deals is incomplete.
-6. `python tools/make_call_list.py sheet.csv happy-hour-scan.jsonl 215-Call-Agent-List.xlsx` (tabs: To call, Verify listed)
-7. The citywide CSV for the week is built by `build.js` at `/exports/philly-happy-hours.csv` (set `EXPORT_DATE=YYYY-MM-DD` to build a given week).
+6. Decide every row of `review.csv` in `data/review-decisions.csv` (see `tools/db_apply_decisions.py`), commit and push.
+7. After the deploy, `read-db` again, then `DB_CSV=db.csv EXPORT_DATE=YYYY-MM-DD node build.js` for the week's citywide CSV
+   (`dist/exports/philly-happy-hours.csv`).
 
 ## House style
 
