@@ -1,0 +1,105 @@
+address,lat,lng,match
+100 Spring Garden St,39.960252,-75.138987,exact
+1000 Frankford Ave,39.966151,-75.134485,exact
+1001 N 2nd St Ste 7,39.966614,-75.140100,exact
+101 N 11th St,39.950137,-75.158572,non_exact
+1021 Arch St,39.953649,-75.156643,exact
+1036 Spring Garden St,39.961549,-75.155153,exact
+1099 Germantown Ave,39.967965,-75.139770,exact
+110 South 13th St,39.949944,-75.162001,exact
+1113-31 Market St,39.951801,-75.158543,exact
+112 Chestnut St,39.948180,-75.142996,exact
+1136 Pine St,39.944971,-75.160797,exact
+116 & 118 S 20th St,39.951428,-75.173699,non_exact
+116-120 S 11th St,39.949638,-75.158832,exact
+121-123 South St,39.941143,-75.144931,exact
+1210 Frankford Ave,39.969207,-75.134504,exact
+1211 Gerritt St,39.932095,-75.164432,exact
+1221-23 Locust St,39.947873,-75.161383,exact
+1235 E Palmer St,39.971737,-75.128807,exact
+124-126 S 19th St,39.951045,-75.172170,exact
+129 W Laurel St,39.965060,-75.138937,exact
+1301 N Howard St,39.970570,-75.136712,exact
+1355 N Front St,39.971157,-75.135446,exact
+14-18 N Front St,39.950197,-75.142085,exact
+1401 Arch St,39.954489,-75.163277,exact
+1426-30 Walnut St,39.949349,-75.164810,exact
+1445 N American St,39.973140,-75.140022,exact
+1500 Locust St,39.948367,-75.166276,exact
+1518 Sansom St,39.950302,-75.166122,exact
+1520-1522 Chestnut St,39.951057,-75.165988,exact
+1525 South St,39.943959,-75.167594,exact
+1526 N American St,39.974142,-75.139958,exact
+1526 Packer Ave,39.912053,-75.174664,exact
+1549 Spring Garden St,39.962869,-75.163855,exact
+1602-1604 Locust St,39.948561,-75.167885,exact
+1612-1616 South St,39.944024,-75.169022,exact
+1612-34 Chancellor St,39.949203,-75.167892,exact
+1620 Sansom St,39.950496,-75.167731,exact
+1625 Chestnut St Unit 142,39.951375,-75.167605,exact
+1625-27 N Howard St,39.975189,-75.135269,exact
+1709-17 E Passyunk Ave,39.928469,-75.165001,exact
+1710-1712 Sansom St,39.950671,-75.169160,exact
+1720 Chestnut St,39.951456,-75.169142,exact
+1720-30 Fairmount Ave,39.967097,-75.165621,exact
+1776 Benjamin Franklin Pkwy,39.956578,-75.168972,exact
+1800 Market St,39.953124,-75.170093,exact
+1801 Chestnut St,39.951725,-75.170396,exact
+1921 Sansom St,39.951199,-75.172437,exact
+1927-33 E Passyunk Ave,39.926026,-75.167877,exact
+1930 Sansom St,39.951104,-75.172605,exact
+1939 Arch St,39.955534,-75.171778,exact
+1939 S Bancroft St,39.926815,-75.173002,exact
+1946 Lombard St,39.945724,-75.174316,exact
+2025 Sansom St,39.951410,-75.174148,exact
+208 S 40th St,39.953790,-75.202731,exact
+2118 Washington Ave,39.939256,-75.178602,exact
+2146 E Susquehanna Ave,39.987849,-75.168823,non_exact
+217-219 Chestnut St,39.948537,-75.144852,exact
+2216 -2222 Walnut St Unit B,39.950936,-75.177573,exact
+224 S 15th St,39.948712,-75.166200,exact
+2301 Frankford Ave,39.980527,-75.128444,exact
+2370-72 E Norris St,39.977079,-75.127970,exact
+246 W Berks St Unit D,39.979341,-75.139372,exact
+2481 N 54th St,39.996481,-75.234746,exact
+250 S Broad St,39.947745,-75.164758,exact
+2620 E Allegheny Ave,39.985049,-75.103385,exact
+2636 E Ann St,39.981694,-75.108930,exact
+2637 Girard Ave,39.974150,-75.179837,non_exact
+270 S 20th St,39.948452,-75.174340,exact
+30-34 S Front St,39.948878,-75.142396,exact
+301 S Broad St,39.946535,-75.164710,exact
+325 N Christopher Columbus Blvd,39.943777,-75.141912,non_exact
+326 Roxborough Ave,40.028080,-75.215700,exact
+3333 Market St,39.955734,-75.190147,exact
+3408-12 Sansom St,39.953533,-75.192137,exact
+3420-24 Sansom St,39.953554,-75.192300,exact
+3705 W School House Ln,40.013693,-75.200389,exact
+3709 Schuyler St,40.011242,-75.164209,exact
+414 S 2nd St,39.942778,-75.145530,exact
+421 S 2nd St,39.942966,-75.145336,exact
+4411-4413 Main St,40.026099,-75.225073,exact
+4417 -4419 Main St,40.026181,-75.225279,exact
+4501 S Broad St,39.896087,-75.175824,exact
+500 Spring Garden St,39.961057,-75.146683,exact
+5001-5005 Linden Ave,40.045835,-74.994615,exact
+501 N 13th St,39.961228,-75.159391,exact
+614 S 7th St,39.941733,-75.154096,exact
+624-632 S 5th St,39.941308,-75.150949,exact
+630-640 N Broad St,39.964960,-75.160924,exact
+655-659 N Broad St,39.965207,-75.160718,exact
+6798 Essington Ave,39.907689,-75.223259,exact
+701 N 2nd St,39.961941,-75.141093,exact
+705 N 2nd St,39.962569,-75.140962,exact
+7136 Germantown Ave,40.059215,-75.190324,exact
+7233-35 Frankford Ave,40.036365,-75.041504,exact
+757 S Front St,39.938419,-75.144559,exact
+7968 Verree Rd,40.071839,-75.077082,exact
+8201-03 Germantown Ave,40.073291,-75.202626,exact
+900 Packer Ave,39.910357,-75.164546,exact
+9010 Roosevelt Blvd,40.073251,-75.036490,exact
+915 Spring Garden St,39.961737,-75.153678,exact
+One S Broad St,39.951499,-75.163588,exact
+"1421 Sansom St",39.950110,-75.164990,approximate
+"1201-05 Frankford Ave 109 East Girard Ave",39.969830,-75.134520,approximate
+"1338-40s 10th St",39.932440,-75.161170,approximate
