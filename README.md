@@ -109,6 +109,7 @@ Every Monday a scheduled Claude task runs the check:
    - When a site has a dedicated happy hour page (e.g. /happy-hour, /events/happy-hour, /specials), use that page as `source_url` and take times and deals from it over the home page.
    - If a page contradicts itself (a header time vs. a detailed list), use the detailed list and note it in `data/review-notes.csv`.
    - Fill in the deals whenever the page lists them. A listing with blank deals is incomplete.
+   - Take deals from the full happy hour menu (its own page or PDF), not a home page summary, which often shows only a few.
 6. Decide every row of `review.csv` in `data/review-decisions.csv` (see `tools/db_apply_decisions.py`), commit and push.
 7. After the deploy, `read-db` again, then `DB_CSV=db.csv EXPORT_DATE=YYYY-MM-DD node build.js` for the week's citywide CSV
    (`dist/exports/philly-happy-hours.csv`).

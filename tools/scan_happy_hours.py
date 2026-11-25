@@ -70,7 +70,7 @@ def text_of(html):
     return re.sub(r'\s+', ' ', soup.get_text(' ', strip=True)), soup
 
 
-def windows(txt, n=4, width=500):
+def windows(txt, n=4, width=1200):
     out, last = [], -10**9
     for m in HAPPY.finditer(txt):
         if m.start() - last < width:
@@ -84,7 +84,10 @@ def windows(txt, n=4, width=500):
 
 def snippets_for(url, txt, how):
     """A dedicated happy hour page is kept whole; elsewhere, the text around each mention."""
-    if HH_URL.search(urlparse(url).path) and (HAPPY.search(txt) or TIME.search(txt)):
+    # whole page: a happy hour address, or a menu/drinks page that's about happy hour from the top
+    # (Osteria's happy hour menu lives at /menu-2024, and its home page shows only 3 of its 15 deals)
+    menu_page = re.search(r'menu|drink|bar|special|food', urlparse(url).path, re.I) and HAPPY.search(txt[:1500])
+    if (HH_URL.search(urlparse(url).path) and (HAPPY.search(txt) or TIME.search(txt))) or menu_page:
         m = HAPPY.search(txt)
         start = max(0, m.start() - 150) if m else 0
         return [{'page': url, 'text': txt[start:start + FULL], 'how': how, 'whole_page': True}]
