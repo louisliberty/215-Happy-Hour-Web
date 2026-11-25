@@ -110,7 +110,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests beautifulsoup4 pypdf playwright && python -m playwright install --with-deps chromium
+      - run: pip install requests beautifulsoup4 pypdf playwright pytesseract pillow && python -m playwright install --with-deps chromium
+      - run: sudo apt-get install -y -q tesseract-ocr >/dev/null
       - name: Scan bar websites
         run: python tools/scan_happy_hours.py "${{ inputs.list || 'tools/all-websites.csv' }}" happy-hour-scan.jsonl 10
       - name: Print results
