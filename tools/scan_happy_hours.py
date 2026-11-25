@@ -233,6 +233,13 @@ def _scan(row):
         rec['error'] = info
         return rec
     rec['ok'] = True
+    # the address now lands on a different company's site (sold or lapsed domain): flag it, don't read it
+    dom = lambda u: '.'.join(urlparse(u).netloc.lower().split('.')[-2:])
+    if dom(final) != dom(url) and not MENU_HOSTS.search(final):
+        rec['offsite'] = final
+        rec['error'] = f'website now goes to {urlparse(final).netloc}'
+        rec['ok'] = False
+        return rec
     txt, soup = text_of(html)
     rec['thin'] = len(txt) < THIN or bool(BOT_CHECK.search(txt[:400]))
     rec['pages'].append(final)
@@ -250,23 +257,24 @@ def _scan(row):
         if has_times(rec) and len(rec['snippets']) >= 4:
             break
 
-    # 3. sitemap and 4. common addresses, only while no happy hour times have turned up
-    if not has_times(rec):
-        rec['tried'].append('sitemap')
-        for loc in sorted(sitemap_urls(final), key=lambda h: 0 if HH_URL.search(h) else 1)[:8]:
-            if loc not in rec['pages']:
-                visit(rec, loc, 'sitemap')
-            if has_times(rec):
-                break
-    if not has_times(rec):
-        rec['tried'].append('probe')
-        root = f'{urlparse(final).scheme}://{urlparse(final).netloc}/'
-        for p in PROBES:
-            got = visit(rec, urljoin(root, p), 'probe')
-            if got:
-                collect(got[0], got[1], rec)
-            if has_times(rec):
-                break
+    # 3. sitemap and 4. common addresses. A dedicated happy hour page is always worth finding (home pages often show
+    # a short or outdated version: Panorama's home page and its /events/happy-hour/ page disagree), so look for one
+    # even when times turned up; the general menu/drinks addresses only while nothing has.
+    whole = lambda: any(x.get('whole_page') for x in rec['snippets'])
+    root = f'{urlparse(final).scheme}://{urlparse(final).netloc}/'
+    rec['tried'].append('sitemap')
+    for loc in sorted(sitemap_urls(final), key=lambda h: 0 if HH_URL.search(h) else 1)[:8]:
+        if has_times(rec) and (whole() or not HH_URL.search(loc)):
+            break
+        if loc not in rec['pages']:
+            visit(rec, loc, 'sitemap')
+    rec['tried'].append('probe')
+    for p in PROBES:
+        if whole() or (has_times(rec) and not HH_URL.search(p)):
+            break
+        got = visit(rec, urljoin(root, p), 'probe')
+        if got:
+            collect(got[0], got[1], rec)
 
     add_pdfs(rec)
     rec['snippets'] = dedupe(rec['snippets'])[:MAX_SNIPPETS]
