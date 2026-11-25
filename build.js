@@ -295,7 +295,7 @@ function card(v, b, from, opts = {}) {
   <div class="hh-body">
     <h3 class="hh-name"><a href="${href(from, `bar/${v.slug}/`)}">${esc(v.name)}</a>${v.phone ? ` <span class="hh-phone">${esc(v.phone)}</span>` : ''}</h3>
     <p class="hh-where">${opts.hideHood ? '' : `<a href="${href(from, `neighborhoods/${v.hoodSlug}/`)}">${esc(v.hood)}</a> · `}${esc(v.address || '')}</p>
-    <ul class="hh-deals">${b.deals.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
+    <ul class="hh-deals">${b.deals.map((d) => `<li>${esc(d)}</li>`).join('')}${opts.day != null ? (v.specials || []).filter((x) => x.happyHour && x.days.includes(opts.day)).map((x) => `<li class="deal-today">${DAY_FULL[opts.day]} special: ${esc(x.special)}</li>`).join('') : ''}</ul>
     <p class="hh-meta">${v.featured ? '<span class="badge badge-feat">Featured</span>' : ''}${v.classic ? '<span class="badge badge-classic">215 Classic</span>' : ''}${late ? '<span class="badge">Late night</span>' : ''}${v.sample ? '<span class="badge badge-sample" title="Placeholder listing for layout. Replace with a real bar.">Sample listing</span>' : ''}${v.verified ? `<span class="verified${stale ? ' is-stale' : ''}">${stale ? 'Needs re-check' : 'Verified ' + fmtDate(v.verified)}</span>` : ''}<a class="dir" href="${map}" target="_blank" rel="noopener">Directions</a></p>
   </div>
 </article>`;
@@ -405,7 +405,7 @@ function weekExport(venues, blocked, specialRows = []) {
       if (blocked && blocked.has(addrKey(r.address))) continue;
       const st = toMin(r.start), en = toMin(r.end);
       for (const d of parseDays(r.days)) {
-        rows.push([dates[d], DAY_FULL[d], r.name, r.neighborhood || '', r.address, hm(st), hm(en), r.special, 'Daily special', r.verified, r.source_url, st ?? 9999, d]);
+        rows.push([dates[d], DAY_FULL[d], r.name, r.neighborhood || '', r.address, hm(st), hm(en), r.special, yes(r.happy_hour) ? 'Happy hour daily special' : 'Daily special', r.verified, r.source_url, st ?? 9999, d]);
       }
     }
   }
@@ -499,7 +499,7 @@ async function main() {
   for (const r of specialRows) {
     const v = vByAddr.get(addrKey(r.address)) || vByName.get(slugify(r.name));
     const days = parseDays(r.days);
-    if (v && days.length) v.specials.push({ days, start: toMin(r.start), end: toMin(r.end), special: r.special, verified: r.verified, source: r.source_url });
+    if (v && days.length) v.specials.push({ days, start: toMin(r.start), end: toMin(r.end), special: r.special, verified: r.verified, source: r.source_url, happyHour: yes(r.happy_hour) });
   }
   console.log(`Weekly specials: ${specialRows.length} rows, ${venues.filter((v) => v.specials.length).length} listed bars show them`);
   if (process.env.LIST_VENUES) {
@@ -531,7 +531,7 @@ async function main() {
   const ctx = { venues, hoods };
   const pairs = (filter = () => true) => venues.flatMap((v) => v.blocks.filter((b) => filter(v, b)).map((b) => [v, b]))
     .sort((x, y) => x[1].start - y[1].start || x[0].name.localeCompare(y[0].name));
-  const listHTML = (from, items, opts) => items.length
+  const listHTML = (from, items, opts = {}) => items.length
     ? `<div class="hh-list">${items.map(([v, b]) => card(v, b, from, opts)).join('\n')}</div><p class="empty" id="empty" hidden>No happy hours match those filters. Try another day or neighborhood.</p>`
     : `<p class="empty">No happy hours listed here yet. We're adding them every day.</p>`;
   const urls = [];
@@ -579,9 +579,9 @@ ${hoodGrid('index.html')}`,
   <h1>${d} Philadelphia Happy Hours</h1>
   <p class="lede">Browse these local bars to find the drink deals and food specials that fit your tastes. Can't find your favorite bar? <a href="${href(`${d.toLowerCase()}/index.html`, 'for-bars/')}">Send us the details.</a> Cheers!</p></section>
 ${filterBar({ when: String(i), showWhen: false, hoods, items })}
-${listHTML(`${d.toLowerCase()}/index.html`, items)}
+${listHTML(`${d.toLowerCase()}/index.html`, items, { day: i })}
 ${(() => {
-      const sp = venues.flatMap((v) => v.specials.filter((x) => x.days.includes(i)).map((x) => ({ v, x }))).sort((a, b) => a.v.name.localeCompare(b.v.name));
+      const sp = venues.flatMap((v) => v.specials.filter((x) => !x.happyHour && x.days.includes(i)).map((x) => ({ v, x }))).sort((a, b) => a.v.name.localeCompare(b.v.name));
       const from = `${d.toLowerCase()}/index.html`;
       return sp.length ? `<section class="also-today" aria-labelledby="also-h"><h2 id="also-h" class="sec-h">Also on ${d}s: weekly specials</h2>
 <p class="muted small">Not happy hours: day-of-the-week deals at bars we list.</p>
@@ -686,13 +686,14 @@ ${hasHH ? (() => {
   </section>
   <section class="v-panel" aria-labelledby="v-deals"><h2 id="v-deals" class="v-h">The deals</h2>
     ${sameDeals ? dealList(v.blocks[0].deals) : v.blocks.map((b) => `<h3 class="v-sub">${daysLabel(b.days)} · ${rangeLabel(b.start, b.end)}</h3>${dealList(b.deals)}`).join('')}
+    ${v.specials.some((x) => x.happyHour) ? `<h3 class="v-sub">Plus a special each day</h3><ol class="week hh-daily">${DAY_FULL.map((d, i) => { const ss = v.specials.filter((x) => x.happyHour && x.days.includes(i)); return ss.length ? `<li data-day="${i}"><span class="wk-day">${d}</span><span class="wk-special">${ss.map((x) => esc(x.special)).join('<br>')}</span></li>` : ''; }).join('')}</ol>` : ''}
     ${src ? `<p class="v-source">Source: <a href="${esc(src)}" target="_blank" rel="noopener">${esc(host(src))}</a>${v.verified ? ` · checked ${fmtDate(v.verified)}` : ''}</p>` : ''}
   </section>
 </div>
-${v.specials.length ? `<section class="v-panel v-weekly" aria-labelledby="v-weekly"><h2 id="v-weekly" class="v-h">Weekly specials</h2>
+${v.specials.some((x) => !x.happyHour) ? `<section class="v-panel v-weekly" aria-labelledby="v-weekly"><h2 id="v-weekly" class="v-h">Weekly specials</h2>
     <p class="muted small">Separate from happy hour: these run on their own days and times.</p>
-    <ol class="week">${DAY_FULL.map((d, i) => { const ss = v.specials.filter((x) => x.days.includes(i)); return ss.length ? `<li data-day="${i}"><span class="wk-day">${d}</span><span class="wk-special">${ss.map((x) => esc(x.special) + (x.start != null && x.end != null ? ` <span class="muted">(${rangeLabel(x.start, x.end)})</span>` : '')).join('<br>')}</span></li>` : ''; }).join('')}</ol>
-    ${v.specials[0].source ? `<p class="v-source">Source: <a href="${esc(v.specials[0].source)}" target="_blank" rel="noopener">${esc(host(v.specials[0].source))}</a>${v.specials[0].verified ? ` · checked ${fmtDate(v.specials[0].verified)}` : ''}</p>` : ''}
+    <ol class="week">${DAY_FULL.map((d, i) => { const ss = v.specials.filter((x) => !x.happyHour && x.days.includes(i)); return ss.length ? `<li data-day="${i}"><span class="wk-day">${d}</span><span class="wk-special">${ss.map((x) => esc(x.special) + (x.start != null && x.end != null ? ` <span class="muted">(${rangeLabel(x.start, x.end)})</span>` : '')).join('<br>')}</span></li>` : ''; }).join('')}</ol>
+    ${(() => { const w = v.specials.find((x) => !x.happyHour); return w && w.source ? `<p class="v-source">Source: <a href="${esc(w.source)}" target="_blank" rel="noopener">${esc(host(w.source))}</a>${w.verified ? ` · checked ${fmtDate(w.verified)}` : ''}</p>` : ''; })()}
   </section>` : ''}
 <p class="report">Something changed? Email <span class="sel">${esc(config.contactEmail)}</span> with the bar name and the new specials.</p>`;
     })() : `<div class="notice"><h2>Happy hour not listed yet</h2><p>We haven't confirmed ${esc(v.name)}'s happy hour. Work here or know the deals? Email <span class="sel">${esc(config.contactEmail)}</span> with the days, times and specials and we'll add them.</p></div>`}

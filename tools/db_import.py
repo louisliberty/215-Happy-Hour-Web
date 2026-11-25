@@ -128,7 +128,8 @@ for r in special_rows:   # weekly specials from websites
         add_est({'name': r['name'], 'address': r['address'], 'neighborhood': r['neighborhood'], 'website': r['source_url']}, 'to_research')
     days = parse_days(r['days'])
     if days and (r.get('special') or '').strip():
-        ds.append([k, r['name'], days, r.get('start') or None, r.get('end') or None, r['special'], r.get('source_url'), r.get('verified') or None])
+        ds.append([k, r['name'], days, r.get('start') or None, r.get('end') or None, r['special'], r.get('source_url'), r.get('verified') or None,
+                   'true' if (r.get('happy_hour') or '').strip().lower() in ('yes', 'y', 'true', '1', 'x') else 'false'])
 for r in sheet:
     days = parse_days(r.get('days'))
     if days and r.get('start') and r.get('end'):
@@ -144,7 +145,7 @@ sql = ['begin;',
        'source text, source_url text, verified_on date) on commit drop;']
 for i in range(0, len(est), 500):
     sql.append(f'insert into s_est values\n' + ',\n'.join('(' + ','.join(q(v) for v in row) + ')' for row in est[i:i + 500]) + ';')
-sql.append('create temp table s_ds (k text, name text, days text[], start_time time, end_time time, special text, source_url text, verified_on date) on commit drop;')
+sql.append('create temp table s_ds (k text, name text, days text[], start_time time, end_time time, special text, source_url text, verified_on date, during_happy_hour boolean) on commit drop;')
 if ds:
     sql.append('insert into s_ds values\n' + ',\n'.join('(' + ','.join(q(v) for v in row) + ')' for row in ds) + ';')
 if hh:
@@ -175,8 +176,8 @@ if about:
     fill.append('update establishments e set about = a.about from (values ' + ', '.join(f'({q(k)}, {q(t)})' for k, t in about)
                 + ') as a(k, about) where e.addr_key = a.k;')
 specials = ["delete from daily_specials where source = 'website';",
-            """insert into daily_specials (establishment_id, days, start_time, end_time, special, source, source_url, verified_on, review_status)
-select m.eid, s.days, s.start_time, s.end_time, s.special, 'website', s.source_url, s.verified_on,
+            """insert into daily_specials (establishment_id, days, start_time, end_time, special, source, source_url, verified_on, during_happy_hour, review_status)
+select m.eid, s.days, s.start_time, s.end_time, s.special, 'website', s.source_url, s.verified_on, s.during_happy_hour,
        case when exists (select 1 from daily_specials x where x.establishment_id = m.eid and x.review_status = 'live'
                          and x.source in ('call', 'owner', 'manual')) then 'retired' else 'live' end
 from s_ds s cross join lateral (select e.id as eid from establishments e where e.addr_key = s.k

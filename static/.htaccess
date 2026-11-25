@@ -22,6 +22,7 @@ RewriteRule ^site_?map\.html?$ /neighborhoods/ [R=301,L,NC]
 RewriteRule ^bar/landmark-americana-tap-and-grill-1680/?$ /bar/landmark-americana-tap-and-grill-3333-market-st/ [R=301,L]
 RewriteRule ^bar/uchi-philadelphia-1595/?$ /bar/uchi-philadelphia/ [R=301,L]
 RewriteRule ^bar/pnk-head-house/?$ /bar/cavanaughs-headhouse/ [R=301,L]
+RewriteRule ^bar/tiffany-diner/?$ /bar/tiffany-on-the-blvd/ [R=301,L]
 </IfModule>
 
 <IfModule mod_expires.c>

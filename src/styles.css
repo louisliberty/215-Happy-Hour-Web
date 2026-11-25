@@ -348,3 +348,6 @@ select, input[type="search"], input[type="email"] {
 .also-list li { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--paper); }
 .also-list a { font-weight: 700; }
 .also-deal { font-size: .95rem; }
+.hh-deals .deal-today { border-color: var(--amber); background: var(--amber-soft); }
+.hh-daily { margin-top: 2px; }
+.hh-daily .wk-special { text-align: right; }
