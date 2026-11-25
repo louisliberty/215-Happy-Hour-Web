@@ -1,0 +1,60 @@
+# Call agent API
+
+The phone agent talks to Supabase over HTTPS. Two calls, both `POST`, both JSON.
+
+**Base URL:** `https://drgmcdgejkqihmjlbcdq.supabase.co/rest/v1/rpc/`
+**Headers on every request:**
+- `apikey: <Supabase publishable (anon) key>` (Supabase: Project Settings > API Keys)
+- `Content-Type: application/json`
+
+**Token:** every body includes `"token"`. Get it in Supabase's SQL Editor:
+`select value from private.settings where key = 'call_agent_token';`
+To replace it: `update private.settings set value = encode(gen_random_bytes(24), 'hex') where key = 'call_agent_token';`
+
+## 1. Who to call next: `next_calls`
+
+```json
+{ "token": "...", "how_many": 10 }
+```
+Returns a list: `establishment_id`, `bar_name`, `address`, `neighborhood`, `phone`, `call_type` (`new` or `verify`),
+`listed_info` (what the site lists now, for verify calls). Never-called bars come first. A bar comes back again
+after 7 days if its specials change weekly, 30 monthly, 90 seasonal, 180 never, 60 otherwise. Bars that asked
+not to be called never come back.
+
+## 2. Report a call: `record_call`
+
+```json
+{ "token": "...", "result": {
+  "establishment_id": "from next_calls",
+  "call_type": "new | verify",
+  "outcome": "completed | voicemail | no_answer | busy_call_back | refused | wrong_number | permanently_closed",
+  "has_happy_hour": "yes | no | unknown",
+  "schedule": [ { "days": ["Mon","Tue","Wed","Thu","Fri"], "start": "16:00", "end": "19:00" } ],
+  "deals": [ { "item": "draft beers", "price": "$5", "notes": "" } ],
+  "where": "bar only | whole venue | unknown",
+  "specials_change_frequency": "never | seasonal | monthly | weekly | daily | varies | unknown",
+  "specials_change_notes": "",
+  "listed_info_correct": "yes | no | partly | n/a",
+  "other_specials": "",
+  "spoke_with": "first name, role",
+  "callback_time": "",
+  "do_not_call": false,
+  "confidence": "high | medium | low",
+  "notes": "",
+  "call_time": "2026-11-25T15:20:00-05:00",
+  "transcript_url": ""
+} }
+```
+Times are 24-hour. If `establishment_id` is missing, the call is matched by `phone`.
+
+Returns `{"ok": true, "action": "...", "review": "..."}`:
+
+| action | meaning |
+|---|---|
+| `published` | New happy hour, high confidence, within PA rules, nothing else on file: live at the next site build |
+| `verified` | Bar confirmed what we list: verified date refreshed |
+| `needs_review` | Held for the weekly review (reason in `review`): low confidence, breaks a PA rule, or differs from the bar's website |
+| `no_happy_hour` | Bar has no happy hour |
+| `saved` | Stored only (voicemail, no answer, refused...). `review` is set when a person should look (e.g. reported closed) |
+
+Every call is stored untouched in the `calls` table either way.
