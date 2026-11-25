@@ -115,6 +115,16 @@ Every Monday a scheduled Claude task runs the check:
 7. After the deploy, `read-db` again, then `DB_CSV=db.csv EXPORT_DATE=YYYY-MM-DD node build.js` for the week's citywide CSV
    (`dist/exports/philly-happy-hours.csv`).
 
+## Bar descriptions
+
+Every bar page opens with a short description of the place (`data/bar-notes.csv`, column `about`), not a repeat of the
+deals. Two sentences, about 40-60 words: what kind of place it is, where, and what it's known for, plus a notable fact or
+two (when it opened, who's behind it, its spaces). Facts come from the bar's own site first, then established local press
+(Philadelphia Inquirer, Philadelphia Magazine, Eater Philly, Visit Philly, Billy Penn). Never invent a fact, no prices or
+deals, no unsourced superlatives. Example: "Mia Ragazza is a lively, two-story Italian restaurant and cocktail bar on Main
+Street in Manayunk, known for putting a Philly spin on Central Italian cooking. Opened in September 2023 by the team behind
+Goat's Beard, it pairs a dressy-casual neighborhood feel with separate indoor and outdoor spaces."
+
 ## House style
 
 Use plain hyphens (-) everywhere on the site: times (3-6 pm), day ranges (Mon-Fri), titles. Never en dashes (–) or em dashes (—). The build also converts any that slip in through the sheet or website data.

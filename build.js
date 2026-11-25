@@ -667,7 +667,7 @@ ${others.length ? `<h2 class="sec-h">${items.length ? 'More bars' : 'Bars'} in $
   <p class="eyebrow"><a href="${href(p, `neighborhoods/${v.hoodSlug}/`)}">${esc(v.hood)}</a>${v.vibe ? ' · ' + esc(v.vibe) : ''}${v.classic ? ' · <span class="badge badge-classic">215 Classic</span>' : ''}</p>
   <h1 id="v-name" class="v-name">${esc(v.name)}</h1>
   ${hasHH ? `<p class="vstatus" data-blocks='${JSON.stringify(v.blocks.map((b) => [b.days, b.start, b.end]))}'><span class="vstatus-dot" aria-hidden="true"></span><span class="vstatus-text">${esc(summary)}</span></p>` : ''}
-  ${v.about ? `<p class="v-about">${esc(v.about)}</p>` : ''}${hasHH ? `<p class="v-summary">${esc(venueSummary(v))}</p>` : ''}
+  ${v.about ? `<p class="v-about">${esc(v.about)}</p>` : ''}
   <dl class="v-facts">
     ${v.address ? `<div><dt>Address</dt><dd>${esc(v.address)}<br><a href="${map}" target="_blank" rel="noopener">Get directions</a></dd></div>` : ''}
     ${v.phone ? `<div><dt>Phone</dt><dd><a href="tel:${esc(v.phone.replace(/[^0-9+]/g, ''))}">${esc(v.phone)}</a></dd></div>` : ''}

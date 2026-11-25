@@ -112,6 +112,30 @@ def weekly_for(url, txt, how):
     return out
 
 
+ABOUT_LINK = re.compile(r'\babout\b|our[- ]story|\bstory\b|history|who[- ]we[- ]are|our[- ]team', re.I)
+
+
+def about_for(rec, soup, final):
+    """What the bar says about itself: meta description, plus its About / Our Story page."""
+    metas = [m.get('content', '').strip() for m in soup.find_all('meta')
+             if (m.get('name') or m.get('property') or '').lower() in ('description', 'og:description')]
+    rec['about'] = {'meta': next((x for x in metas if len(x) > 40), ''), 'page': '', 'text': ''}
+    for a in soup.find_all('a', href=True):
+        label = (a.get_text(' ', strip=True) or '') + ' ' + a['href']
+        if ABOUT_LINK.search(label):
+            try:
+                href = urljoin(final, a['href']).split('#')[0]
+            except ValueError:
+                continue
+            if not same_site(href, final) or href.rstrip('/') == final.rstrip('/'):
+                continue
+            h, f, _ = get(href)
+            if h:
+                t, _ = text_of(h)
+                rec['about'].update(page=f, text=t[:1500])
+            break
+
+
 def same_site(a, b):
     return urlparse(a).netloc.replace('www.', '') == urlparse(b).netloc.replace('www.', '')
 
@@ -267,6 +291,7 @@ def _scan(row):
     rec['pages'].append(final)
     rec['snippets'] += snippets_for(final, txt, 'home')
     rec['weekly'] += weekly_for(final, txt, 'home')
+    about_for(rec, soup, final)
     links = collect(soup, final, rec)
     links.sort(key=lambda h: 0 if HH_URL.search(h) else 1 if MENU_HOSTS.search(urlparse(h).netloc) else 2)
 

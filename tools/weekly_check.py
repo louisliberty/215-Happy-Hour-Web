@@ -117,12 +117,29 @@ for (name, ak), r in bars.items():
               + ''.join(f"  SITE ({w['page']}): {re.sub(chr(10), ' ', w['text'])[:700]}\n" for w in cands[:3]))
 open(os.path.join(OUTDIR, 'weekly-specials.txt'), 'w', encoding='utf-8').write('\n'.join(wk))
 
+# 4) listed bars without a description yet, with what their own site says about them
+described = {addr_key(r['address']) for r in read_csv(os.path.join(DATA, 'bar-notes.csv')) if (r.get('about') or '').strip()}
+ab = []
+for (name, ak), r in bars.items():
+    if ak in described:
+        continue
+    recs = list(by_addr.get(ak, []))
+    s3 = by_site.get(site_key(r['source_url']))
+    if s3 and s3 not in recs:
+        recs.append(s3)
+    info = next((rec.get('about') for rec in recs if rec.get('about')), {}) or {}
+    ab.append(f"{name} | {r['address']} | {r['neighborhood']} | site: {r['source_url']}\n"
+              f"  META: {info.get('meta', '')[:400]}\n"
+              f"  ABOUT PAGE ({info.get('page', '')}): {re.sub(chr(10), ' ', info.get('text', ''))[:900]}\n")
+open(os.path.join(OUTDIR, 'about-needed.txt'), 'w', encoding='utf-8').write('\n'.join(ab))
+
 counts = {}
 for c in check:
     counts[c['status']] = counts.get(c['status'], 0) + 1
 print(f'Listed bars: {len(check)} | ' + ', '.join(f'{k}: {v}' for k, v in sorted(counts.items())))
 print(f'Not listed but mention happy hour (to review): {n_new} -> {OUTDIR}/review.txt')
 print(f'Listed bars with weekly specials to check: {n_wk} -> {OUTDIR}/weekly-specials.txt')
+print(f'Listed bars without a description: {len(ab)} -> {OUTDIR}/about-needed.txt')
 drop = [c for c in check if int(c['misses_in_a_row']) >= 2]
 print('Missed 2+ weeks in a row (remove from the site, add to the call list):')
 for c in drop:
