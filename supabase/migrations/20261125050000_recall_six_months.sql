@@ -1,8 +1,8 @@
 -- Calls happen only when someone asks the phone agent to make them: next_calls just answers "who's next?".
 -- Once a bar has answered (a completed call), it isn't offered again for recall_after_days (default 180, about 6 months).
--- Unanswered attempts (voicemail, no answer, busy) can be retried after retry_after_days (default 7).
+-- Unanswered attempts (voicemail, no answer, busy) can be retried after retry_after_days (default 2).
 -- Change either in Supabase's SQL editor, e.g.: update private.settings set value = '365' where key = 'recall_after_days';
-insert into private.settings (key, value) values ('recall_after_days', '180'), ('retry_after_days', '7')
+insert into private.settings (key, value) values ('recall_after_days', '180'), ('retry_after_days', '2')
 on conflict (key) do nothing;
 
 create or replace function public.next_calls(token text, how_many int default 10)
@@ -10,7 +10,7 @@ returns table (establishment_id uuid, bar_name text, address text, neighborhood 
 language plpgsql security definer set search_path = public, pg_temp as $$
 declare
   recall int := coalesce((select value::int from private.settings where key = 'recall_after_days'), 180);
-  retry int := coalesce((select value::int from private.settings where key = 'retry_after_days'), 7);
+  retry int := coalesce((select value::int from private.settings where key = 'retry_after_days'), 2);
 begin
   perform private.check_token(token);
   return query

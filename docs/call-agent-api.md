@@ -22,7 +22,7 @@ Returns a list: `establishment_id`, `bar_name`, `address`, `neighborhood`, `phon
 Nothing calls on its own: the agent only gets bars when someone asks it for the next batch. A bar rests for 180 days
 only after a complete call: it confirmed what we list, gave days, times and deals that went live, or clearly said it
 has no happy hour. Anything less (voicemail, no answer, unclear, low confidence, missing deals, rejected in review)
-can be retried after 7 days. `record_call` returns `"complete": true/false`. Bars that
+can be retried after 2 days. `record_call` returns `"complete": true/false`. Bars that
 asked not to be called never come back. Change the timing in Supabase's SQL editor:
 `update private.settings set value = '365' where key = 'recall_after_days';` (or `retry_after_days`).
 

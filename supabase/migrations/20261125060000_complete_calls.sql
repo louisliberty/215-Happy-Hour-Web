@@ -3,7 +3,7 @@
 --   * the bar has a happy hour and gave days, times AND deals, and it went live (published, or approved in the weekly review), or
 --   * the bar clearly said it has no happy hour (high confidence).
 -- Anything else (voicemail, no answer, unclear, low confidence, no deals, held and rejected) can be retried after
--- retry_after_days (default 7).
+-- retry_after_days (default 2).
 alter table calls add column if not exists info_complete boolean not null default false;
 
 create or replace function public.record_call(token text, result jsonb)
@@ -30,7 +30,7 @@ returns table (establishment_id uuid, bar_name text, address text, neighborhood 
 language plpgsql security definer set search_path = public, pg_temp as $$
 declare
   recall int := coalesce((select value::int from private.settings where key = 'recall_after_days'), 180);
-  retry int := coalesce((select value::int from private.settings where key = 'retry_after_days'), 7);
+  retry int := coalesce((select value::int from private.settings where key = 'retry_after_days'), 2);
 begin
   perform private.check_token(token);
   return query
