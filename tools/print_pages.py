@@ -23,7 +23,7 @@ for url in sys.argv[1:]:
             txt = re.sub(r'\s+', ' ', soup.get_text(' ', strip=True))
         m = re.search(r'happy\s*-?\s*hour', txt, re.I)
         start = max(0, (m.start() if m else 0) - 300)
-        print(txt[start:start + 12000])
+        print(txt[start:start + 30000])
     except Exception as e:
         print(f'ERROR {type(e).__name__}: {e}')
 print('=====END=====')
